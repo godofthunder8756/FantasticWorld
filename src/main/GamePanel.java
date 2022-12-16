@@ -7,6 +7,7 @@ import javax.security.auth.x500.X500Principal;
 import javax.swing.JPanel;
 
 import entity.Player;
+import object.SuperObject;
 import tile.TileManager;
 
 import java.awt.Graphics;
@@ -36,7 +37,10 @@ public class GamePanel extends JPanel implements Runnable{
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
 	public CollisionChecker cChecker = new CollisionChecker(this);
+	public AssetSetter aSetter = new AssetSetter(this);
 	public Player player = new Player(this, keyH);
+	public SuperObject obj[] = new SuperObject[10]; //Display up to ten objects at once in game (for performance. subject to change)
+	
 	
 	// Set player's default location
 	int playerX = 100;
@@ -51,6 +55,11 @@ public class GamePanel extends JPanel implements Runnable{
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
 	}
+	
+	public void setupGame() {
+		aSetter.setObject();
+	}
+	
 	
 	public void startGameThread() {
 		gameThread = new Thread(this);
@@ -96,11 +105,19 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-
 		Graphics2D g2 = (Graphics2D)g;
 
+		//TILE
 		tileM.draw(g2);
 		
+		//OBJECT
+		for(int i = 0; i<obj.length; i++) {
+			if(obj[i] != null) {
+				obj[i].draw(g2, this);
+			}
+		}
+		
+		//PLAYER
 		player.draw(g2);
 		g2.dispose();
 	}
