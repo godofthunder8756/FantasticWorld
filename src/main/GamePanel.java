@@ -7,6 +7,7 @@ import javax.security.auth.x500.X500Principal;
 import javax.swing.JPanel;
 
 import entity.Player;
+import tile.TileManager;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -18,12 +19,14 @@ public class GamePanel extends JPanel implements Runnable{
 	final int scale = 3; //scale everything up by 3 cuz shit's too small. 
 	
 	public final int tileSize = originalTileSize * scale; // Makes tiles 48x48 IRL
-	final int maxScreenCol = 16;
-	final int maxScreenRow = 12;  //4x3 ratio
-	final int screenWidth = tileSize * maxScreenCol; //48*16 =  768px
-	final int screenHeight = tileSize * maxScreenRow; //48*12 = 576px
+	public final int maxScreenCol = 16;
+	public final int maxScreenRow = 12;  //4x3 ratio
+	public final int screenWidth = tileSize * maxScreenCol; //48*16 =  768px
+	public final int screenHeight = tileSize * maxScreenRow; //48*12 = 576px
+	
 	final int FPS = 60; // 60 FPS
 	
+	TileManager tileManager = new TileManager(this);
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
 	Player player = new Player(this, keyH);
@@ -89,6 +92,8 @@ public class GamePanel extends JPanel implements Runnable{
 
 		Graphics2D g2 = (Graphics2D)g;
 
+		tileManager.draw(g2);
+		
 		player.draw(g2);
 		g2.dispose();
 	}
