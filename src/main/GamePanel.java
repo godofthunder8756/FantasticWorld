@@ -32,9 +32,10 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	final int FPS = 60; // 60 FPS
 	
-	TileManager tileManager = new TileManager(this);
+	TileManager tileM = new TileManager(this);
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
+	public CollisionChecker cChecker = new CollisionChecker(this);
 	public Player player = new Player(this, keyH);
 	
 	// Set player's default location
@@ -98,7 +99,7 @@ public class GamePanel extends JPanel implements Runnable{
 
 		Graphics2D g2 = (Graphics2D)g;
 
-		tileManager.draw(g2);
+		tileM.draw(g2);
 		
 		player.draw(g2);
 		g2.dispose();
