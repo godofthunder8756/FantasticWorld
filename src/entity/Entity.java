@@ -30,12 +30,18 @@ public class Entity {
 	String dialogue[] = new String[50];
 	int dialogueIndex = 0;
 	
+	// CharacterStatus
+	public int maxLife;
+	public int life;
+	
 	public Entity(GamePanel gp) {
 		this.gp = gp;
 	}
+	
 	public void setAction() {
 		
 	}
+	
 	public void speak() {
 		if(dialogue[dialogueIndex] == null) {
 			dialogueIndex = 0;
@@ -58,9 +64,9 @@ public class Entity {
 			break;
 		}
 	}
+	
 	public void update() {
 		setAction();
-		
 		
 		collisionOn = false;
 		gp.cChecker.checkTile(this);
@@ -88,6 +94,7 @@ public class Entity {
 		}
 		
 	}
+	
 	public void draw(Graphics2D g2) {
 		BufferedImage image = null;
 		int screenX = worldX - gp.player.worldX + gp.player.screenX;
@@ -131,11 +138,9 @@ public class Entity {
 					image = right2;
 				}
 				break;
-			}
-			
+			}			
 			g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 		}
-		
 	}
 	public BufferedImage setup(String imagePath) {
 		
@@ -151,5 +156,4 @@ public class Entity {
 		}
 		return image;
 	}
-
 }
