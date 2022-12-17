@@ -14,15 +14,15 @@ import main.UtilityTool;
 
 public class Player extends Entity{
 	
-	GamePanel gp;
 	KeyHandler keyH;
-	
 	public final int screenX;
 	public final int screenY;
-	public int hasKey = 0;
+	int standCounter = 0;
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
-		this.gp = gp;
+		
+		super(gp);
+		
 		this.keyH = keyH;
 		
 		screenX = gp.screenWidth/2 - (gp.tileSize/2);
@@ -33,7 +33,7 @@ public class Player extends Entity{
 		solidArea.y = 16;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
-		solidArea.width = 32;
+		solidArea.width = 32;           //MAYBE change both to 28 
 		solidArea.height = 32;
 		
 		setDefaultValues();
@@ -46,36 +46,20 @@ public class Player extends Entity{
 		direction = "down";
 	}
 	
-	public void getPlayerImage() {
+	public void getPlayerImage() {	
+		up1 = setup("/player/character_08");
+		up2 = setup("/player/character_09");
+		down1 = setup("/player/character_00");
+		down2 = setup("/player/character_01");
+		left1 = setup("/player/character_05");
+		left2 = setup("/player/character_04");
+		right1 = setup("/player/character_07");
+		right2 = setup("/player/character_06");
+		upIdle = setup("/player/character_10");
+		downIdle = setup("/player/character_03");
+		leftIdle = setup("/player/character_04");
+		rightIdle = setup("/player/character_06");
 		
-		up1 = setup("character_08");
-		up2 = setup("character_09");
-		down1 = setup("character_00");
-		down2 = setup("character_01");
-		left1 = setup("character_05");
-		left2 = setup("character_04");
-		right1 = setup("character_07");
-		right2 = setup("character_06");
-		upIdle = setup("character_10");
-		downIdle = setup("character_03");
-		leftIdle = setup("character_04");
-		rightIdle = setup("character_06");
-		
-	}
-	
-	public BufferedImage setup(String imageName) {
-		UtilityTool uTool = new UtilityTool();
-		BufferedImage image = null;
-		
-		
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/player/" + imageName + ".png"));
-			image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		return image;
 	}
 	
 	public void update() {
@@ -101,6 +85,11 @@ public class Player extends Entity{
 			// CHECK OBJECT COLLISION
 			int objIndex = gp.cChecker.checkObject(this, true);
 			pickUpObject(objIndex);
+			
+			// CHECK ONPC COLLISION
+			int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+			interactNPC(npcIndex);
+			
 			// IF COLLISION IS FLASE< PLAYER CAN MOVE
 			if(collisionOn == false) {
 				switch(direction) {
@@ -126,39 +115,13 @@ public class Player extends Entity{
 	
 	public void pickUpObject(int i) {
 		if(i != 999) {
-			
-			String objectName = gp.obj[i].name;
-			
-			switch(objectName) {
-			case "Key":
-				gp.playSE(1);                 // coin sound
-				hasKey++;
-				gp.obj[i] = null;
-				gp.ui.showMessage("You found a key!");
-				break;
-			case "Door":
-				if(hasKey > 0) {
-					gp.playSE(3);
-					gp.obj[i] = null;
-					hasKey--;
-					gp.ui.showMessage("You opened the door!");
-				}
-				else {
-					gp.ui.showMessage("You need a key!");
-				}
-				break;
-			case "Boots":
-				gp.playSE(2);
-				speed += 2;
-				gp.obj[i] = null;
-				gp.ui.showMessage("Speed +2!");
-				break;
-			case "Chest":
-				gp.ui.gameFinished = true;
-				gp.stopMusic();
-				gp.playSE(4);
-				break;
-			}
+			// empty
+		}
+	}
+	
+	public void interactNPC(int i) {
+		if(i != 999) {
+			System.out.println("you har hitting an npc");
 		}
 	}
 	

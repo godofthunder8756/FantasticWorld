@@ -30,7 +30,7 @@ public class TileManager {
 	
 	public void getTileImage() {
 
-		setup(0, "grass00", false);
+		setup(0, "grass00", false); // Some Nintendo-style bullshit
 		setup(1, "grass00", false);
 		setup(2, "grass00", false);
 		setup(3, "grass00", false);
