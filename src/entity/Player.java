@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 
 public class Player extends Entity{
 	
@@ -46,25 +47,35 @@ public class Player extends Entity{
 	}
 	
 	public void getPlayerImage() {
+		
+		up1 = setup("character_08");
+		up2 = setup("character_09");
+		down1 = setup("character_00");
+		down2 = setup("character_01");
+		left1 = setup("character_05");
+		left2 = setup("character_04");
+		right1 = setup("character_07");
+		right2 = setup("character_06");
+		upIdle = setup("character_10");
+		downIdle = setup("character_03");
+		leftIdle = setup("character_04");
+		rightIdle = setup("character_06");
+		
+	}
+	
+	public BufferedImage setup(String imageName) {
+		UtilityTool uTool = new UtilityTool();
+		BufferedImage image = null;
+		
+		
 		try {
-			
-			up1 = ImageIO.read(getClass().getResourceAsStream("/player/character_08.png")); //
-			up2 = ImageIO.read(getClass().getResourceAsStream("/player/character_09.png")); //
-			down1 = ImageIO.read(getClass().getResourceAsStream("/player/character_00.png")); //
-			down2 = ImageIO.read(getClass().getResourceAsStream("/player/character_01.png")); //
-			left1 = ImageIO.read(getClass().getResourceAsStream("/player/character_05.png")); //
-			left2 = ImageIO.read(getClass().getResourceAsStream("/player/character_04.png")); //
-			right1 = ImageIO.read(getClass().getResourceAsStream("/player/character_07.png")); //
-			right2 = ImageIO.read(getClass().getResourceAsStream("/player/character_06.png")); //
-			upIdle = ImageIO.read(getClass().getResourceAsStream("/player/character_10.png")); //
-			downIdle = ImageIO.read(getClass().getResourceAsStream("/player/character_03.png")); //
-			leftIdle = ImageIO.read(getClass().getResourceAsStream("/player/character_04.png")); //
-			rightIdle = ImageIO.read(getClass().getResourceAsStream("/player/character_06.png")); //
-			
-		} catch (IOException e) {
-			// TODO: handle exception
+			image = ImageIO.read(getClass().getResourceAsStream("/player/" + imageName + ".png"));
+			image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		}
+		return image;
 	}
 	
 	public void update() {
@@ -203,7 +214,7 @@ public class Player extends Entity{
 			}
 			break;
 		}
-		g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+		g2.drawImage(image, screenX, screenY, null);
 	}
 
 }
