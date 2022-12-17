@@ -24,13 +24,39 @@ public class Entity {
 	public Rectangle solidArea = new Rectangle(0,0,48,48);
 	public int solidAreaDefaultX, solidAreaDefaultY;
 	public boolean collisionOn = false;
+	// Locomotion AI
 	public int actionLockCounter = 0;
+	//Dialogue
+	String dialogue[] = new String[50];
+	int dialogueIndex = 0;
 	
 	public Entity(GamePanel gp) {
 		this.gp = gp;
 	}
 	public void setAction() {
 		
+	}
+	public void speak() {
+		if(dialogue[dialogueIndex] == null) {
+			dialogueIndex = 0;
+		}
+		gp.ui.currentDialogue = dialogue[dialogueIndex];
+		dialogueIndex++;
+		
+		switch(gp.player.direction) {
+		case "up":
+			direction = "down";
+			break;
+		case "down":
+			direction = "up";
+			break;
+		case "left":
+			direction = "right";
+			break;
+		case "right":
+			direction = "left";
+			break;
+		}
 	}
 	public void update() {
 		setAction();

@@ -14,6 +14,7 @@ public class NPC_OldMan extends Entity{
 		speed = 1;
 		
 		getImage();
+		setDialogue();
 	}
 	public void getImage() {
 		
@@ -27,6 +28,14 @@ public class NPC_OldMan extends Entity{
 		right2 = setup("/npc/oldman_right_2");
 		
 	}
+	
+	public void setDialogue() {
+		dialogue[0] = "Hello!";
+		dialogue[1] = "I am just a template for future \nNPCs. Testing long text. ";
+		dialogue[2] = "Just in case you forgot...";
+		dialogue[3] = "Jeffery Epstein did not kill himself";
+	}
+	
 	public void setAction() {
 		// unique overriding simple ai	
 		actionLockCounter++;
@@ -50,8 +59,11 @@ public class NPC_OldMan extends Entity{
 		
 		
 	}
-	
-
-	
-
+	public void speak() {
+		
+		//DO THIS CHARACTER SPECIFIC STUFF
+		
+		
+		super.speak();
+	}
 }
