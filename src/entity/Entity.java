@@ -17,7 +17,7 @@ public class Entity {
 	public int worldX, worldY;
 	public int speed;
 	public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, upIdle, downIdle, leftIdle, rightIdle;
-	public String direction;
+	public String direction = "down";
 	public int spriteCounter = 0;
 	public int spriteNum = 1;
 	// Collision
@@ -29,6 +29,10 @@ public class Entity {
 	//Dialogue
 	String dialogue[] = new String[50];
 	int dialogueIndex = 0;
+	// Object Salvage
+	public BufferedImage image, image2 , image3;
+	public String name;
+	public boolean collision = false;
 	
 	// CharacterStatus
 	public int maxLife;
