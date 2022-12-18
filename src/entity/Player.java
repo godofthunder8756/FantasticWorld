@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -98,7 +99,7 @@ public class Player extends Entity{
 			
 			// CHECK NPC COLLISION
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-			//interactNPC(npcIndex);
+			contactMonster(monsterIndex);
 			
 			// CHECK EVENT
 			gp.eHandler.checkEvent();
@@ -126,6 +127,15 @@ public class Player extends Entity{
 				spriteCounter = 0;
 			}
 		}	
+		// OUTSIDE of key if statement
+		if(invincible==true) {
+			invincibleCounter++;
+			if(invincibleCounter >60) {
+				invincible = false;
+				invincibleCounter = 0;
+				
+			}
+		}
 	}
 	
 	public void pickUpObject(int i) {
@@ -141,7 +151,15 @@ public class Player extends Entity{
 				gp.npc[i].speak();
 			}
 		}
-		
+	}
+	
+	public void contactMonster(int i){
+		if(i != 999) {
+			if(invincible == false) {
+				life -=1;
+				invincible = true;
+			}					
+		}
 	}
 	
 	public void draw(Graphics2D g2 ){
@@ -196,7 +214,14 @@ public class Player extends Entity{
 			}
 			break;
 		}
+		// Invincibility
+		if(invincible==true) {
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+		}
 		g2.drawImage(image, screenX, screenY, null);
+		
+		//Reset Invincibility alpha
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 	}
 
 }
