@@ -105,7 +105,6 @@ public class Player extends Entity{
 			gp.eHandler.checkEvent();
 			
 			
-			
 			// IF COLLISION IS FLASE< PLAYER CAN MOVE
 			if(collisionOn == false || keyH.enterPressed == false) {
 				switch(direction) {
