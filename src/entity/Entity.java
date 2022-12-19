@@ -17,6 +17,9 @@ public class Entity {
 	public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, upIdle, downIdle, leftIdle, rightIdle;
 	public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
 	public BufferedImage image, image2 , image3;
+	public Rectangle solidArea = new Rectangle(0,0,48,48);
+	public Rectangle attackArea = new Rectangle();
+	public int solidAreaDefaultX, solidAreaDefaultY;
 	String dialogue[] = new String[50];
 	public boolean collision = false;
 	
@@ -24,11 +27,7 @@ public class Entity {
 	public int spriteCounter = 0;
 	public int actionLockCounter = 0;
 	public int invincibleCounter = 0;
-	
-	// Collision
-	public Rectangle solidArea = new Rectangle(0,0,48,48);
-	public int solidAreaDefaultX, solidAreaDefaultY;
-		
+
 	// STATE
 	public int worldX, worldY;
 	public String direction = "down";

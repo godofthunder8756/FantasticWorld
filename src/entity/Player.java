@@ -37,6 +37,9 @@ public class Player extends Entity{
 		solidArea.width = 32;           //MAYBE change both to 28 
 		solidArea.height = 32;
 		
+		attackArea.width = 38;          //Attack radius, MAYBE 48????
+		attackArea.height = 38;
+		
 		setDefaultValues();
 		getPlayerImage();
 		getPlayerAttackImage();
@@ -86,18 +89,10 @@ public class Player extends Entity{
 			attacking();
 		}
 		else if(keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true) {
-			if(keyH.upPressed == true) {
-				direction = "up";
-			}
-			else if(keyH.downPressed == true) {
-				direction = "down";		
-			}
-			else if(keyH.leftPressed == true) {
-				direction = "left";			
-			}
-			else if(keyH.rightPressed == true) {
-				direction = "right";			
-			}
+			if(keyH.upPressed == true) {direction = "up";}
+			else if(keyH.downPressed == true) {direction = "down";}
+			else if(keyH.leftPressed == true) {direction = "left";}
+			else if(keyH.rightPressed == true) {direction = "right";}
 			
 			// CHECK TILE COLLISION
 			collisionOn = false;
@@ -162,7 +157,33 @@ public class Player extends Entity{
 		}
 		if(spriteCounter > 5 && spriteCounter <= 25) { //20 frames
 			spriteNum = 2;
+			// Store current worldx and worldy
+			int currentWorldX = worldX;
+			int currentWorldY = worldY;
+			int solidAreaWidth = solidArea.width;
+			int solidAreaHeight = solidArea.height;
+			
+			// Adjust worldx and world y of player
+			switch (direction) {
+			case "up": worldY -= attackArea.height; break;
+			case "down": worldY += attackArea.height; break;
+			case "left": worldX -= attackArea.width; break;
+			case "right": worldX += attackArea.width; break;
+			}
+			// attackArea becomes solidArea
+			solidArea.width = attackArea.width;
+			solidArea.height = attackArea.height;
+			// Check monster collision with the updated worldX and worldY
+			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+			damageMonster(monsterIndex);
+			
+			// After checking collision, restore world x and y
+			worldX = currentWorldX;
+			worldY = currentWorldY;
+			solidArea.width = solidAreaWidth;
+			solidArea.height = solidAreaHeight;
 		}
+		
 		if(spriteCounter > 25) {
 			spriteNum = 1;
 			spriteCounter= 0;
@@ -194,6 +215,15 @@ public class Player extends Entity{
 				life -=1;
 				invincible = true;
 			}					
+		}
+	}
+	
+	public void damageMonster(int i) {
+		if(i != 999) {
+			System.out.println("Hit");  //DEBUG
+		}
+		else {
+			System.out.println("Miss"); //DEBUG
 		}
 	}
 	
