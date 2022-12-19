@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -113,6 +114,15 @@ public class Entity {
 			}
 			spriteCounter = 0;
 		}
+		// Invincibility
+		if(invincible==true) {
+			invincibleCounter++;
+			if(invincibleCounter > 40) {
+				invincible = false;
+				invincibleCounter = 0;
+				
+			}
+		}
 		
 	}
 	
@@ -143,8 +153,17 @@ public class Entity {
 				if(spriteNum == 1) { image = right1;}
 				if(spriteNum == 2) { image = right2;}
 				break;
-			}			
+			}	
+			
+			// Invincibility
+			if(invincible==true) {
+				g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+			}
+			
 			g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+			
+			//Reset Invincibility alpha
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		}
 	}
 	public BufferedImage setup(String imagePath, int width, int height) {
