@@ -163,6 +163,7 @@ public class UI {
 		
 	}
 	public void drawPauseScreen() {
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
 		String text = "PAUSED";
 		int x = getXforCenteredText(text);
 		int y = gp.screenHeight/2;

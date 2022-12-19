@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -159,6 +160,21 @@ public class Entity {
 				if(spriteNum == 2) { image = right2;}
 				break;
 			}	
+			
+			// Monster HP Bar
+			if(type == 2) {
+				
+				double oneScale = (double)gp.tileSize/maxLife;
+				double hpBarValue = oneScale*life;
+				
+				g2.setColor(new Color(35,35,35));                      //Boarder
+				g2.fillRect(screenX-1, screenY-16, gp.tileSize+2, 12);
+				g2.setColor(new Color(255,0,30));					   //Meter
+				g2.fillRect(screenX, screenY - 15, (int)hpBarValue, 10);
+				
+			}
+			
+			
 			
 			// Invincibility
 			if(invincible==true) {
