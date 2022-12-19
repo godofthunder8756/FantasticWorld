@@ -90,9 +90,11 @@ public class Entity {
 		gp.cChecker.checkEntity(this, gp.monster);
 		boolean contactPlayer = gp.cChecker.checkPlayer(this);
 		
+		//When Monster touches Player
 		if(this.type ==2 && contactPlayer == true) {
 			if(gp.player.invincible == false) {
 				//damage
+				gp.playSE(6);
 				gp.player.life -=1;
 				gp.player.invincible= true;
 			}
