@@ -30,6 +30,7 @@ public class Entity {
 	public int actionLockCounter = 0;
 	public int invincibleCounter = 0;
 	int dyingCounter = 0;
+	int hpBarCounter = 0;
 
 	// STATE
 	public int worldX, worldY;
@@ -41,6 +42,7 @@ public class Entity {
 	boolean attacking = false;
 	public boolean dying = false;
 	public boolean alive = true;
+	boolean hpBarOn = false;
 	
 	// CHARACTER ATTRIBUTES
 	public int type; //0 = player, 1 = npc, 2 = monster
@@ -162,7 +164,7 @@ public class Entity {
 			}	
 			
 			// Monster HP Bar
-			if(type == 2) {
+			if(type == 2 && hpBarOn == true) {
 				
 				double oneScale = (double)gp.tileSize/maxLife;
 				double hpBarValue = oneScale*life;
@@ -172,22 +174,20 @@ public class Entity {
 				g2.setColor(new Color(255,0,30));					   //Meter
 				g2.fillRect(screenX, screenY - 15, (int)hpBarValue, 10);
 				
+				hpBarCounter++;
+				if(hpBarCounter > 300) { //5 sec
+					hpBarCounter = 0;
+					hpBarOn =false;
+				}
+				
 			}
-			
-			
 			
 			// Invincibility
-			if(invincible==true) {
-				g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
-			}
-			if(dying==true) {
-				dyingAnimation(g2);
-			}
-			
+			if(invincible==true) { hpBarOn = true; hpBarCounter = 0; changeAlpha(g2, 0.4F);}
+			if(dying==true) { dyingAnimation(g2);}
 			g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-			
 			//Reset Invincibility alpha
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+			changeAlpha(g2, 1F);
 		}
 	}
 	
