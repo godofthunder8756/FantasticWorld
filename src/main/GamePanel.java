@@ -56,6 +56,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int playState = 1;
 	public final int pauseState = 2;
 	public final int dialogueState = 3;
+	public final int characterState = 4;
 	
 	
 	// Set player's default location
@@ -112,7 +113,7 @@ public class GamePanel extends JPanel implements Runnable{
 				drawCount++;
 			}
 			if(timer >= 1000000000) {
-				System.out.println("FPS: " + drawCount);
+				//System.out.println("FPS: " + drawCount);
 				drawCount = 0;
 				timer = 0;
 			}
