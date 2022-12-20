@@ -12,6 +12,8 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
+import object.OBJ_Shield_Wood;
+import object.OBJ_Sword_Normal;
 
 public class Player extends Entity{
 	
@@ -54,8 +56,26 @@ public class Player extends Entity{
 		direction = "down";
 		
 		// Player Status
+		level = 1;
 		maxLife = 6;
 		life = maxLife;
+		strength = 1;  // More strength = more damage given
+		dexterity = 1; // More dexterity = less damage recieved
+		exp = 0;
+		nextLevelExp = 5;
+		coin = 0;
+		currentWeapon = new OBJ_Sword_Normal(gp);
+		currentSheild = new OBJ_Shield_Wood(gp);
+		attack = getAttack();
+		defense = getDefense();
+	}
+	
+	public int getAttack() {
+		return attack = strength*currentWeapon.attackValue;
+	}
+	public int getDefense() {
+		return defense = dexterity*currentSheild.defenseValue;
+		
 	}
 	
 	public void getPlayerImage() {	
