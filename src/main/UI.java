@@ -32,6 +32,8 @@ public class UI {
 	public boolean gameFinished = false;
 	public String currentDialogue;
 	public int commandNum = 0;
+	public int slotCol = 0;
+	public int slotRow = 0;
 	
 	
 	public UI(GamePanel gp) {
@@ -90,6 +92,7 @@ public class UI {
 		//Character State
 		if(gp.gameState == gp.characterState) {
 			drawCharacterScreen();
+			drawInventory();
 		}
 	}
 	
@@ -228,7 +231,7 @@ public class UI {
 	}
 	public void drawCharacterScreen() {
 		//CREATE FRAME
-		final int frameX = gp.tileSize*2;
+		final int frameX = gp.tileSize*1;  // or x2... not sure
 		final int frameY = gp.tileSize;
 		final int frameWidth = gp.tileSize*5;
 		final int frameHeight = gp.tileSize*10;
@@ -323,6 +326,49 @@ public class UI {
 		textY+=gp.tileSize;
 		
 	}
+	
+	public void drawInventory() {
+		
+		// FRAME
+		int frameX = gp.tileSize*9;
+		int frameY = gp.tileSize;
+		int frameWidth = gp.tileSize*6;
+		int frameHeight = gp.tileSize*5;
+		drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+		
+		// SLOT
+		final int slotXstart = frameX + 20;
+		final int slotYstart = frameY + 20;
+		int slotX = slotXstart;
+		int slotY = slotYstart;
+		int slotSize = gp.tileSize+3;
+		
+		//Draw Player's Items
+		for(int i = 0; i < gp.player.inventory.size(); i++) {
+			
+			g2.drawImage(gp.player.inventory.get(i).down1, slotX, slotY, null);
+			slotX+=slotSize;
+			if( i == 4 || i == 9 || i == 14) {
+				slotX = slotXstart;
+				slotY += slotSize;
+			}
+		}
+		
+		//Cursor
+		int cursorX = slotXstart + (slotSize * slotCol);
+		int cursorY = slotYstart + (slotSize * slotRow);
+		int cursorWidth = gp.tileSize;
+		int cursorHeight = gp.tileSize;
+		
+		
+		
+		//Draw Cursor
+		g2.setColor(Color.white);
+		g2.setStroke(new BasicStroke(3));
+		g2.drawRoundRect(cursorX,cursorY, cursorWidth, cursorHeight, 10, 10);
+		
+	}
+	
 	public void drawSubWindow(int x, int y, int width, int height) {
 		Color c = new Color(0,0,0,210);
 		g2.setColor(c);
