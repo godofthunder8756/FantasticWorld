@@ -11,12 +11,12 @@ public class Sound {
 	
 	public Sound() {
 		soundURL[0] = getClass().getResource("/sound/BlueBoyAdventure.wav");
-		soundURL[1] = getClass().getResource("/sound/coin.wav");
+		soundURL[1] = getClass().getResource("/sound/coin.wav"); //custom
 		soundURL[2] = getClass().getResource("/sound/powerup.wav");
 		soundURL[3] = getClass().getResource("/sound/unlock.wav");
 		soundURL[4] = getClass().getResource("/sound/fanfare.wav");
-		soundURL[5] = getClass().getResource("/sound/hitmonster.wav");
-		soundURL[6] = getClass().getResource("/sound/receivedamage.wav");
+		soundURL[5] = getClass().getResource("/sound/hitmonster.wav"); //custom
+		soundURL[6] = getClass().getResource("/sound/receivedamage.wav"); //custom
 		soundURL[7] = getClass().getResource("/sound/swingweapon.wav"); //custom
 		soundURL[8] = getClass().getResource("/sound/levelup.wav"); //custom
 	}
