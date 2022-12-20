@@ -99,6 +99,7 @@ public class EventHandler {
 			gp.ui.currentDialogue = "You drank from the secret \nhealing water...";
 			gp.player.life = gp.player.maxLife;
 			eventRect[col][row].eventDone = true;
+			gp.aSetter.setMonster();//RESPAWN MONSTERS
 		}
 		
 	}

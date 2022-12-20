@@ -238,7 +238,12 @@ public class Player extends Entity{
 		if(i != 999) {
 			if(invincible == false) {
 				gp.playSE(6);
-				life -=1;
+				
+				int damage = gp.monster[i].attack - gp.player.defense;
+				if(damage < 0) {
+					damage = 0;
+				}
+				life -=damage;
 				invincible = true;
 			}					
 		}
@@ -249,18 +254,43 @@ public class Player extends Entity{
 			System.out.println("Hit");  //DEBUG
 			if(gp.monster[i].invincible == false) {
 				gp.playSE(5);
-				gp.monster[i].life -= 1;
+				
+				int damage = attack - gp.monster[i].defense;
+				if(damage < 0) {
+					damage = 0;
+				}
+				
+				gp.monster[i].life -= damage;
+				gp.ui.addMessage(damage + " damage!");
 				gp.monster[i].invincible = true;
 				gp.monster[i].damageReaction();
 				
 				if(gp.monster[i].life <= 0) {
 					gp.monster[i].dying = true;
-					//gp.monster[i] = null; //kill
+					gp.ui.addMessage(gp.monster[i].name + " killed!");
+					gp.ui.addMessage("+"+gp.monster[i].exp+" EXP");
+					exp += gp.monster[i].exp;
+					checkLevelUp();
 				}
 			}
 		}
 		else {
 			System.out.println("Miss"); //DEBUG
+		}
+	}
+	public void checkLevelUp() {
+		if(exp >= nextLevelExp) {
+			level++;
+			nextLevelExp =  nextLevelExp*2; //-----------------------------------------------------ADJUST
+			maxLife+=2; //----------------------------------------------------------------------/
+			life+=2; //------------------------------------------------------------------------/
+			strength++;
+			dexterity++;
+			attack = getAttack();
+			defense = getDefense();
+			gp.playSE(8);
+			gp.gameState = gp.dialogueState;
+			gp.ui.currentDialogue = "LEVEL " + level +"!\n" + "You feel stronger now!";
 		}
 	}
 	
