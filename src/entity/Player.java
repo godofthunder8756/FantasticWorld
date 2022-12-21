@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.tree.AbstractLayoutCache;
 
 import main.GamePanel;
 import main.KeyHandler;
@@ -78,8 +79,6 @@ public class Player extends Entity{
 	public void setItems() {
 		inventory.add(currentWeapon);
 		inventory.add(currentSheild);
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
 		inventory.add(new OBJ_Key(gp));
 		inventory.add(new OBJ_Key(gp));
 	}
@@ -234,7 +233,17 @@ public class Player extends Entity{
 	
 	public void pickUpObject(int i) {
 		if(i != 999) {
-			// empty
+			String text;
+			if(inventory.size() != maxInventorySize) {
+				inventory.add(gp.obj[i]);
+				gp.playSE(1);
+				text = "Obtained: "+gp.obj[i].name+"!";
+			}
+			else {
+				text = "Your inventory is full!";
+			}
+			gp.ui.addMessage(text);
+			gp.obj[i] = null;
 		}
 	}
 	
