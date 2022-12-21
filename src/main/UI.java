@@ -346,6 +346,12 @@ public class UI {
 		//Draw Player's Items
 		for(int i = 0; i < gp.player.inventory.size(); i++) {
 			
+			//EQUIP CURSOR
+			if(gp.player.inventory.get(i)==gp.player.currentWeapon || gp.player.inventory.get(i) == gp.player.currentSheild) {
+				g2.setColor(new Color(240,190,90));
+				g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
+			}
+			
 			g2.drawImage(gp.player.inventory.get(i).down1, slotX, slotY, null);
 			slotX+=slotSize;
 			if( i == 4 || i == 9 || i == 14) {

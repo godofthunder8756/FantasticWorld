@@ -8,9 +8,12 @@ public class OBJ_Sword_Normal extends Entity{
 	public OBJ_Sword_Normal(GamePanel gp){
 		super(gp);
 		
+		type = type_sword;
 		name = "Normal Sword";
 		down1 = setup("/objects/sword_normal", gp.tileSize, gp.tileSize);
-		attackValue = 2;
+		attackValue = 1;
+		attackArea.width = 36;
+		attackArea.height = 36;
 		description = "["+ name +"]\nKinda rusty. Good for \nturning slimes into jelly.";
 	}
 

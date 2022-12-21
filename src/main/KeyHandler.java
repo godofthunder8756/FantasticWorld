@@ -139,11 +139,11 @@ public class KeyHandler implements KeyListener{
 
 		}
 		if(code == KeyEvent.VK_ENTER) {
-			//DO NOTHING RN
+			gp.player.selectItem();
 		}
 		
 	}
-	
+
 
 	@Override
 	public void keyReleased(KeyEvent e) {
