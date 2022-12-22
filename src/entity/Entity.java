@@ -113,6 +113,20 @@ public class Entity {
 		}
 	}
 	public void use(Entity entity) {} //gets overrided
+	
+	public void checkDrop() {}
+	
+	public void dropItem(Entity droppedItem) {
+		for(int i = 0; i<gp.obj.length; i++) {
+			if(gp.obj[i] == null) { //see if there's room in the array
+				gp.obj[i] = droppedItem;
+				gp.obj[i].worldX = worldX; //where monster was
+				gp.obj[i].worldY = worldY;
+				break; //the two hour bug
+			}
+		}
+	}
+	
 	public void update() {
 		setAction();
 		
