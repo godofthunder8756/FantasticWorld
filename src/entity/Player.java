@@ -211,12 +211,17 @@ public class Player extends Entity{
 			if(invincibleCounter >60) {
 				invincible = false;
 				invincibleCounter = 0;
-				
 			}
 		}
 		// Shoot cooldown timer
 		if(shotAvailableCOunter < 30) {
 			shotAvailableCOunter++;
+		}
+		if(life > maxLife) {
+			life = maxLife;
+		}
+		if(mana > maxMana) {
+			mana = maxMana;
 		}
 	}
 	
