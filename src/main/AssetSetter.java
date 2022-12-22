@@ -12,6 +12,7 @@ import object.OBJ_Heart;
 import object.OBJ_Key;
 import object.OBJ_Potion_Red;
 import object.OBJ_Shield_Blue;
+import tile_interactive.IT_DryTree;
 
 public class AssetSetter {
 	
@@ -95,5 +96,18 @@ public class AssetSetter {
 		i++;
 		
 	}
+public void setInteractiveTile() {
+		
+		int i = 0;
+		
+		gp.iTile[i] = new IT_DryTree(gp, 27, 12);i++;
+		gp.iTile[i] = new IT_DryTree(gp, 28, 12);i++;
+		gp.iTile[i] = new IT_DryTree(gp, 29, 12);i++;
+		gp.iTile[i] = new IT_DryTree(gp, 30, 12);i++;
+		gp.iTile[i] = new IT_DryTree(gp, 31, 12);i++;
+		gp.iTile[i] = new IT_DryTree(gp, 32, 12);i++;
+		gp.iTile[i] = new IT_DryTree(gp, 33, 12);i++;
+		
+}
 
 }
