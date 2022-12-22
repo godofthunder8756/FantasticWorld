@@ -18,9 +18,22 @@ public class InteractiveTile extends Entity{
 		
 		return isCorrectItem;	
 	}
+	public void playSE() {}
+	
+	public InteractiveTile getDestroyedForm() {
+		InteractiveTile tile = null;
+		return tile;
+	}
 	
 	public void update() {
-		
+		if(invincible==true) {
+			invincibleCounter++;
+			if(invincibleCounter > 20) {
+				invincible = false;
+				invincibleCounter = 0;
+				
+			}
+		}
 	}
 
 }
