@@ -84,7 +84,7 @@ public class MONS_RedSlime extends Entity{
 			dropItem(new OBJ_Heart(gp));
 		}
 		if(i >=50 && i < 75) {
-			dropItem(null);
+			// you get nuthin
 		}
 		
 	}
