@@ -33,6 +33,10 @@ public class Particle extends Entity{
 		
 		life --; 
 		
+		if(life <maxLife/3) { //cheap gravity system
+			yd++;
+		}
+		
 		worldX += xd*speed;
 		worldY += yd*speed;
 		
