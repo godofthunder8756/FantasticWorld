@@ -31,6 +31,7 @@ public class Entity {
 	public int invincibleCounter = 0;
 	int dyingCounter = 0;
 	int hpBarCounter = 0;
+	public int shotAvailableCOunter;
 
 	// STATE
 	public int worldX, worldY;
@@ -45,11 +46,12 @@ public class Entity {
 	boolean hpBarOn = false;
 	
 	// CHARACTER ATTRIBUTES
-	
 	public String name;
 	public int speed;
 	public int maxLife;
 	public int life;
+	public int maxMana;
+	public int mana;
 	public int level;
 	public int strength;
 	public int dexterity;
@@ -58,13 +60,15 @@ public class Entity {
 	public int exp;
 	public int nextLevelExp;
 	public int coin;
-	public Entity currentWeapon;
-	public Entity currentSheild;
+	public Entity currentWeapon; //Instantiated in player.setDefault()
+	public Entity currentSheild; //^
+	public Projectile projectile;//^ 
 	
 	// ITEM ATTRIBUTES
 	public int attackValue;
 	public int defenseValue;
 	public String description = "";
+	public int useCost;
 	
 	//TYPE
 	public int type; //0 = player, 1 = npc, 2 = monster
@@ -119,16 +123,7 @@ public class Entity {
 		
 		//When Monster touches Player
 		if(this.type == type_monster && contactPlayer == true) {
-			if(gp.player.invincible == false) {
-				//damage
-				gp.playSE(6);
-				int damage = attack - gp.player.defense;
-				if(damage < 0) {
-					damage = 0;
-				}
-				gp.player.life -=damage;
-				gp.player.invincible= true;
-			}
+			damagePlayer(attack);
 		}
 		
 		if(collisionOn == false) {
@@ -159,7 +154,24 @@ public class Entity {
 				
 			}
 		}
+		// Shoot cooldown timer
+		if(shotAvailableCOunter < 30) {
+			shotAvailableCOunter++;
+		}
 		
+	}
+	
+	public void damagePlayer(int attack) {
+		if(gp.player.invincible == false) {
+			//damage
+			gp.playSE(6);
+			int damage = attack - gp.player.defense;
+			if(damage < 0) {
+				damage = 0;
+			}
+			gp.player.life -=damage;
+			gp.player.invincible= true;
+		}
 	}
 	
 	public void draw(Graphics2D g2) {

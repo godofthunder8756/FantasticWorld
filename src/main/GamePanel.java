@@ -48,6 +48,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Entity obj[] = new Entity[10]; //Display up to ten objects at once in game (for performance. subject to change)
 	public Entity npc[] = new Entity[10]; 
 	public Entity monster[] = new Entity[20];
+	public ArrayList<Entity> projectileList = new ArrayList<>();
 	ArrayList<Entity> entityList = new ArrayList<>();
 	
 	// GAME STATE
@@ -60,8 +61,8 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	
 	// Set player's default location
-	int playerX = 100;
-	int playerY = 100;
+//	int playerX = 100;
+//	int playerY = 100;
 	int playerSpeed = 4;
 	
 	public GamePanel () {
@@ -139,8 +140,18 @@ public class GamePanel extends JPanel implements Runnable{
 					}
 					if(monster[i].alive ==false) {
 						monster[i] = null;
+					}	
+				}
+			}
+			//Projectile
+			for(int i=0; i<projectileList.size(); i++) {
+				if(projectileList.get(i) != null) {
+					if(projectileList.get(i).alive ==true) {
+						projectileList.get(i).update();
 					}
-					
+					if(projectileList.get(i).alive ==false) {
+						projectileList.remove(i);
+					}	
 				}
 			}
 			
@@ -185,6 +196,12 @@ public class GamePanel extends JPanel implements Runnable{
 			for(int i=0; i<monster.length; i++) {
 				if(monster[i] != null) {
 					entityList.add(monster[i]);
+				}
+			}
+			//Projectiles
+			for(int i=0; i<projectileList.size(); i++) {
+				if(projectileList.get(i) != null) {
+					entityList.add(projectileList.get(i));
 				}
 			}
 			

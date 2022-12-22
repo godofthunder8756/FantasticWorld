@@ -4,6 +4,7 @@ import java.util.Random;
 
 import entity.Entity;
 import main.GamePanel;
+import object.OBJ_Rock;
 
 public class MONS_BrownSlime extends Entity{
 
@@ -22,6 +23,7 @@ public class MONS_BrownSlime extends Entity{
 		attack = 5;
 		defense = 0;
 		exp = 3;
+		projectile = new OBJ_Rock(gp);
 		
 		solidArea.x = 3;
 		solidArea.y = 18;
@@ -63,6 +65,13 @@ public class MONS_BrownSlime extends Entity{
 			}
 			actionLockCounter = 0;
 		}
+		int i = new Random().nextInt(100)+1; // pick a num form 1 to 100
+		if(i>99 && projectile.alive == false && shotAvailableCOunter == 30) {
+			projectile.set(worldX, worldY, direction, true, this);
+			gp.projectileList.add(projectile);
+			shotAvailableCOunter = 0;
+		}
+
 	}
 	public void damageReaction() {
 		

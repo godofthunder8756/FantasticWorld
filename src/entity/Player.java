@@ -14,6 +14,7 @@ import javax.swing.tree.AbstractLayoutCache;
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
+import object.OBJ_Fireball;
 import object.OBJ_Key;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
@@ -72,6 +73,7 @@ public class Player extends Entity{
 		coin = 0;
 		currentWeapon = new OBJ_Sword_Normal(gp);
 		currentSheild = new OBJ_Shield_Wood(gp);
+		projectile = new OBJ_Fireball(gp);
 		attack = getAttack();
 		defense = getDefense();
 	}
@@ -192,6 +194,18 @@ public class Player extends Entity{
 			}
 		}	
 		// OUTSIDE of key if statement
+		//Projectile Shooting
+		if(gp.keyH.shootKeyPressed == true && projectile.alive == false && shotAvailableCOunter == 30) { //ONLY SHOOT ONE AT A TIME
+			//Set Default data
+			projectile.set(worldX, worldY, direction, true, this);
+			
+			//add to the list
+			gp.projectileList.add(projectile);
+			shotAvailableCOunter = 0;
+			gp.playSE(10);
+			
+		}
+		
 		if(invincible==true) {
 			invincibleCounter++;
 			if(invincibleCounter >60) {
@@ -199,6 +213,10 @@ public class Player extends Entity{
 				invincibleCounter = 0;
 				
 			}
+		}
+		// Shoot cooldown timer
+		if(shotAvailableCOunter < 30) {
+			shotAvailableCOunter++;
 		}
 	}
 	
@@ -229,7 +247,7 @@ public class Player extends Entity{
 			solidArea.height = attackArea.height;
 			// Check monster collision with the updated worldX and worldY
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-			damageMonster(monsterIndex);
+			damageMonster(monsterIndex, attack);
 			
 			// After checking collision, restore world x and y
 			worldX = currentWorldX;
@@ -286,7 +304,7 @@ public class Player extends Entity{
 		}
 	}
 	
-	public void damageMonster(int i) {
+	public void damageMonster(int i, int attack) {
 		if(i != 999) {
 			System.out.println("Hit");  //DEBUG
 			if(gp.monster[i].invincible == false) {
