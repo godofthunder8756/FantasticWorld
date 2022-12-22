@@ -265,17 +265,27 @@ public class Player extends Entity{
 	
 	public void pickUpObject(int i) {
 		if(i != 999) {
-			String text;
-			if(inventory.size() != maxInventorySize) {
-				inventory.add(gp.obj[i]);
-				gp.playSE(1);
-				text = "Obtained: "+gp.obj[i].name+"!";
+			// PICKUP ONLY
+			if(gp.obj[i].type == type_pickupOnly){
+				gp.obj[i].use(this);
+				gp.obj[i] = null;
 			}
+			
+			// INVENTORY ITEMS
 			else {
-				text = "Your inventory is full!";
+				String text;
+				if(inventory.size() != maxInventorySize) {
+					inventory.add(gp.obj[i]);
+					gp.playSE(1);
+					text = "Obtained: "+gp.obj[i].name+"!";
+				}
+				else {
+					text = "Your inventory is full!";
+				}
+				gp.ui.addMessage(text);
+				gp.obj[i] = null;				
 			}
-			gp.ui.addMessage(text);
-			gp.obj[i] = null;
+
 		}
 	}
 	
