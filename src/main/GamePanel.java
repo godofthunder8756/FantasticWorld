@@ -115,7 +115,6 @@ public class GamePanel extends JPanel implements Runnable{
 		aSetter.setMonster();
 	}
 	public void restart() {
-		stopMusic();
 		player.setDefaultValues();
 		player.setDefaultPositions();
 		player.restoreLifeAndMana();
