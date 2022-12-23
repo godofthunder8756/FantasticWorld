@@ -42,18 +42,24 @@ public class KeyHandler implements KeyListener{
 		else if(gp.gameState == gp.characterState) {
 			characterState(code);
 		}
+		// OPTIONS STATE
+		else if(gp.gameState == gp.optionsState) {
+			optionsState(code);
+		}
 		
 	}
 	
 	public void titleState(int code) {
-			if(code == KeyEvent.VK_UP || code == KeyEvent.VK_W) {
-				gp.ui.commandNum--;
-				if(gp.ui.commandNum <0) {
-					gp.ui.commandNum = 2;
-				}
+		if(code == KeyEvent.VK_UP || code == KeyEvent.VK_W) {
+			gp.ui.commandNum--;
+			gp.playSE(9);
+			if(gp.ui.commandNum <0) {
+				gp.ui.commandNum = 2;
 			}
+		}
 		if(code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S) {
 			gp.ui.commandNum++;
+			gp.playSE(9);
 			if(gp.ui.commandNum >2) {
 				gp.ui.commandNum = 0;
 			}
@@ -85,7 +91,7 @@ public class KeyHandler implements KeyListener{
 		if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) {
 			rightPressed = true;
 		}
-		if(code == KeyEvent.VK_ESCAPE) {
+		if(code == KeyEvent.VK_P) {
 			gp.gameState = gp.pauseState;		
 		}
 		if(code == KeyEvent.VK_C) {
@@ -94,13 +100,16 @@ public class KeyHandler implements KeyListener{
 		if(code == KeyEvent.VK_ENTER) {
 			enterPressed=true;		
 		}
-		if(code == KeyEvent.VK_F) {
+		if(code == KeyEvent.VK_F) { 
 			shootKeyPressed=true;		
+		}
+		if(code == KeyEvent.VK_ESCAPE) { 
+			gp.gameState = gp.optionsState;		
 		}
 	}
 	
 	public void pauseState(int code) {
-		if(code == KeyEvent.VK_ESCAPE) {
+		if(code == KeyEvent.VK_ESCAPE || code == KeyEvent.VK_P) {
 			gp.gameState = gp.playState;
 		}
 	}
@@ -145,6 +154,83 @@ public class KeyHandler implements KeyListener{
 			gp.player.selectItem();
 		}
 		
+	}
+	
+	public void optionsState(int code) {
+		if(code == KeyEvent.VK_ESCAPE ) {
+			gp.gameState = gp.playState;
+		}
+		if(code == KeyEvent.VK_ENTER) {
+			enterPressed = true;
+		}
+		
+		int maxCommandNum = 0;
+		switch(gp.ui.subState) {
+		case 0: maxCommandNum = 5;break;
+		case 3: maxCommandNum = 1;break;
+		}
+		
+		if(code == KeyEvent.VK_UP || code == KeyEvent.VK_W) {
+			gp.ui.commandNum--;
+			gp.playSE(9);
+			if(gp.ui.commandNum < 0) {
+				gp.ui.commandNum = maxCommandNum;
+			}
+		}
+		if(code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S) {
+			gp.ui.commandNum++;
+			gp.playSE(9);
+			if(gp.ui.commandNum > maxCommandNum) {
+				gp.ui.commandNum = 0;
+			}
+		}
+		if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT) {
+			if(gp.ui.subState == 0) {
+				if(gp.ui.commandNum == 1 && gp.music.volumeScale > 0) {
+					gp.music.volumeScale--;
+					gp.music.checkVolume();
+					gp.playSE(9);
+				}
+				if(gp.ui.commandNum == 2 && gp.se.volumeScale > 0) {
+					gp.se.volumeScale--;
+					gp.playSE(9);
+				}
+			}
+			
+		}
+		if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) {
+			if(gp.ui.subState == 0) {
+				if(gp.ui.commandNum == 1 && gp.music.volumeScale < 5) {
+					gp.music.volumeScale++;
+					gp.music.checkVolume();
+					gp.playSE(9);
+				}
+				if(gp.ui.commandNum == 2 && gp.se.volumeScale < 5) {
+					gp.se.volumeScale++;
+					gp.playSE(9);
+				}
+			}
+		}
+		if(code == KeyEvent.VK_ENTER || code == KeyEvent.VK_SPACE) {
+			if(gp.ui.commandNum == 0) {
+				//
+			}
+			if(gp.ui.commandNum == 1) {
+				// add later
+			}
+			if(gp.ui.commandNum == 2) {
+				// add later
+			}
+			if(gp.ui.commandNum == 3) {
+				// add later
+			}
+			if(gp.ui.commandNum == 4) {
+				//
+			}
+			if(gp.ui.commandNum == 5) {
+				gp.gameState = gp.playState;
+			}
+		}
 	}
 
 

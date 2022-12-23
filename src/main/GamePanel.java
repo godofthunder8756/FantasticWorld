@@ -11,6 +11,9 @@ import tile_interactive.InteractiveTile;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,14 +25,21 @@ public class GamePanel extends JPanel implements Runnable{
 	final int scale = 3; //scale everything up by 3 cuz shit's too small. 
 	
 	public final int tileSize = originalTileSize * scale; // Makes tiles 48x48 IRL
-	public final int maxScreenCol = 16;
+	public final int maxScreenCol = 20;
 	public final int maxScreenRow = 12;  //4x3 ratio
-	public final int screenWidth = tileSize * maxScreenCol; //48*16 =  768px
+	public final int screenWidth = tileSize * maxScreenCol; //48*20 =  960px
 	public final int screenHeight = tileSize * maxScreenRow; //48*12 = 576px
 	
 	// WORLD SETTING
 	public final int maxWorldCol = 50;
 	public final int maxWorldRow = 50;
+	
+	// FOR FULLSCREEN
+	int screenWidth2 = screenWidth;
+	int screenHeight2 = screenHeight;
+	BufferedImage tempScreen;
+	Graphics2D g2;
+	public boolean fullScreenOn = false;
 	
 	// FPS
 	final int FPS = 60; // 60 FPS
@@ -43,6 +53,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public AssetSetter aSetter = new AssetSetter(this);
 	public UI ui = new UI(this);
 	public EventHandler eHandler = new EventHandler(this);
+	Config config = new Config(this);
 	Thread gameThread;
 	
 	// ENTITY AND OBJECT
@@ -62,6 +73,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int pauseState = 2;
 	public final int dialogueState = 3;
 	public final int characterState = 4;
+	public final int optionsState = 5;
 	
 	
 	// Set player's default location
@@ -86,8 +98,24 @@ public class GamePanel extends JPanel implements Runnable{
 		aSetter.setInteractiveTile();
 //		playMusic(0);                      //STARTS MUSIC
 		gameState = titleState;
+		//FULLSCREEN
+		tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
+		g2 = (Graphics2D)tempScreen.getGraphics();
+		
+		if(fullScreenOn == true) {
+			setFullscreen();
+		}
 	}
 	
+	public void setFullscreen() {
+		// GET MONITOR SPECS
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice gd = ge.getDefaultScreenDevice();
+		gd.setFullScreenWindow(Main.window);
+		// GET FULL SCREEN WIDTH AND HEIGHT
+		screenWidth2 = Main.window.getWidth();
+		screenHeight2 = Main.window.getHeight();
+	}
 	
 	public void startGameThread() {
 		gameThread = new Thread(this);
@@ -114,7 +142,8 @@ public class GamePanel extends JPanel implements Runnable{
 			
 			if(delta >= 1) {
 				update();
-				repaint();
+				drawToTempScreen();
+				drawToScreen();
 				delta--;
 				drawCount++;
 			}
@@ -186,84 +215,79 @@ public class GamePanel extends JPanel implements Runnable{
 		
 	}
 	
-	public void paintComponent(Graphics g){
-		super.paintComponent(g);
-		Graphics2D g2 = (Graphics2D)g;
-		
+	public void drawToTempScreen() {
 		// TITLE SCREEN
-		if(gameState == titleState) {
-			ui.draw(g2);
-			
-		}
-		//OTHERS
-		else {
-			
-			//TILE
-			tileM.draw(g2);
-			
-			//  Interactive TIles
-			for(int i = 0; i<iTile.length; i++) {
-				if(iTile[i] != null) {
-					iTile[i].draw(g2);
+				if(gameState == titleState) {
+					ui.draw(g2);
+					
 				}
-			}
-			
-			// ADD ENTITIES TO THE LIST
-			entityList.add(player);
-			//NPCs
-			for(int i=0; i<npc.length; i++) {
-				if(npc[i] != null) {
-					entityList.add(npc[i]);
+				//OTHERS
+				else {
+					//TILE
+					tileM.draw(g2);
+					//  Interactive TIles
+					for(int i = 0; i<iTile.length; i++) {
+						if(iTile[i] != null) {
+							iTile[i].draw(g2);
+						}
+					}
+					// ADD ENTITIES TO THE LIST
+					entityList.add(player);
+					//NPCs
+					for(int i=0; i<npc.length; i++) {
+						if(npc[i] != null) {
+							entityList.add(npc[i]);
+						}
+					}
+					//Objects
+					for(int i=0; i<obj.length; i++) {
+						if(obj[i] != null) {
+							entityList.add(obj[i]);
+						}
+					}
+					//Monsters
+					for(int i=0; i<monster.length; i++) {
+						if(monster[i] != null) {
+							entityList.add(monster[i]);
+						}
+					}
+					//Projectiles
+					for(int i=0; i<projectileList.size(); i++) {
+						if(projectileList.get(i) != null) {
+							entityList.add(projectileList.get(i));
+						}
+					}
+					//Particles
+					for(int i=0; i<particleList.size(); i++) {
+						if(particleList.get(i) != null) {
+							entityList.add(particleList.get(i));
+						}
+					}
+					
+					// SORT
+					Collections.sort(entityList, new Comparator<Entity>() {
+						@Override
+						public int compare(Entity e1, Entity e2) {
+							int result = Integer.compare(e1.worldY, e2.worldY);
+							return result;
+						}		
+					}
+					);
+					
+					// Draw Entity List
+					for(int i=0; i<entityList.size(); i++) { entityList.get(i).draw(g2);}
+					// Empty Entity List
+					entityList.clear();
+					
+					//UI
+					ui.draw(g2);
 				}
-			}
-			//Objects
-			for(int i=0; i<obj.length; i++) {
-				if(obj[i] != null) {
-					entityList.add(obj[i]);
-				}
-			}
-			//Monsters
-			for(int i=0; i<monster.length; i++) {
-				if(monster[i] != null) {
-					entityList.add(monster[i]);
-				}
-			}
-			//Projectiles
-			for(int i=0; i<projectileList.size(); i++) {
-				if(projectileList.get(i) != null) {
-					entityList.add(projectileList.get(i));
-				}
-			}
-			//Particles
-			for(int i=0; i<particleList.size(); i++) {
-				if(particleList.get(i) != null) {
-					entityList.add(particleList.get(i));
-				}
-			}
-			
-			// SORT
-			Collections.sort(entityList, new Comparator<Entity>() {
-
-				@Override
-				public int compare(Entity e1, Entity e2) {
-					int result = Integer.compare(e1.worldY, e2.worldY);
-					return result;
-				}
-				
-			});
-			
-			// Draw Entity List
-			for(int i=0; i<entityList.size(); i++) {
-				entityList.get(i).draw(g2);
-			}
-			// Empty Entity List
-			entityList.clear();
-			
-			//UI
-			ui.draw(g2);
-			
-		}
+	}
+	public void drawToScreen() {
 		
+		Graphics g =getGraphics();
+		g.drawImage(tempScreen, 0, 0, screenWidth2, screenHeight2, null);
+		g.dispose();
 	}
 	public void playMusic(int i) {
 		music.setFile(i);
