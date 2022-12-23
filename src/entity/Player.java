@@ -78,11 +78,23 @@ public class Player extends Entity{
 		defense = getDefense();
 	}
 	
+	public void setDefaultPositions() {
+		worldX = gp.tileSize *10;
+		worldY = gp.tileSize *13;
+		direction = "down";
+	}
+	public void restoreLifeAndMana() {
+		life = maxLife;
+		mana = maxMana;
+		invincible = false;
+	}
+	
 	public void setItems() {
-		inventory.add(currentWeapon);
-		inventory.add(currentSheild);
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
+		inventory.clear();
+		inventory.add(currentWeapon); //Default
+		inventory.add(currentSheild); //Default
+		inventory.add(new OBJ_Key(gp)); //Default
+		inventory.add(new OBJ_Key(gp)); //Default
 	}
 	
 	public int getAttack() {
@@ -225,6 +237,10 @@ public class Player extends Entity{
 		}
 		if(mana > maxMana) {
 			mana = maxMana;
+		}
+		if(life <= 0) {
+			gp.gameState = gp.gameOverState;
+			gp.playSE(12);
 		}
 	}
 	

@@ -74,6 +74,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int dialogueState = 3;
 	public final int characterState = 4;
 	public final int optionsState = 5;
+	public final int gameOverState = 6;
 	
 	
 	// Set player's default location
@@ -105,6 +106,24 @@ public class GamePanel extends JPanel implements Runnable{
 		if(fullScreenOn == true) {
 			setFullscreen();
 		}
+	}
+	
+	public void retry() {
+		player.setDefaultPositions();
+		player.restoreLifeAndMana();
+		aSetter.setNPC();
+		aSetter.setMonster();
+	}
+	public void restart() {
+		stopMusic();
+		player.setDefaultValues();
+		player.setDefaultPositions();
+		player.restoreLifeAndMana();
+		player.setItems();
+		aSetter.setObject();
+		aSetter.setNPC();
+		aSetter.setMonster();
+		aSetter.setInteractiveTile();
 	}
 	
 	public void setFullscreen() {
