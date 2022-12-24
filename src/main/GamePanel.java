@@ -78,6 +78,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int optionsState = 5;
 	public final int gameOverState = 6;
 	public final int transitionState = 7;
+	public final int tradeState = 8;
 	
 	
 	// Set player's default location
@@ -95,7 +96,7 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
 	public void setupGame() {
-		
+		currentMap = 1;
 		aSetter.setObject();
 		aSetter.setNPC();
 		aSetter.setMonster();

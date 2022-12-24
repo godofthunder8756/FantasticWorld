@@ -15,6 +15,7 @@ public class OBJ_Sword_Normal extends Entity{
 		attackArea.width = 36;
 		attackArea.height = 36;
 		description = "["+ name +"]\nKinda rusty. Good for \nturning slimes into jelly.";
+		price = 2;
 	}
 
 }

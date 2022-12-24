@@ -1,5 +1,6 @@
 package main;
 
+import entity.NPC_Merchant;
 import entity.NPC_OldMan;
 import monster.MONS_BrownSlime;
 import monster.MONS_RedSlime;
@@ -72,7 +73,8 @@ public class AssetSetter {
 		
 		// MAP 1
 		mapNum = 1;
-		gp.npc[mapNum][i] = new NPC_OldMan(gp);
+		i = 0;
+		gp.npc[mapNum][i] = new NPC_Merchant(gp);
 		gp.npc[mapNum][i].worldX = gp.tileSize*12;
 		gp.npc[mapNum][i].worldY = gp.tileSize*7;
 		i++;
