@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 
+import ai.Pathfinder;
 import entity.Entity;
 import entity.Player;
 import tile.TileManager;
@@ -47,7 +48,7 @@ public class GamePanel extends JPanel implements Runnable{
 	final int FPS = 60; // 60 FPS
 	
 	// SYSTEM
-	TileManager tileM = new TileManager(this);
+	public TileManager tileM = new TileManager(this);
 	public KeyHandler keyH = new KeyHandler(this);
 	Sound se = new Sound();
 	Sound music = new Sound();
@@ -56,6 +57,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public UI ui = new UI(this);
 	public EventHandler eHandler = new EventHandler(this);
 	Config config = new Config(this);
+	public Pathfinder pFinder = new Pathfinder(this);
 	Thread gameThread;
 	
 	// ENTITY AND OBJECT

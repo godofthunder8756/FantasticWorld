@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.Rectangle;
 import java.util.Random;
 
 import main.GamePanel;
@@ -12,6 +13,14 @@ public class NPC_OldMan extends Entity{
 		
 		direction = "down";
 		speed = 1;
+		
+		solidArea = new Rectangle();
+		solidArea.x = 8;
+		solidArea.y = 16;
+		solidAreaDefaultX = solidArea.x;
+		solidAreaDefaultY = solidArea.y;
+		solidArea.width = 30;
+		solidArea.height = 30;
 		
 		getImage();
 		setDialogue();
@@ -37,25 +46,32 @@ public class NPC_OldMan extends Entity{
 	}
 	
 	public void setAction() {
-		// unique overriding simple ai	
-		actionLockCounter++;
-		if(actionLockCounter == 120) {
-			Random random = new Random();
-			int i = random.nextInt(100)+1; // pick a num form 1 to 100
-			if(i<=25) {
-				direction = "up";
-			}
-			if(i>25 && i <= 50) {
-				direction = "down";
-			}
-			if(i>50 && i <= 75) {
-				direction = "left";
-			}
-			if(i>75 && i <= 100) {
-				direction = "right";
-			}
-			actionLockCounter = 0;
+		
+		if(onPath == true) {
+			int goalCol =12;
+			int goalRow =9; 
+			searchPath(goalCol, goalRow);
 		}
+		else {
+			actionLockCounter++;
+			if(actionLockCounter == 120) {
+				Random random = new Random();
+				int i = random.nextInt(100)+1; // pick a num form 1 to 100
+				if(i<=25) {
+					direction = "up";
+				}
+				if(i>25 && i <= 50) {
+					direction = "down";
+				}
+				if(i>50 && i <= 75) {
+					direction = "left";
+				}
+				if(i>75 && i <= 100) {
+					direction = "right";
+				}
+				actionLockCounter = 0;
+			}	
+		}	
 	}
 	public void speak() {
 		
@@ -63,5 +79,6 @@ public class NPC_OldMan extends Entity{
 		
 		
 		super.speak();
+		onPath = true;
 	}
 }
