@@ -2,7 +2,10 @@ package main;
 
 import entity.NPC_Merchant;
 import entity.NPC_OldMan;
+import monster.MONS_BlackSlime;
+import monster.MONS_BlueSlime;
 import monster.MONS_BrownSlime;
+import monster.MONS_PurpleSlime;
 import monster.MONS_RedSlime;
 import object.OBJ_Axe;
 import object.OBJ_Boots;
@@ -92,6 +95,14 @@ public class AssetSetter {
 		gp.monster[mapNum][i].worldX = gp.tileSize*23;
 		gp.monster[mapNum][i].worldY = gp.tileSize*37;
 		i++;
+		gp.monster[mapNum][i] = new MONS_BlackSlime(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*22;
+		gp.monster[mapNum][i].worldY = gp.tileSize*37;
+		i++;
+		gp.monster[mapNum][i] = new MONS_PurpleSlime(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*22;
+		gp.monster[mapNum][i].worldY = gp.tileSize*38;
+		i++;
 		gp.monster[mapNum][i] = new MONS_RedSlime(gp);
 		gp.monster[mapNum][i].worldX = gp.tileSize*11;
 		gp.monster[mapNum][i].worldY = gp.tileSize*10;
@@ -102,6 +113,10 @@ public class AssetSetter {
 		i++;
 		gp.monster[mapNum][i] = new MONS_BrownSlime(gp);
 		gp.monster[mapNum][i].worldX = gp.tileSize*10;
+		gp.monster[mapNum][i].worldY = gp.tileSize*30;
+		i++;
+		gp.monster[mapNum][i] = new MONS_BlueSlime(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*11;
 		gp.monster[mapNum][i].worldY = gp.tileSize*30;
 		i++;
 		
