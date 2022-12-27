@@ -45,11 +45,12 @@ public class Player extends Entity{
 		setItems();
 	}
 	public void setDefaultValues() {
-//		worldX = gp.tileSize *23;  FIRST TESTING
-//		worldY = gp.tileSize *21;
-		worldX = gp.tileSize *12;
-		worldY = gp.tileSize *13;
-		speed = 4;
+		worldX = gp.tileSize *23;  //FIRST TESTING
+		worldY = gp.tileSize *21;
+//		worldX = gp.tileSize *12;
+//		worldY = gp.tileSize *13;
+		defaultSpeed = 4;
+		speed = defaultSpeed;
 		direction = "down";
 		
 		// Player Status
@@ -132,7 +133,6 @@ public class Player extends Entity{
 			attackRight1 = setup("/player/boy_axe_right_1", gp.tileSize*2, gp.tileSize);
 			attackRight2 = setup("/player/boy_axe_right_2", gp.tileSize*2, gp.tileSize);
 		}
-		
 	}
 	
 	public void update() {
@@ -269,7 +269,7 @@ public class Player extends Entity{
 			solidArea.height = attackArea.height;
 			// Check monster collision with the updated worldX and worldY
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-			damageMonster(monsterIndex, attack);
+			damageMonster(monsterIndex, attack, currentWeapon.knockBackPower);
 			
 			int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
 			damageInteractiveTile(iTileIndex);
@@ -324,6 +324,13 @@ public class Player extends Entity{
 		}
 	}
 	
+	public void knockBack(Entity entity, int knockBackPower) {
+		
+		entity.direction = direction;
+		entity.speed += knockBackPower;
+		entity.knockBack = true;
+	}
+	
 	public void interactNPC(int i) {
 		if(gp.keyH.enterPressed == true) {
 			if(i != 999) {
@@ -349,11 +356,16 @@ public class Player extends Entity{
 		}
 	}
 	
-	public void damageMonster(int i, int attack) {
+	public void damageMonster(int i, int attack, int knockBackPower) {
 		if(i != 999) {
 			System.out.println("Hit");  //DEBUG
 			if(gp.monster[gp.currentMap][i].invincible == false) {
 				gp.playSE(5);
+				
+				if(knockBackPower > 0) {
+					knockBack(gp.monster[gp.currentMap][i], knockBackPower);
+				}
+				
 				
 				int damage = attack - gp.monster[gp.currentMap][i].defense;
 				if(damage < 0) {

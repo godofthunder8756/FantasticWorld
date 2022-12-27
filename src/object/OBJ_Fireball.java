@@ -19,6 +19,7 @@ public class OBJ_Fireball extends Projectile {
 		maxLife= 40; // 60 frames it burns out
 		life = maxLife;
 		attack = 2;
+		knockBackPower = 0; // unneccisary code
 		useCost = 1; // spend 1 mana to cast
 		alive = false;
 		getImage();

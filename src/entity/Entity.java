@@ -33,6 +33,7 @@ public class Entity {
 	int dyingCounter = 0;
 	int hpBarCounter = 0;
 	public int shotAvailableCOunter;
+	int knockbackCounter = 0;
 
 	// STATE
 	public int worldX, worldY;
@@ -46,9 +47,11 @@ public class Entity {
 	public boolean alive = true;
 	boolean hpBarOn = false;
 	public boolean onPath = false;
+	public boolean knockBack = false;
 	
 	// CHARACTER ATTRIBUTES
 	public String name;
+	public int defaultSpeed;
 	public int speed;
 	public int maxLife;
 	public int life;
@@ -75,6 +78,7 @@ public class Entity {
 	public String description = "";
 	public int useCost;
 	public int price;
+	public int knockBackPower;
 	
 	//TYPE
 	public int type; //0 = player, 1 = npc, 2 = monster
@@ -180,27 +184,49 @@ public class Entity {
 	}
 	
 	public void update() {
-		setAction();
 		
-		checkCollision();
+		if(knockBack == true) {
+			checkCollision();
+			if(collisionOn == true) {
+				knockbackCounter = 0; //stop knockback if it collides with anything
+				knockBack = false;
+				speed = defaultSpeed;
+			}
+			else if(collisionOn == false) {
+				switch (gp.player.direction) { 
+				case "up": worldY -= speed; break;
+				case "down": worldY += speed; break;
+				case "left": worldX -= speed; break;
+				case "right": worldX += speed; break;
+
+				}
+			}
+			knockbackCounter++;
+			if(knockbackCounter == 10) {
+				knockbackCounter = 0;
+				knockBack = false;
+				speed = defaultSpeed;
+			}
+		}
 		
-		if(collisionOn == false) {
-			switch(direction) {
-			case "up": worldY -= speed; break;
-			case "down": worldY += speed; break;
-			case "left": worldX -= speed; break;
-			case "right": worldX += speed; break;
+		else {
+			setAction();
+			checkCollision();
+			
+			if(collisionOn == false) {
+				switch(direction) {
+				case "up": worldY -= speed; break;
+				case "down": worldY += speed; break;
+				case "left": worldX -= speed; break;
+				case "right": worldX += speed; break;
+				}
 			}
 		}
 		
 		spriteCounter++;
 		if(spriteCounter > 12) {
-			if(spriteNum == 1) {
-				spriteNum = 2;
-			}
-			else if(spriteNum ==2) {
-				spriteNum = 1;
-			}
+			if(spriteNum == 1) {spriteNum = 2;}
+			else if(spriteNum ==2) {spriteNum = 1;}
 			spriteCounter = 0;
 		}
 		// Invincibility

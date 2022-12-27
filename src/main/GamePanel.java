@@ -87,7 +87,7 @@ public class GamePanel extends JPanel implements Runnable{
 	// Set player's default location
 //	int playerX = 100;
 //	int playerY = 100;
-	int playerSpeed = 4;
+//	int playerSpeed = 4;
 	
 	public GamePanel () {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -99,7 +99,7 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
 	public void setupGame() {
-		currentMap = 1;
+		currentMap = 0;
 		aSetter.setObject();
 		aSetter.setNPC();
 		aSetter.setMonster();
