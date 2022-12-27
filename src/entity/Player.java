@@ -1,19 +1,11 @@
 package entity;
 
 import java.awt.AlphaComposite;
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-import javax.swing.tree.AbstractLayoutCache;
-
 import main.GamePanel;
 import main.KeyHandler;
-import main.UtilityTool;
 import object.OBJ_Fireball;
 import object.OBJ_Key;
 import object.OBJ_Shield_Wood;
@@ -212,8 +204,13 @@ public class Player extends Entity{
 			//Set Default data
 			projectile.set(worldX, worldY, direction, true, this);
 			
-			//add to the list
-			gp.projectileList.add(projectile);
+			//CHECK VACANCY
+			for(int i = 0; i < gp.projectile[1].length; i++) {
+				if(gp.projectile[gp.currentMap][i] == null) {
+					gp.projectile[gp.currentMap][i] = projectile;
+					break;
+				}
+			}
 			shotAvailableCOunter = 0;
 			gp.playSE(10);
 			
@@ -277,6 +274,9 @@ public class Player extends Entity{
 			int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
 			damageInteractiveTile(iTileIndex);
 			
+			int projectileIndex = gp.cChecker.checkEntity(this, gp.projectile);
+			damageProjectile(projectileIndex);
+			
 			// After checking collision, restore world x and y
 			worldX = currentWorldX;
 			worldY = currentWorldY;
@@ -291,6 +291,13 @@ public class Player extends Entity{
 		}
 	}
 	
+	private void damageProjectile(int i) {
+		if(i != 999) {
+			Entity projectilEntity = gp.projectile[gp.currentMap][i];
+			projectilEntity.alive = false;
+			generateParticle(projectilEntity, projectilEntity);
+		}
+	}
 	public void pickUpObject(int i) {
 		if(i != 999) {
 			// PICKUP ONLY

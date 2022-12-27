@@ -8,12 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.rmi.server.RemoteStub;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-
-import javax.swing.colorchooser.ColorSelectionModel;
-
 import entity.Entity;
 import object.OBJ_Coin_Bronze;
 import object.OBJ_Heart;

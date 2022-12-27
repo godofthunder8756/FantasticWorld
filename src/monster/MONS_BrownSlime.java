@@ -70,7 +70,14 @@ public class MONS_BrownSlime extends Entity{
 		int i = new Random().nextInt(100)+1; // pick a num form 1 to 100
 		if(i>99 && projectile.alive == false && shotAvailableCOunter == 30) {
 			projectile.set(worldX, worldY, direction, true, this);
-			gp.projectileList.add(projectile);
+
+			for(int j = 0; j < gp.projectile[1].length; j++) {
+				if(gp.projectile[gp.currentMap][j] == null) {
+					gp.projectile[gp.currentMap][j] = projectile;
+					break;
+				}
+			}
+			
 			shotAvailableCOunter = 0;
 		}
 

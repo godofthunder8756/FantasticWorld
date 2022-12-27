@@ -1,7 +1,5 @@
 package main;
 
-import javax.crypto.spec.GCMParameterSpec;
-
 import entity.Entity;
 
 public class EventHandler {

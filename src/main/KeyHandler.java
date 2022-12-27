@@ -2,7 +2,6 @@ package main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.nio.charset.CoderMalfunctionError;
 
 public class KeyHandler implements KeyListener{
 	

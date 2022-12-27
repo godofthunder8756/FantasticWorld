@@ -14,8 +14,8 @@ public class OBJ_Blue_Slimeball extends Projectile{
 		this.gp = gp;
 		
 		name = "Slime Ball";
-		speed = 8; 
-		maxLife= 40; // 60 frames it burns out
+		speed = 4; 
+		maxLife= 80; // 80 frames it burns out
 		life = maxLife;
 		attack = 2;
 		useCost = 1; // spend 1 mana to cast
