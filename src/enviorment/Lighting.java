@@ -21,16 +21,9 @@ public class Lighting {
 		darknessFilter = new BufferedImage(gp.screenWidth, gp.screenHeight, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = (Graphics2D)darknessFilter.getGraphics();
 		// Make rectangle screen sized
-		Area screenArea = new Area(new Rectangle2D.Double(0,0,gp.screenWidth,gp.screenHeight));
 		// Make circle
 		int centerX = gp.player.screenX + (gp.tileSize)/2;
 		int centerY = gp.player.screenY + (gp.tileSize)/2;
-		double x = centerX - (circleSize/2);
-		double y = centerY - (circleSize/2);
-		Shape circleShape = new Ellipse2D.Double(x, y, circleSize, circleSize);
-		Area lightArea = new Area(circleShape);
-		//Apply light effect
-		screenArea.subtract(lightArea);
 		//Gradient
 		Color color[] = new Color[12];//--------------------Must be the same
 		float fraction[] = new float[12];//---------------/
@@ -64,10 +57,7 @@ public class Lighting {
 		// Set the gradient data on g2
 		g2.setPaint(gradientPaint);
 		//Draw light circle
-		g2.fill(circleShape);
-//		//set color to rectangle
-//		g2.setColor(new Color(0,0,0,0.95f));
-		g2.fill(screenArea);
+		g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 		g2.dispose();
 	}
 	public void draw(Graphics2D g2) {
