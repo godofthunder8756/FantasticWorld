@@ -47,9 +47,11 @@ public class MONS_PurpleSlime extends Entity{
 		right2 = setup("/monster/purpleslime_down_2", gp.tileSize, gp.tileSize);
 	}
 	
-	public void update() {
-		super.update();
-		
+//	public void update() {
+//		super.update();
+//	}
+	
+	public void setAction() {
 		int xDistance = Math.abs(worldX - gp.player.worldX);
 		int yDistance = Math.abs(worldY - gp.player.worldY);
 		int tileDistance = (xDistance + yDistance)/gp.tileSize;
@@ -63,9 +65,6 @@ public class MONS_PurpleSlime extends Entity{
 		if(onPath == true && tileDistance > 15) {
 			onPath = false;
 		}
-	}
-	
-	public void setAction() {
 		if(onPath == true) {
 			
 			speed = 1;

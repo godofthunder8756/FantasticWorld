@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.lang.annotation.Target;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -110,7 +111,26 @@ public class Entity {
 	public Entity(GamePanel gp) {
 		this.gp = gp;
 	}
-	
+	public int getXDistance(Entity target) {
+		int xDistance = Math.abs(worldX - target.worldX);
+		return xDistance;
+	}
+	public int getYDistance(Entity target) {
+		int yDistance = Math.abs(worldY - target.worldY);
+		return yDistance;
+	}
+	public int getTileDistance(Entity target) {
+		int tileDistance = (getXDistance(target) + getYDistance(target)/gp.tileSize);
+		return tileDistance;
+	}
+	public int getGoalCol(Entity target) {
+		int goalCol = (target.worldX + target.solidArea.x)/gp.tileSize;
+		return goalCol;
+	}
+	public int getGoalRow(Entity target) {
+		int goalRow = (target.worldY + target.solidArea.y)/gp.tileSize;
+		return goalRow;
+	}
 	public void setAction() {} //override
 	
 	public void damageReaction() {} //override
@@ -276,7 +296,49 @@ public class Entity {
 			gp.player.invincible= true;
 		}
 	}
-	
+	public void checkStopChasingOrNot(Entity target, int distance, int rate) {
+		if(getTileDistance(target) > distance) {
+			int i = new Random().nextInt(rate);
+			if(i==0) {
+				onPath = false;
+			}
+		}
+	}
+	public void checkStartChasingOrNot(Entity target, int distance, int rate) {
+		if(getTileDistance(target) < distance) {
+			int i = new Random().nextInt(rate);
+			if(i==0) {
+				onPath = true;
+			}
+		}
+	}
+	public void checkShootOrNot(int rate, int shotInterval) {
+		int i = new Random().nextInt(rate);
+		if(i == 0 && projectile.alive == false && shotAvailableCOunter == shotInterval) {
+			projectile.set(worldX, worldY, direction, true, this);
+			// Check vacancy
+			for(int ii = 0; ii < gp.projectile[1].length; ii++) {
+				if(gp.projectile[gp.currentMap][ii] == null) {
+					gp.projectile[gp.currentMap][ii] = projectile;
+					break;
+				}
+			}
+			
+			shotAvailableCOunter = 0;
+		}
+	}
+	public void getRandomDirection() {
+		actionLockCounter++;
+		if(actionLockCounter == 120) {
+			Random random = new Random();
+			int i = random.nextInt(100)+1; // pick a num form 1 to 100
+			if(i<=25) {direction = "up";}
+			if(i>25 && i <= 50) {direction = "down";}
+			if(i>50 && i <= 75) {direction = "left";}
+			if(i>75 && i <= 100) {direction = "right";}
+			actionLockCounter = 0;
+		}	
+	}
 	public void draw(Graphics2D g2) {
 		BufferedImage image = null;
 		int screenX = worldX - gp.player.worldX + gp.player.screenX;

@@ -51,67 +51,28 @@ public class MONS_BlueSlime extends Entity{
 		right1 = setup("/monster/blueslime_down_1", gp.tileSize, gp.tileSize);
 		right2 = setup("/monster/blueslime_down_2", gp.tileSize, gp.tileSize);
 	}
-	public void update() {
-		super.update();
-		
-		int xDistance = Math.abs(worldX - gp.player.worldX);
-		int yDistance = Math.abs(worldY - gp.player.worldY);
-		int tileDistance = (xDistance + yDistance)/gp.tileSize;
-		
-		if(onPath == false && tileDistance < 5) {
-			int i = new Random().nextInt(100)+1;
-			if(i>50) {
-				onPath = true;
-			}
-		}
-		if(onPath == true && tileDistance > 15) {
-			onPath = false;
-		}
-	}
+//	public void update() {
+//		super.update();
+//	}
 	public void setAction() {
+		
 		if(onPath == true) {
-			
-			speed = 1;
-			int goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
-			int goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
-			
-			searchPath(goalCol, goalRow);
-			
-			int j = new Random().nextInt(100)+1; // pick a num form 1 to 100
-			if(j>99 && projectile.alive == false && shotAvailableCOunter == 30) {
-				projectile.set(worldX, worldY, direction, true, this);
+			// Check if it stops chasing
+			checkStopChasingOrNot(gp.player, 15, 100);
+			// Search the direction to go
+			searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
+			// Check if shoot projectile
+			checkShootOrNot(200, 30);
 
-				for(int i = 0; i < gp.projectile[1].length; i++) {
-					if(gp.projectile[gp.currentMap][i] == null) {
-						gp.projectile[gp.currentMap][i] = projectile;
-						break;
-					}
-				}
-				
-				shotAvailableCOunter = 0;
-			}
 		}
 		else {
-			actionLockCounter++;
-			if(actionLockCounter == 120) {
-				Random random = new Random();
-				int i = random.nextInt(100)+1; // pick a num form 1 to 100
-				if(i<=25) {
-					direction = "up";
-				}
-				if(i>25 && i <= 50) {
-					direction = "down";
-				}
-				if(i>50 && i <= 75) {
-					direction = "left";
-				}
-				if(i>75 && i <= 100) {
-					direction = "right";
-				}
-				actionLockCounter = 0;
-			}	
+			//Check if start chasing
+			checkStartChasingOrNot(gp.player, 5, 100);
+			// Get Random Direction
+			getRandomDirection();
 		}
 	}
+	
 	public void damageReaction() {
 		
 		actionLockCounter = 0;

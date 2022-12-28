@@ -48,6 +48,9 @@ public class MONS_BrownSlime extends Entity{
 		right1 = setup("/monster/brownslime_down_1", gp.tileSize, gp.tileSize);
 		right2 = setup("/monster/brownslime_down_2", gp.tileSize, gp.tileSize);
 	}
+	
+
+	
 	public void setAction() {
 		// unique overriding simple ai	
 		actionLockCounter++;
@@ -78,16 +81,12 @@ public class MONS_BrownSlime extends Entity{
 					break;
 				}
 			}
-			
 			shotAvailableCOunter = 0;
 		}
-
 	}
 	public void damageReaction() {
-		
 		actionLockCounter = 0;
-		direction = gp.player.direction;
-		
+		direction = gp.player.direction;	
 	}
 	public void checkDrop() {
 		// Roll dice

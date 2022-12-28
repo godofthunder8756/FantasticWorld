@@ -46,17 +46,16 @@ public class MONS_BlackSlime extends Entity{
 		right1 = setup("/monster/blackslime_down_1", gp.tileSize, gp.tileSize);
 		right2 = setup("/monster/blackslime_down_2", gp.tileSize, gp.tileSize);
 	}
+	
+//	public void update() {
+//		super.update();
+//	}
+	
 	public void setAction() {
 		if(onPath == true) {
-			
-//			int goalCol =12;
-//			int goalRow =9; 
-			
 			speed = 2;
 			int goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
 			int goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
-			
-			
 			searchPath(goalCol, goalRow);
 		}
 		else {

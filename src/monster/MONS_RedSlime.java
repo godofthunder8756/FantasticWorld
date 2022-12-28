@@ -46,6 +46,11 @@ public class MONS_RedSlime extends Entity{
 		right1 = setup("/monster/redslime_down_1", gp.tileSize, gp.tileSize);
 		right2 = setup("/monster/redslime_down_2", gp.tileSize, gp.tileSize);
 	}
+	
+//	public void update() {
+//		super.update();
+//	}
+	
 	public void setAction() {
 		// unique overriding simple ai	
 		actionLockCounter++;
