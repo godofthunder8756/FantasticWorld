@@ -14,6 +14,7 @@ import object.OBJ_Coin_Bronze;
 import object.OBJ_Door;
 import object.OBJ_Heart;
 import object.OBJ_Key;
+import object.OBJ_Lantern;
 import object.OBJ_Potion_Red;
 import object.OBJ_Shield_Blue;
 import tile_interactive.IT_DryTree;
@@ -28,11 +29,6 @@ public class AssetSetter {
 	public void setObject() {
 		int mapNum = 0;
 		int i = 0;
-		
-//		gp.obj[i] = new OBJ_Door(gp);
-//		gp.obj[i].worldX = gp.tileSize*21;
-//		gp.obj[i].worldY = gp.tileSize*22;
-//		i++;
 		
 		gp.obj[mapNum][i] = new OBJ_Coin_Bronze(gp);
 		gp.obj[mapNum][i].worldX = gp.tileSize*25;
@@ -58,7 +54,7 @@ public class AssetSetter {
 		gp.obj[mapNum][i].worldX = gp.tileSize*35;
 		gp.obj[mapNum][i].worldY = gp.tileSize*21;
 		i++;
-		gp.obj[mapNum][i] = new OBJ_Chest(gp, new OBJ_Heart(gp));
+		gp.obj[mapNum][i] = new OBJ_Chest(gp, new OBJ_Lantern(gp));
 		gp.obj[mapNum][i].worldX = gp.tileSize*36;
 		gp.obj[mapNum][i].worldY = gp.tileSize*21;
 		i++;
