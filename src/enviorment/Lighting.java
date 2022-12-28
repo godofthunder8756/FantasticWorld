@@ -1,5 +1,6 @@
 package enviorment;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RadialGradientPaint;
@@ -11,6 +12,15 @@ public class Lighting {
 	
 	GamePanel gp;
 	BufferedImage darknessFilter;
+	int dayCounter;
+	float filterAlpha = 0f;
+	
+	//Day State
+	final int day = 0;
+	final int dusk = 1;
+	final int night = 2;
+	final int dawn = 3;
+	int dayState = day;
 	
 	public Lighting(GamePanel gp) {
 		this.gp = gp;
@@ -73,8 +83,57 @@ public class Lighting {
 			setLightSource();
 			gp.player.lightUpdated = false;
 		}
+		// Check the state of the day
+		if(dayState == day) {
+			dayCounter++;
+			
+			if(dayCounter > 6000) { // 6000 = 100 seconds
+				dayState = dusk;
+				dayCounter = 0;
+			}
+		}
+		if(dayState == dusk) {
+			filterAlpha += 0.001f;
+			if(filterAlpha>1f) {
+				filterAlpha = 1f; //cap at 1
+				dayState = night;
+			}
+		}
+		if(dayState == night) {
+			dayCounter++;
+			
+			if(dayCounter > 6000) { // 6000 = 100 seconds
+				dayState = dawn;
+				dayCounter = 0;
+			}
+		}
+		if(dayState == dawn) {
+			filterAlpha -= 0.001f;
+			if(filterAlpha<0f) {
+				filterAlpha = 0f; //cap at 0
+				dayState = day;
+			}
+		}
 	}
 	public void draw(Graphics2D g2) {
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, filterAlpha));
 		g2.drawImage(darknessFilter, 0,0,null);
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
+		//Debug
+		String situationString = "";
+		switch (dayState) {
+		case day: situationString = "DAY"; break;
+		case dusk: situationString = "DUSK"; break;
+		case night: situationString = "NIGHT"; break;
+		case dawn: situationString = "DAWN"; break;
+		}
+		
+			g2.setColor(Color.black);
+			g2.setFont(g2.getFont().deriveFont(50F));
+			g2.drawString(situationString, 800, 500);
+			g2.setColor(Color.white);
+			g2.drawString(situationString, 803, 503);
+		
 	}
 }
