@@ -19,6 +19,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Map;
 
 public class GamePanel extends JPanel implements Runnable{
 	
@@ -35,7 +36,7 @@ public class GamePanel extends JPanel implements Runnable{
 	// WORLD SETTING
 	public int maxWorldCol;
 	public int maxWorldRow;
-	public final int maxMap = 10;
+	public final int maxMap = 10; //MAXIMUM Number of maps
 	public int currentMap = 0;
 	
 	// FOR FULLSCREEN
@@ -60,6 +61,7 @@ public class GamePanel extends JPanel implements Runnable{
 	Config config = new Config(this);
 	public Pathfinder pFinder = new Pathfinder(this);
 	EnviormentManager eManager = new EnviormentManager(this); 
+	tile.Map map = new tile.Map(this); //-----------------------------------------MAYBE A FIX????
 	Thread gameThread;
 	
 	// ENTITY AND OBJECT
@@ -84,6 +86,8 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int gameOverState = 6;
 	public final int transitionState = 7;
 	public final int tradeState = 8;
+	public final int sleepState = 9;
+	public final int mapState = 10;
 	
 	
 	// Set player's default location
@@ -250,6 +254,10 @@ public class GamePanel extends JPanel implements Runnable{
 					ui.draw(g2);
 					
 				}
+				//MAP SCREEN
+				else if(gameState == mapState) {
+					map.drawFullMapScreen(g2);
+				}
 				//OTHERS
 				else {
 					//TILE
@@ -259,7 +267,7 @@ public class GamePanel extends JPanel implements Runnable{
 						if(iTile[currentMap][i] != null) {
 							iTile[currentMap][i].draw(g2);
 						}
-					}
+					}	
 					// ADD ENTITIES TO THE LIST
 					entityList.add(player);
 					//NPCs
@@ -310,6 +318,9 @@ public class GamePanel extends JPanel implements Runnable{
 					
 					//ENVIORMENT
 					eManager.draw(g2);
+					
+					//Mini Map
+					map.drawMiniMap(g2);
 					
 					//UI
 					ui.draw(g2);
