@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import ai.Pathfinder;
 import entity.Entity;
 import entity.Player;
+import enviorment.EnviormentManager;
 import tile.TileManager;
 import tile_interactive.InteractiveTile;
 
@@ -58,6 +59,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public EventHandler eHandler = new EventHandler(this);
 	Config config = new Config(this);
 	public Pathfinder pFinder = new Pathfinder(this);
+	EnviormentManager eManager = new EnviormentManager(this); 
 	Thread gameThread;
 	
 	// ENTITY AND OBJECT
@@ -104,6 +106,7 @@ public class GamePanel extends JPanel implements Runnable{
 		aSetter.setNPC();
 		aSetter.setMonster();
 		aSetter.setInteractiveTile();
+		eManager.setup();
 //		playMusic(0);                      //STARTS MUSIC
 		gameState = titleState;
 		//FULLSCREEN
@@ -303,6 +306,9 @@ public class GamePanel extends JPanel implements Runnable{
 					for(int i=0; i<entityList.size(); i++) { entityList.get(i).draw(g2);}
 					// Empty Entity List
 					entityList.clear();
+					
+					//ENVIORMENT
+					eManager.draw(g2);
 					
 					//UI
 					ui.draw(g2);
