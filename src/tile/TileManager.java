@@ -43,26 +43,39 @@ public class TileManager {
 		}
 		// INitialize the tile array based on the fileNames size
 		tile = new Tile[fileNames.size()];
-		getTileImage();
+		getTileImage();	
 		
-		//Get maxWorlCol and Row
-		is = getClass().getResourceAsStream("/maps/worldmap.txt");
-		br = new BufferedReader(new InputStreamReader(is));
-		
-		try {
-			String line2 = br.readLine();
-			String maxTile[] = line2.split(" ");
-			gp.maxWorldCol = maxTile.length;
-			gp.maxWorldRow = maxTile.length;
-			mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
-			
-			br.close();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(gp.currentMap == 0) {
+			//Get maxWorlCol and Row	
+			is = getClass().getResourceAsStream("/maps/worldmap.txt");
+			br = new BufferedReader(new InputStreamReader(is));
+			try {
+				String line2 = br.readLine();
+				String maxTile[] = line2.split(" ");
+				gp.maxWorldCol = maxTile.length;
+				gp.maxWorldRow = maxTile.length;
+				mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];	
+				br.close();	
+			} catch (IOException e) { e.printStackTrace();}
+			loadMap("/maps/worldmap.txt", 0);
 		}
-
-		loadMap("/maps/worldmap.txt", 0);
+		if(gp.currentMap == 1) {
+			//Get maxWorlCol and Row	
+			is = getClass().getResourceAsStream("/maps/indoor01.txt");
+			br = new BufferedReader(new InputStreamReader(is));
+			try {
+				String line2 = br.readLine();
+				String maxTile[] = line2.split(" ");
+				gp.maxWorldCol = maxTile.length;
+				gp.maxWorldRow = maxTile.length;
+				mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];	
+				br.close();	
+			} catch (IOException e) { e.printStackTrace();}
+			loadMap("/maps/indoor01.txt", 1);
+		}
+				
+		
+		
 		//loadMap("/maps/indoor1.txt", 1);
 		
 //		loadMap("/maps/worldV3.txt", 0);
