@@ -35,6 +35,7 @@ public class Entity {
 	public int solidAreaDefaultX, solidAreaDefaultY;
 	String dialogue[] = new String[50];
 	public boolean collision = false;
+	public Entity attacker;
 	
 	//COUNTERS
 	public int spriteCounter = 0;
@@ -58,6 +59,7 @@ public class Entity {
 	boolean hpBarOn = false;
 	public boolean onPath = false;
 	public boolean knockBack = false;
+	public String knockBackDirection;
 	
 	// CHARACTER ATTRIBUTES
 	public String name;
@@ -221,7 +223,13 @@ public class Entity {
 			damagePlayer(attack);
 		}
 	}
-	
+	public void setKnockBack(Entity target, Entity attacker, int knockBackPower) {
+		this.attacker = attacker;
+		target.knockBackDirection = attacker.direction;
+		//entity.direction = direction;
+		target.speed += knockBackPower;
+		target.knockBack = true;
+	}
 	public void update() {
 		
 		if(knockBack == true) {
@@ -232,7 +240,7 @@ public class Entity {
 				speed = defaultSpeed;
 			}
 			else if(collisionOn == false) {
-				switch (gp.player.direction) { 
+				switch (knockBackDirection) { 
 				case "up": worldY -= speed; break;
 				case "down": worldY += speed; break;
 				case "left": worldX -= speed; break;

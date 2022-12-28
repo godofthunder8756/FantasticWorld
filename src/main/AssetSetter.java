@@ -7,6 +7,7 @@ import monster.MONS_BlueSlime;
 import monster.MONS_BrownSlime;
 import monster.MONS_PurpleSlime;
 import monster.MONS_RedSlime;
+import monster.MONS_Orc;
 import object.OBJ_Axe;
 import object.OBJ_Boots;
 import object.OBJ_Chest;
@@ -130,6 +131,10 @@ public class AssetSetter {
 		gp.monster[mapNum][i] = new MONS_BlueSlime(gp);
 		gp.monster[mapNum][i].worldX = gp.tileSize*11;
 		gp.monster[mapNum][i].worldY = gp.tileSize*30;
+		i++;
+		gp.monster[mapNum][i] = new MONS_Orc(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*12;
+		gp.monster[mapNum][i].worldY = gp.tileSize*33;
 		i++;
 		
 	}
