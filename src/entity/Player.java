@@ -67,8 +67,7 @@ public class Player extends Entity{
 		projectile = new OBJ_Fireball(gp);
 		attack = getAttack();
 		defense = getDefense();
-	}
-	
+	}	
 	public void setDefaultPositions() {
 		worldX = gp.tileSize *12;
 		worldY = gp.tileSize *13;
@@ -79,7 +78,6 @@ public class Player extends Entity{
 		mana = maxMana;
 		invincible = false;
 	}
-	
 	public void setItems() {
 		inventory.clear();
 		inventory.add(currentWeapon); //Default
@@ -87,16 +85,13 @@ public class Player extends Entity{
 		inventory.add(new OBJ_Key(gp)); //Default
 		inventory.add(new OBJ_Key(gp)); //Default
 	}
-	
 	public int getAttack() {
 		attackArea = currentWeapon.attackArea;
 		return attack = strength*currentWeapon.attackValue;
 	}
 	public int getDefense() {
-		return defense = dexterity*currentSheild.defenseValue;
-		
+		return defense = dexterity*currentSheild.defenseValue;	
 	}
-	
 	public void getPlayerImage() {	
 		up1 = setup("/player/character_08", gp.tileSize, gp.tileSize);
 		up2 = setup("/player/character_09", gp.tileSize, gp.tileSize);
@@ -111,7 +106,6 @@ public class Player extends Entity{
 		leftIdle = setup("/player/character_04", gp.tileSize, gp.tileSize);
 		rightIdle = setup("/player/character_06", gp.tileSize, gp.tileSize);	
 	}
-	
 	public void getPlayerAttackImage() {
 		if(currentWeapon.type == type_sword) {
 			attackUp1 = setup("/player/boy_attack_up_1", gp.tileSize, gp.tileSize*2);
@@ -305,7 +299,13 @@ public class Player extends Entity{
 				gp.obj[gp.currentMap][i].use(this);
 				gp.obj[gp.currentMap][i] = null;
 			}
-			
+			// OBSTCLE
+			else if(gp.obj[gp.currentMap][i].type == type_obstacle) {
+				if(keyH.enterPressed == true) {
+					attackCancelled = true;
+					gp.obj[gp.currentMap][i].interact();
+				}
+			}
 			// INVENTORY ITEMS
 			else {
 				String text;
@@ -438,9 +438,9 @@ public class Player extends Entity{
 			}
 			if(selectedItem.type == type_consumable) {
 
-				selectedItem.use(this);
-				inventory.remove(itemIndex);
-				
+				if(selectedItem.use(this) == true) {
+					inventory.remove(itemIndex);
+				}
 			}
 		}
 	}

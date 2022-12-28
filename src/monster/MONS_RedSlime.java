@@ -18,7 +18,7 @@ public class MONS_RedSlime extends Entity{
 		
 		type = type_monster;
 		name = "Red Slime";
-		defaultSpeed = speed;
+		defaultSpeed = 1;
 		speed = defaultSpeed;
 		maxLife = 4;
 		life = maxLife;

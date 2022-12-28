@@ -14,15 +14,16 @@ public class OBJ_Mana_Crystal extends Entity{
 		name = "Mana Crystal";
 		type = type_pickupOnly;
 		value = 1;
-//		down1 = setup("/objects/heart_full", gp.tileSize, gp.tileSize);
-//		image = setup("/objects/manacrystal_full", gp.tileSize, gp.tileSize);
-//		image2 = setup("/objects/manacrystal_blank", gp.tileSize, gp.tileSize);
+		down1 = setup("/objects/manacrystal_full", gp.tileSize, gp.tileSize);
+		image = setup("/objects/manacrystal_full", gp.tileSize, gp.tileSize);
+		image2 = setup("/objects/manacrystal_blank", gp.tileSize, gp.tileSize);
 		
 	}
-	public void use(Entity entity) {
+	public boolean use(Entity entity) {
 		gp.playSE(2);
 		gp.ui.addMessage("+"+ value+"HP");
 		entity.mana+=value;
+		return true;
 	}
 
 }
