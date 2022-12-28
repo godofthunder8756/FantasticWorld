@@ -411,6 +411,26 @@ public class UI {
 			}
 			
 			g2.drawImage(entity.inventory.get(i).down1, slotX, slotY, null);
+			
+			// DRAW AMOUNT
+			if(entity == gp.player && entity.inventory.get(i).amount > 1) {
+				g2.setFont(g2.getFont().deriveFont(32f));
+				int amountX;
+				int amountY;
+				
+				String string = "" + entity.inventory.get(i).amount;
+				amountX = getXforAlignToRightText(string, slotX+44);
+				amountY = slotY + gp.tileSize;
+				
+				//Shadow
+				g2.setColor(new Color(60,60,60));
+				g2.drawString(string, amountX, amountY);
+				//Number
+				g2.setColor(Color.white);
+				g2.drawString(string, amountX-3, amountY-3);
+				
+			}
+			
 			slotX+=slotSize;
 			if( i == 4 || i == 9 || i == 14) {
 				slotX = slotXstart;
@@ -550,19 +570,17 @@ public class UI {
 					currentDialogue = "PUT THAT DOWN! \nYou can't afford that!";
 					drawDialogueScreen();
 				}
-				else if(gp.player.inventory.size() == gp.player.maxInventorySize) {
-					subState = 0;
-					gp.gameState = gp.dialogueState;
-					currentDialogue = "Ha! \nYou don't have enough room for that!";
-					drawDialogueScreen();
-				}
 				else {
-					gp.player.coin -= npc.inventory.get(itemIndex).price;
-					gp.player.inventory.add(npc.inventory.get(itemIndex));
-					gp.playSE(1);
+					if(gp.player.canObtainItem(npc.inventory.get(itemIndex)) == true) {
+						gp.player.coin -= npc.inventory.get(itemIndex).price;
+					}
+					else {
+						subState = 0;
+						gp.gameState = gp.dialogueState;
+						currentDialogue = "Ha! \nYou don't have enough room for that!";					
+					}
 				}
 			}
-			
 		}
 	}
 	public void trade_sell() {
@@ -611,8 +629,12 @@ public class UI {
 					currentDialogue = "You can't sell and equiped item!";
 				}
 				else {
-					gp.player.inventory.remove(itemIndex);
-					gp.player.coin += price;
+					if(gp.player.inventory.get(itemIndex).amount > 1) {
+						gp.player.inventory.get(itemIndex).amount--;
+					}
+					else {
+						gp.player.inventory.remove(itemIndex);
+					}
 					gp.playSE(1);
 				}
 			}

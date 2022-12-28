@@ -17,7 +17,7 @@ public class OBJ_Potion_Red extends Entity{
 		value = 5;
 		description = "["+ name +"]\nTastes like red Kool-Aid!\nHeals you by "+value+"HP!";
 		price = 75;
-		
+		stackable = true;
 		
 	}
 	public boolean use(Entity entity) {
