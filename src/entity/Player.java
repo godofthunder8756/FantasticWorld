@@ -90,6 +90,8 @@ public class Player extends Entity{
 	}
 	public int getAttack() {
 		attackArea = currentWeapon.attackArea;
+		motion1_duration = currentWeapon.motion1_duration;
+		motion2_duration = currentWeapon.motion2_duration;
 		return attack = strength*currentWeapon.attackValue;
 	}
 	public int getDefense() {
@@ -239,56 +241,9 @@ public class Player extends Entity{
 		}
 	}
 	
-	public void attacking() {
-		
-		spriteCounter++;
-		
-		if(spriteCounter <= 5) { //5 frames
-			spriteNum = 1;
-		}
-		if(spriteCounter > 5 && spriteCounter <= 25) { //20 frames
-			spriteNum = 2;
-			// Store current worldx and worldy
-			int currentWorldX = worldX;
-			int currentWorldY = worldY;
-			int solidAreaWidth = solidArea.width;
-			int solidAreaHeight = solidArea.height;
-			
-			// Adjust worldx and world y of player
-			switch (direction) {
-			case "up": worldY -= attackArea.height; break;
-			case "down": worldY += attackArea.height; break;
-			case "left": worldX -= attackArea.width; break;
-			case "right": worldX += attackArea.width; break;
-			}
-			// attackArea becomes solidArea
-			solidArea.width = attackArea.width;
-			solidArea.height = attackArea.height;
-			// Check monster collision with the updated worldX and worldY
-			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-			damageMonster(monsterIndex, this, attack, currentWeapon.knockBackPower);
-			
-			int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
-			damageInteractiveTile(iTileIndex);
-			
-			int projectileIndex = gp.cChecker.checkEntity(this, gp.projectile);
-			damageProjectile(projectileIndex);
-			
-			// After checking collision, restore world x and y
-			worldX = currentWorldX;
-			worldY = currentWorldY;
-			solidArea.width = solidAreaWidth;
-			solidArea.height = solidAreaHeight;
-		}
-		
-		if(spriteCounter > 25) {
-			spriteNum = 1;
-			spriteCounter= 0;
-			attacking = false;
-		}
-	}
+
 	
-	private void damageProjectile(int i) {
+	public void damageProjectile(int i) {
 		if(i != 999) {
 			Entity projectilEntity = gp.projectile[gp.currentMap][i];
 			projectilEntity.alive = false;
@@ -496,9 +451,6 @@ public class Player extends Entity{
 	}
 	
 	public void draw(Graphics2D g2 ){
-		//g2.setColor(Color.red);
-		//g2.fillRect(x, y, gp.tileSize, gp.tileSize);
-		
 		BufferedImage image = null;
 		int tempScreenX = screenX;
 		int tempScreenY = screenY;
@@ -508,7 +460,6 @@ public class Player extends Entity{
 			if(attacking == false) {
 				if(spriteNum == 1) {image = up1;}
 				if(spriteNum == 2) {image = up2;}
-				//if(spriteNum == 3) {image = upIdle;}				
 			}
 			if(attacking == true) {
 				tempScreenY = screenY - gp.tileSize;
@@ -520,7 +471,6 @@ public class Player extends Entity{
 			if(attacking == false) {
 				if(spriteNum == 1) {image = down1;}
 				if(spriteNum == 2) {image = down2;}
-				//if(spriteNum == 3) {image = downIdle;}				
 			}
 			if(attacking == true) {
 				if(spriteNum == 1) {image = attackDown1;}
@@ -531,7 +481,6 @@ public class Player extends Entity{
 			if(attacking == false) {
 				if(spriteNum == 1) {image = left1;}
 				if(spriteNum == 2) {image = left2;}
-				//if(spriteNum == 3) {image = leftIdle;}				
 			}
 			if(attacking == true) {
 				tempScreenX = screenX - gp.tileSize;
@@ -543,7 +492,6 @@ public class Player extends Entity{
 			if(attacking == false) {
 				if(spriteNum == 1) {image = right1;}
 				if(spriteNum == 2) {image = right2;}
-				//if(spriteNum == 3) {image = rightIdle;}
 			}
 			if(attacking == true) {
 				if(spriteNum == 1) {image = attackRight1;}

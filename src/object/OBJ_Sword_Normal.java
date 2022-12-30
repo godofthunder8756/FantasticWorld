@@ -17,6 +17,8 @@ public class OBJ_Sword_Normal extends Entity{
 		description = "["+ name +"]\nKinda rusty. Good for \nturning slimes into jelly.";
 		price = 2;
 		knockBackPower = 2;
+		motion1_duration = 2;
+		motion2_duration = 25;
 	}
 
 }

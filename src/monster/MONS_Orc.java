@@ -36,6 +36,8 @@ public class MONS_Orc extends Entity{
 		projectile = new OBJ_Blue_Slimeball(gp);
 		attackArea.width = 48;
 		attackArea.height = 48;
+		motion1_duration = 40;
+		motion2_duration = 85;
 
 		
 		getImage();
@@ -78,6 +80,10 @@ public class MONS_Orc extends Entity{
 			checkStartChasingOrNot(gp.player, 5, 100);
 			// Get Random Direction
 			getRandomDirection();
+		}
+		//Check if attacking
+		if(attacking == false) {
+			checkAttackOrNot(30, gp.tileSize*4, gp.tileSize);
 		}
 	}
 	
