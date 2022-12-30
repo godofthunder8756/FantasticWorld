@@ -29,6 +29,7 @@ public class Entity {
 	public int getRow() {return (worldY + solidArea.y)/gp.tileSize;}
 	public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, upIdle, downIdle, leftIdle, rightIdle;
 	public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
+	public BufferedImage guardUp, guardDown, guardLeft, guardRight;
 	public BufferedImage image, image2 , image3;
 	public Rectangle solidArea = new Rectangle(0,0,48,48);
 	public Rectangle attackArea = new Rectangle();
@@ -60,6 +61,7 @@ public class Entity {
 	public boolean onPath = false;
 	public boolean knockBack = false;
 	public String knockBackDirection;
+	public boolean guarding = false;
 	
 	// CHARACTER ATTRIBUTES
 	public String name;
@@ -352,15 +354,34 @@ public class Entity {
 	
 	public void damagePlayer(int attack) {
 		if(gp.player.invincible == false) {
-			//damage
-			gp.playSE(6);
+			
 			int damage = attack - gp.player.defense;
-			if(damage < 0) {
-				damage = 0;
+			//Get an oppostie direction of this attackjer
+			String canGuardDirection = getOppositeDirection(direction);
+			if(gp.player.guarding == true && gp.player.direction.equals(canGuardDirection)) {
+				damage /=3;
+				gp.playSE(15);
 			}
+			else {
+				//not guarding
+				gp.playSE(6);
+				if(damage < 1) {
+					damage = 1;
+			}
+		}
 			gp.player.life -=damage;
 			gp.player.invincible= true;
 		}
+	}
+	public String getOppositeDirection(String direction) {
+		String oppositeDirection = "";
+		switch(direction) {
+		case "up": oppositeDirection = "down";
+		case "down": oppositeDirection = "up";
+		case "left": oppositeDirection = "right";
+		case "right": oppositeDirection = "left";
+		}
+		return oppositeDirection;
 	}
 	public void checkStopChasingOrNot(Entity target, int distance, int rate) {
 		if(getTileDistance(target) > distance) {

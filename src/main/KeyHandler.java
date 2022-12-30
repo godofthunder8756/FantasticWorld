@@ -7,7 +7,7 @@ public class KeyHandler implements KeyListener{
 	
 	GamePanel gp;
 	
-	public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shootKeyPressed;
+	public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shootKeyPressed, spacePressed;
 	
 	public KeyHandler(GamePanel gp) {
 		this.gp = gp;
@@ -169,6 +169,9 @@ public class KeyHandler implements KeyListener{
 			else {
 				gp.map.miniMapOn = false;
 			}
+		}
+		if(code == KeyEvent.VK_SPACE) { 
+			spacePressed = true;		
 		}
 	}
 	
@@ -349,6 +352,9 @@ public class KeyHandler implements KeyListener{
 		}
 		if(code == KeyEvent.VK_F) {
 			shootKeyPressed = false;
+		}
+		if(code == KeyEvent.VK_SPACE) {
+			spacePressed = false;
 		}
 ;	}
 	public void gameOverState(int code) {

@@ -28,6 +28,9 @@ public class Sound {
 		soundURL[11] = getClass().getResource("/sound/cuttree.wav"); //custom
 		soundURL[12] = getClass().getResource("/sound/gameover.wav"); //custom
 		soundURL[13] = getClass().getResource("/sound/stairs.wav"); //custom
+		soundURL[14] = getClass().getResource("/sound/coin.wav"); //custom //filler
+		soundURL[15] = getClass().getResource("/sound/blocked.wav"); //custom
+		soundURL[16] = getClass().getResource("/sound/parry.wav"); //custom
 	}
 	public void setFile(int i) { 
 		try {
