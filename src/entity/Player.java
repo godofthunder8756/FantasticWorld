@@ -45,6 +45,9 @@ public class Player extends Entity{
 		getPlayerAttackImage();
 		setItems();
 	}
+	public void getGuardImage() {
+		// will do later
+	}
 	public void setDefaultValues() {
 //		worldX = gp.tileSize *23;  //FIRST TESTING
 //		worldY = gp.tileSize *21;
