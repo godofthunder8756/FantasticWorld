@@ -41,10 +41,7 @@ public class Player extends Entity{
 //		attackArea.height = 38;
 		
 		setDefaultValues();
-		getImage();
-		getAttackImage();
-		getGuardImage();
-		setItems();
+
 	}
 	public void getGuardImage() {
 		guardUp = setup("/player/boy_guard_up", gp.tileSize, gp.tileSize);
@@ -74,19 +71,28 @@ public class Player extends Entity{
 		coin = 500; //----------------------------------------------------------DEBUG
 		currentWeapon = new OBJ_Sword_Normal(gp);
 		currentSheild = new OBJ_Shield_Wood(gp);
+		currentLight = null;
 		projectile = new OBJ_Fireball(gp);
 		attack = getAttack();
 		defense = getDefense();
+		getImage();
+		getAttackImage();
+		getGuardImage();
+		setItems();
 	}	
 	public void setDefaultPositions() {
 		worldX = gp.tileSize *12;
 		worldY = gp.tileSize *13;
 		direction = "down";
 	}
-	public void restoreLifeAndMana() {
+	public void restoreStatus() {
 		life = maxLife;
 		mana = maxMana;
 		invincible = false;
+		attacking = false;
+		guarding = false;
+		knockBack = false;
+		lightUpdated = true;
 	}
 	public void setItems() {
 		inventory.clear();
@@ -105,6 +111,16 @@ public class Player extends Entity{
 		return defense = dexterity*currentSheild.defenseValue;	
 	}
 	public void getImage() {	
+//		up1 = setup("/player/man_up_1", gp.tileSize, gp.tileSize);
+//		up2 = setup("/player/man_up_2", gp.tileSize, gp.tileSize);
+//		down1 = setup("/player/man_down_1", gp.tileSize, gp.tileSize);
+//		down2 = setup("/player/man_down_2", gp.tileSize, gp.tileSize);
+//		left1 = setup("/player/man_left_1", gp.tileSize, gp.tileSize);
+//		left2 = setup("/player/man_left_2", gp.tileSize, gp.tileSize);
+//		right1 = setup("/player/man_right_1", gp.tileSize, gp.tileSize);
+//		right2 = setup("/player/man_right_2", gp.tileSize, gp.tileSize);
+//		downIdle = setup("/player/man_down_idle", gp.tileSize, gp.tileSize);
+		
 		up1 = setup("/player/character_08", gp.tileSize, gp.tileSize);
 		up2 = setup("/player/character_09", gp.tileSize, gp.tileSize);
 		down1 = setup("/player/character_00", gp.tileSize, gp.tileSize);
@@ -117,6 +133,7 @@ public class Player extends Entity{
 		downIdle = setup("/player/character_03", gp.tileSize, gp.tileSize);
 		leftIdle = setup("/player/character_04", gp.tileSize, gp.tileSize);
 		rightIdle = setup("/player/character_06", gp.tileSize, gp.tileSize);	
+
 	}
 	public void getAttackImage() {
 		if(currentWeapon.type == type_sword) {
