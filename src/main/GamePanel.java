@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 import ai.Pathfinder;
+import data.SaveLoad;
 import entity.Entity;
 import entity.Player;
 import enviorment.EnviormentManager;
@@ -62,11 +63,12 @@ public class GamePanel extends JPanel implements Runnable{
 	public Pathfinder pFinder = new Pathfinder(this);
 	EnviormentManager eManager = new EnviormentManager(this); 
 	tile.Map map = new tile.Map(this); //-----------------------------------------MAYBE A FIX????
+	SaveLoad saveLoad = new SaveLoad(this);
 	Thread gameThread;
 	
 	// ENTITY AND OBJECT
 	public Player player = new Player(this, keyH);
-	public Entity obj[][] = new Entity[maxMap][30]; //Display up to 30 objects at once in game (for performance. subject to change)
+	public Entity obj[][] = new Entity[maxMap][20]; //Display up to 20 objects at once in game (for performance. subject to change)
 	public Entity npc[][] = new Entity[maxMap][10]; 
 	public Entity monster[][] = new Entity[maxMap][20];
 	public InteractiveTile iTile[][] = new InteractiveTile[maxMap][50];
@@ -91,9 +93,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	
 	// Set player's default location
-//	int playerX = 100;
-//	int playerY = 100;
-//	int playerSpeed = 4;
+
 	
 	public GamePanel () {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));

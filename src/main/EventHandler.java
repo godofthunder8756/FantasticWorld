@@ -124,10 +124,11 @@ public class EventHandler {
 			gp.gameState = gameState;
 			gp.player.attackCancelled = true;
 			gp.playSE(2);
-			gp.ui.currentDialogue = "You drank from the secret \nhealing water...";
+			gp.ui.currentDialogue = "You drank from the secret \nhealing water...\nYour game has been save!";
 			gp.player.life = gp.player.maxLife;
 			//eventRect[col][row].eventDone = true;
 			gp.aSetter.setMonster();//RESPAWN MONSTERS
+			gp.saveLoad.save();
 		}
 		
 	}

@@ -62,6 +62,8 @@ public class Entity {
 	public boolean knockBack = false;
 	public String knockBackDirection;
 	public boolean guarding = false;
+	public Entity loot; //Chest
+	public boolean opened = false; //Chest
 	
 	// CHARACTER ATTRIBUTES
 	public String name;
@@ -112,7 +114,8 @@ public class Entity {
 	public final int type_consumable = 6;
 	public final int type_pickupOnly = 7;
 	public final int type_obstacle = 8;
-	public final int type_light = 8;
+	public final int type_light = 9;
+	public final int type_boots = 10;
 	
 	public Entity(GamePanel gp) {
 		this.gp = gp;
@@ -165,7 +168,7 @@ public class Entity {
 	}
 	
 	public void interact() {}
-	
+	public void setLoot(Entity loot) {}
 	public boolean use(Entity entity) {return false;} //gets overrided
 	
 	public void checkDrop() {} 

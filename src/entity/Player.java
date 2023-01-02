@@ -99,7 +99,7 @@ public class Player extends Entity{
 		inventory.add(currentWeapon); //Default
 		inventory.add(currentSheild); //Default
 		inventory.add(new OBJ_Key(gp)); //Default
-		inventory.add(new OBJ_Key(gp)); //Default
+		//inventory.add(new OBJ_Key(gp)); //Default
 	}
 	public int getAttack() {
 		attackArea = currentWeapon.attackArea;
@@ -269,8 +269,24 @@ public class Player extends Entity{
 			gp.playSE(12);
 		}
 	}
-	
-
+	public int getCurrentWeaponSlot() {
+		int currentWeaponSlot = 0;
+		for(int i = 0; i < inventory.size(); i++) {
+			if(inventory.get(i) == currentWeapon) {
+				currentWeaponSlot = i;
+			}
+		}
+		return currentWeaponSlot;
+	}
+	public int getCurrentShieldSlot() {
+		int currentShieldSlot = 0;
+		for(int i = 0; i < inventory.size(); i++) {
+			if(inventory.get(i) == currentSheild) {
+				currentShieldSlot = i;
+			}
+		}
+		return currentShieldSlot;
+	}
 	
 	public void damageProjectile(int i) {
 		if(i != 999) {
