@@ -4,7 +4,7 @@ import entity.Entity;
 import main.GamePanel;
 
 public class OBJ_Coin_Bronze extends Entity{
-	
+	public static final String OBJNAME = "Bronze Coin";
 	GamePanel gp;
 	
 	public OBJ_Coin_Bronze(GamePanel gp) {
@@ -12,7 +12,7 @@ public class OBJ_Coin_Bronze extends Entity{
 		this.gp = gp;
 		
 		type = type_pickupOnly;
-		name = "Bronze Coin";
+		name = OBJNAME;
 		down1 = setup("/objects/coin_bronze", gp.tileSize, gp.tileSize);
 		value = 1;
 	

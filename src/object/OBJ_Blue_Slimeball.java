@@ -7,13 +7,14 @@ import entity.Projectile;
 import main.GamePanel;
 
 public class OBJ_Blue_Slimeball extends Projectile{
+	public static final String OBJNAME = "Slime Ball";
 	GamePanel gp;
 	
 	public OBJ_Blue_Slimeball(GamePanel gp) {
 		super(gp);
 		this.gp = gp;
 		
-		name = "Slime Ball";
+		name = OBJNAME;
 		speed = 4; 
 		maxLife= 80; // 80 frames it burns out
 		life = maxLife;

@@ -27,25 +27,7 @@ public class SaveLoad {
 	public SaveLoad(GamePanel gp) {
 		this.gp = gp;
 	}
-	public Entity getObject(String itemName) {
-		Entity obj = null;
-		switch (itemName) {
-		case "Boots": obj = new OBJ_Boots(gp); break;
-		case "Axe": obj = new OBJ_Axe(gp); break;
-		//case "Slime Ball": obj = new OBJ_Blue_Slimeball(gp); break;
-		case "Key": obj = new OBJ_Potion_Red(gp); break;
-		case "Lantern": obj = new OBJ_Lantern(gp); break;
-		case "Blue Shield": obj = new OBJ_Shield_Blue(gp); break;
-		case "Wood Shield": obj = new OBJ_Shield_Wood(gp); break;
-		case "Normal Sword": obj = new OBJ_Sword_Normal(gp); break;
-		case "Door": obj = new OBJ_Door(gp); break;
-		case "Chest": obj = new OBJ_Chest(gp); break;
-		case "Heart": obj = new OBJ_Heart(gp); break;
-		case "Red Potion": obj = new OBJ_Potion_Red(gp); break;
-		case "Bronze Coin": obj = new OBJ_Coin_Bronze(gp); break;
-		}
-		return obj;
-	}
+
 	public void save() {
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("save.dat")));
@@ -119,7 +101,7 @@ public class SaveLoad {
 			//Player Inventory
 			gp.player.inventory.clear();
 			for(int i = 0; i< ds.itemNames.size(); i++) {
-				gp.player.inventory.add(getObject(ds.itemNames.get(i)));
+				gp.player.inventory.add(gp.eGenerator.getObject(ds.itemNames.get(i)));
 				gp.player.inventory.get(i).amount = ds.itemAmounts.get(i);
 			}
 			//Player Equipment
@@ -135,21 +117,28 @@ public class SaveLoad {
 						gp.obj[mapNum][i] = null;
 					}
 					else {
-						gp.obj[mapNum][i] = getObject(ds.mapObjectNames[mapNum][i]);
-						gp.obj[mapNum][i].worldX = ds.mapObjectWorldX[mapNum][i];
-						gp.obj[mapNum][i].worldY = ds.mapObjectWorldY[mapNum][i];
-						if(ds.mapObjectLootNames[mapNum][i] != null) {
-							gp.obj[mapNum][i].loot = getObject(ds.mapObjectLootNames[mapNum][i]);
+						gp.obj[mapNum][i] = gp.eGenerator.getObject(ds.mapObjectNames[mapNum][i]);
+						if(gp.obj[mapNum][i] != null) {
+							gp.obj[mapNum][i].worldX = ds.mapObjectWorldX[mapNum][i];
+							gp.obj[mapNum][i].worldY = ds.mapObjectWorldY[mapNum][i];
 						}
-						gp.obj[mapNum][i].opened = ds.mapObjectOpened[mapNum][i];
-						if(gp.obj[mapNum][i].opened == true) {
-							gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image2;
+						
+						if(ds.mapObjectLootNames[mapNum][i] != null) {
+							gp.obj[mapNum][i].loot = gp.eGenerator.getObject(ds.mapObjectLootNames[mapNum][i]);
+						}
+						if(gp.obj[mapNum][i] != null) {
+							gp.obj[mapNum][i].opened = ds.mapObjectOpened[mapNum][i];
+							
+							if(gp.obj[mapNum][i].opened == true) {
+								gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image2;
+							}
 						}
 					}
 				}
 			}
 			
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Load Error!");
 		}
 	}

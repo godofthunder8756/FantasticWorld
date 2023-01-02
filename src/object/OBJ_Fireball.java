@@ -7,14 +7,14 @@ import entity.Projectile;
 import main.GamePanel;
 
 public class OBJ_Fireball extends Projectile {
-
+	public static final String OBJNAME = "Fireball";
 	GamePanel gp;
 	
 	public OBJ_Fireball(GamePanel gp) {
 		super(gp);
 		this.gp = gp;
 		
-		name = "Fireball";
+		name = OBJNAME;
 		speed = 10; 
 		maxLife= 40; // 60 frames it burns out
 		life = maxLife;

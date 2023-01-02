@@ -4,7 +4,7 @@ import entity.Entity;
 import main.GamePanel;
 
 public class OBJ_Heart extends Entity{
-	
+	public static final String OBJNAME = "Heart";
 	GamePanel gp;
 	
 		
@@ -13,7 +13,7 @@ public class OBJ_Heart extends Entity{
 		this.gp = gp;
 		
 		type = type_pickupOnly;
-		name = "Heart";
+		name = OBJNAME;
 		value = 2;
 		down1 = setup("/objects/heart_full", gp.tileSize, gp.tileSize);
 		image = setup("/objects/heart_full", gp.tileSize, gp.tileSize);
