@@ -476,16 +476,17 @@ public class Player extends Entity{
 	public boolean canObtainItem(Entity item) {
 		
 		boolean canObtain = false;
+		Entity newItem = gp.eGenerator.getObject(item.name); //UNIQUE ITEM CREATION
 		// check stackablity
-		if(item.stackable == true) {
-			int index = searchItemInInventory(item.name);
+		if(newItem.stackable == true) {
+			int index = searchItemInInventory(newItem.name);
 			if(index != 999) {
 				inventory.get(index).amount++;
 				canObtain = true;
 			}
 			else { //new item so check vacancy
 				if(inventory.size() != maxInventorySize) {
-					inventory.add(item);
+					inventory.add(newItem);
 					canObtain = true;
 				}
 			}
