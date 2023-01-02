@@ -86,6 +86,7 @@ public class Player extends Entity{
 		direction = "down";
 	}
 	public void restoreStatus() {
+		speed = defaultSpeed;
 		life = maxLife;
 		mana = maxMana;
 		invincible = false;

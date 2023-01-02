@@ -44,8 +44,10 @@ public class Entity {
 	public int invincibleCounter = 0;
 	int dyingCounter = 0;
 	int hpBarCounter = 0;
-	public int shotAvailableCOunter;
+	public int shotAvailableCOunter = 0;
 	int knockbackCounter = 0;
+	public int guardCounter = 0;
+	int offBalanceCounter = 0;
 
 	// STATE
 	public int worldX, worldY;
@@ -139,6 +141,17 @@ public class Entity {
 	public int getGoalRow(Entity target) {
 		int goalRow = (target.worldY + target.solidArea.y)/gp.tileSize;
 		return goalRow;
+	}
+	public void resetCounter() {
+		spriteCounter = 0;
+		actionLockCounter = 0;
+		invincibleCounter = 0;
+		dyingCounter = 0;
+		hpBarCounter = 0;
+		shotAvailableCOunter = 0;
+		knockbackCounter = 0;
+		guardCounter = 0;
+		offBalanceCounter = 0;
 	}
 	public void setAction() {} //override
 	
