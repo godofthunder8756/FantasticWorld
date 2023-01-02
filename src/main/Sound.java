@@ -31,6 +31,7 @@ public class Sound {
 		soundURL[14] = getClass().getResource("/sound/coin.wav"); //custom //filler
 		soundURL[15] = getClass().getResource("/sound/blocked.wav"); //custom
 		soundURL[16] = getClass().getResource("/sound/parry.wav"); //custom
+		soundURL[17] = getClass().getResource("/sound/speak.wav"); //custom
 	}
 	public void setFile(int i) { 
 		try {

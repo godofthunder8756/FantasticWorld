@@ -30,7 +30,6 @@ public class OBJ_Chest extends Entity{
 		this.loot = loot;
 	}
 	public void interact() {
-		gp.gameState = gp.dialogueState;
 		if(opened == false) {
 			gp.playSE(3);
 			
@@ -45,10 +44,12 @@ public class OBJ_Chest extends Entity{
 				down1 = image2;
 				opened = true;
 			}
-			gp.ui.currentDialogue = sb.toString();
+			dialogues[0][0] = sb.toString();
+			startDialogue(this, 0);
 		}
 		else {
-			gp.ui.currentDialogue = "It's empty...";
+			dialogues[1][0] = "It's empty...";
+			startDialogue(this, 1);
 		}
 	}
 

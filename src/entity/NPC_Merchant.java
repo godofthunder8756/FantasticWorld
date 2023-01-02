@@ -35,7 +35,11 @@ public class NPC_Merchant extends Entity{
 	}
 	
 	public void setDialogue() {
-		dialogue[0] = "Hello! Care to browse my wares?";
+		dialogues[0][0] = "Hello! Care to browse my wares?";
+		dialogues[1][0] = "Come Again!";
+		dialogues[2][0] = "PUT THAT DOWN! \nYou can't afford that!";
+		dialogues[3][0] = "Ha! \nYou don't have enough room for that!";	
+		dialogues[4][0] = "You can't sell and equiped item!";
 
 	}
 	public void setItems() {
@@ -47,7 +51,7 @@ public class NPC_Merchant extends Entity{
 		inventory.add(new OBJ_Shield_Blue(gp));
 	}
 	public void speak() {
-		super.speak();
+		facePlayer();
 		gp.gameState = gp.tradeState;
 		gp.ui.npc = this;
 	}

@@ -18,11 +18,13 @@ public class OBJ_Potion_Red extends Entity{
 		description = "["+ name +"]\nTastes like red Kool-Aid!\nHeals you by "+value+"HP!";
 		price = 75;
 		stackable = true;
-		
+		setDialogue();
+	}
+	public void setDialogue() {
+		dialogues[0][0] = "You drink the "+name+"!\n +"+value+"HP";
 	}
 	public boolean use(Entity entity) {
-		gp.gameState = gp.dialogueState;
-		gp.ui.currentDialogue = "You drink the "+name+"!\n +"+value+"HP";
+		startDialogue(this, 0);
 		entity.life += value;
 		gp.playSE(2);
 		return true;

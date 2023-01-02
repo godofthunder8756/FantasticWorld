@@ -22,6 +22,8 @@ public class NPC_OldMan extends Entity{
 		solidArea.width = 30;
 		solidArea.height = 30;
 		
+		dialogueSet = -1;
+		
 		getImage();
 		setDialogue();
 	}
@@ -39,10 +41,17 @@ public class NPC_OldMan extends Entity{
 	}
 	
 	public void setDialogue() {
-		dialogue[0] = "Hello!";
-		dialogue[1] = "I am just a template for future \nNPCs. Testing long text. ";
-		dialogue[2] = "Just in case you forgot...";
-		dialogue[3] = "Jeffery Epstein did not kill himself";
+		//dialogue set 1
+		dialogues[0][0] = "Hello!";
+		dialogues[0][1] = "I am just a template for future \nNPCs. Testing long text. ";
+		dialogues[0][2] = "Just in case you forgot...";
+		dialogues[0][3] = "Jeffery Epstein did not kill himself";
+		//dialogue set 2
+		dialogues[1][0] = "Hello again!";
+		dialogues[1][1] = "What are you still doing here?";
+		dialogues[1][2] = "You've already talked to me!";
+		//dialogue set 3
+		dialogues[2][0] = "Seriously, I'm busy.";
 	}
 	
 	public void setAction() {
@@ -83,9 +92,15 @@ public class NPC_OldMan extends Entity{
 	public void speak() {
 		
 		//DO THIS CHARACTER SPECIFIC STUFF
+		facePlayer();
+		dialogueSet++;
+		startDialogue(this, dialogueSet);
 		
 		
-		super.speak();
-		onPath = true;
+		if(dialogues[dialogueSet][0] == null) {
+			dialogueSet = 0;
+		}
+		
+//		onPath = true; //walks to his house
 	}
 }

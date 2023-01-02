@@ -54,8 +54,8 @@ public class Player extends Entity{
 //		worldY = gp.tileSize *21;
 //		worldX = gp.tileSize *12;
 //		worldY = gp.tileSize *13;
-		worldX = gp.tileSize *12;  
-		worldY = gp.tileSize *13;
+		worldX = gp.tileSize *32;  
+		worldY = gp.tileSize *21;
 		defaultSpeed = 4;
 		speed = defaultSpeed;
 		direction = "down";
@@ -79,10 +79,11 @@ public class Player extends Entity{
 		getAttackImage();
 		getGuardImage();
 		setItems();
+		setDialogue();
 	}	
 	public void setDefaultPositions() {
-		worldX = gp.tileSize *12;
-		worldY = gp.tileSize *13;
+		worldX = gp.tileSize *32;
+		worldY = gp.tileSize *21;
 		direction = "down";
 	}
 	public void restoreStatus() {
@@ -332,7 +333,6 @@ public class Player extends Entity{
 		if(gp.keyH.enterPressed == true) {
 			if(i != 999) {
 				attackCancelled = true;
-				gp.gameState = gp.dialogueState;
 				gp.npc[gp.currentMap][i].speak();
 			}
 		}
@@ -414,11 +414,14 @@ public class Player extends Entity{
 			attack = getAttack();
 			defense = getDefense();
 			gp.playSE(8);
-			gp.gameState = gp.dialogueState;
-			gp.ui.currentDialogue = "LEVEL " + level +"!\n" + "You feel stronger now!";
+			//gp.gameState = gp.dialogueState;
+			dialogues[0][0] = "LEVEL " + level +"!\n" + "You feel stronger now!";
+			startDialogue(this, 0);
 		}
 	}
-	
+	public void setDialogue() {
+//		dialogues[0][0] = "LEVEL " + level +"!\n" + "You feel stronger now!";
+	}
 	public void selectItem() {
 		int itemIndex = gp.ui.getItemIndexOnSlot(gp.ui.playerslotCol, gp.ui.playerslotRow);
 		if(itemIndex < inventory.size()) {

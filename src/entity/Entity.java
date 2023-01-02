@@ -34,7 +34,7 @@ public class Entity {
 	public Rectangle solidArea = new Rectangle(0,0,48,48);
 	public Rectangle attackArea = new Rectangle();
 	public int solidAreaDefaultX, solidAreaDefaultY;
-	String dialogue[] = new String[50];
+	public String dialogues[][] = new String[50][50];
 	public boolean collision = false;
 	public Entity attacker;
 	
@@ -53,7 +53,8 @@ public class Entity {
 	public int worldX, worldY;
 	public String direction = "down";
 	public int spriteNum = 1;
-	int dialogueIndex = 0;
+	public int dialogueSet = 0;
+	public int dialogueIndex = 0;
 	public boolean invincible = false;
 	public boolean collisionOn = false;
 	public boolean attacking = false;
@@ -157,29 +158,20 @@ public class Entity {
 	
 	public void damageReaction() {} //override
 	
-	public void speak() {
-		if(dialogue[dialogueIndex] == null) {
-			dialogueIndex = 0;
-		}
-		gp.ui.currentDialogue = dialogue[dialogueIndex];
-		dialogueIndex++;
-		
+	public void speak() {} //override
+	public void facePlayer() {
 		switch(gp.player.direction) {
-		case "up":
-			direction = "down";
-			break;
-		case "down":
-			direction = "up";
-			break;
-		case "left":
-			direction = "right";
-			break;
-		case "right":
-			direction = "left";
-			break;
+		case "up":direction = "down";break;
+		case "down":direction = "up";break;
+		case "left":direction = "right";break;
+		case "right":direction = "left";break;
 		}
 	}
-	
+	public void startDialogue(Entity entity, int setNum) {
+		gp.gameState = gp.dialogueState;
+		gp.ui.npc = entity;
+		dialogueSet = setNum;
+	}
 	public void interact() {}
 	public void setLoot(Entity loot) {}
 	public boolean use(Entity entity) {return false;} //gets overrided
