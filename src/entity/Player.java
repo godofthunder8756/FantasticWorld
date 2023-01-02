@@ -101,7 +101,7 @@ public class Player extends Entity{
 		inventory.add(currentWeapon); //Default
 		inventory.add(currentSheild); //Default
 		inventory.add(new OBJ_Key(gp)); //Default
-		//inventory.add(new OBJ_Key(gp)); //Default
+		inventory.add(new OBJ_Key(gp)); //Default
 	}
 	public int getAttack() {
 		attackArea = currentWeapon.attackArea;

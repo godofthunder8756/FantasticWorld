@@ -51,10 +51,10 @@ public class Lighting {
 			color[5] = new Color(0,0,0,0.76f);
 			color[6] = new Color(0,0,0,0.82f);
 			color[7] = new Color(0,0,0,0.87f);
-			color[8] = new Color(0,0,0,0.91f);
-			color[9] = new Color(0,0,0,0.94f);
-			color[10] = new Color(0,0,0,0.96f);
-			color[11] = new Color(0,0,0,0.98f);
+			color[8] = new Color(0,0,0,0.9f);
+			color[9] = new Color(0,0,0,0.9f);
+			color[10] = new Color(0,0,0,0.9f);
+			color[11] = new Color(0,0,0,0.9f);
 	
 			fraction[0] = 0f;
 			fraction[1] = 0.4f;
@@ -66,8 +66,8 @@ public class Lighting {
 			fraction[7] = 0.8f;
 			fraction[8] = 0.85f;
 			fraction[9] = 0.9f;
-			fraction[10] = 0.95f;
-			fraction[11] = 1f;
+			fraction[10] = 0.91f;
+			fraction[11] = 0.98f;
 	
 			RadialGradientPaint gradientPaint= new RadialGradientPaint(centerX, centerY, gp.player.currentLight.lightRadius, fraction, color);
 			// Set the gradient data on g2
@@ -120,8 +120,12 @@ public class Lighting {
 		}
 	}
 	public void draw(Graphics2D g2) {
-		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, filterAlpha));
-		g2.drawImage(darknessFilter, 0,0,null);
+		if(gp.currentArea == gp.outside) {
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, filterAlpha));
+		}
+		if(gp.currentArea == gp.outside || gp.currentArea == gp.dungeon) {
+			g2.drawImage(darknessFilter, 0,0,null);
+		}
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
 		//Debug

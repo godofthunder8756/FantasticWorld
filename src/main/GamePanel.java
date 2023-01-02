@@ -93,7 +93,12 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int mapState = 10;
 	
 	
-	// Set player's default location
+	// AREA
+	public int currentArea;
+	public int nextArea;
+	public final int outside = 50;
+	public final int indoor = 52;
+	public final int dungeon = 52;
 
 	
 	public GamePanel () {
@@ -112,8 +117,8 @@ public class GamePanel extends JPanel implements Runnable{
 		aSetter.setMonster();
 		aSetter.setInteractiveTile();
 		eManager.setup();
-//		playMusic(0);                      //STARTS MUSIC
 		gameState = titleState;
+		currentArea = outside;
 		//FULLSCREEN
 		tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
 		g2 = (Graphics2D)tempScreen.getGraphics();
@@ -246,7 +251,16 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		
 	}
-	
+	public void changeArea() {
+		if(nextArea != currentArea) {
+			stopMusic();
+			if(nextArea == outside) {playMusic(0);}
+			//if(nextArea == outside) {playMusic(0);}
+			//if(nextArea == outside) {playMusic(0);}
+		}
+		currentArea = nextArea;
+		aSetter.setMonster();//RESPAWNS MONSTERS
+	}
 	public void drawToTempScreen() {
 		// TITLE SCREEN
 				if(gameState == titleState) {

@@ -58,12 +58,15 @@ public class EventHandler {
 			canTouchEvent = true;
 		}
 		if(canTouchEvent == true) {
-			if(hit(0, 22, 18, "any") == true) { damagePit(gp.dialogueState);}
-			//if(hit(0, 26, 16, "right") == true) { teleport(26, 16, gp.dialogueState);}
-			else if(hit(0, 23, 12, "up") == true) { healingPool(gp.dialogueState);}		
-			else if(hit(0, 10, 39, "any") == true) {teleport(1, 12, 13);}
-			else if(hit(1, 12, 13, "any") == true) {teleport(0, 10, 39);}
-			else if (hit(1, 12, 9, "up") == true) {speak(gp.npc[1][0]);}
+			if(hit(0, 22, 18, "any") == true) { damagePit(gp.dialogueState);} //Invisible pit
+			else if(hit(0, 23, 12, "up") == true) { healingPool(gp.dialogueState);}	//Secret Pond Save	
+			else if(hit(0, 10, 39, "any") == true) {teleport(1, 12, 13, gp.indoor);} // Enter hut
+			else if(hit(1, 12, 13, "any") == true) {teleport(0, 10, 39, gp.outside);} // Leave hut
+			else if (hit(1, 12, 9, "up") == true) {speak(gp.npc[1][0]);} //Merchant Speak
+			else if(hit(0, 12, 9, "any") == true) {teleport(2, 9, 41, gp.dungeon);} // Enter Dungeon
+			else if(hit(2, 9, 41, "any") == true) {teleport(0, 12, 9, gp.outside);} // Exit Dungeon
+			else if(hit(2, 8, 7, "any") == true) {teleport(3, 26, 41, gp.dungeon);} // Enter B2
+			else if(hit(3, 26, 41, "any") == true) {teleport(2, 8, 7, gp.dungeon);} // Enter B1
 		}
 	}
 	
@@ -100,19 +103,13 @@ public class EventHandler {
 		
 		return hit;
 	}
-	public void  teleport(int mapNum, int col, int row) {
+	public void  teleport(int mapNum, int col, int row, int area) {
 		gp.gameState = gp.transitionState;
-		
+		gp.nextArea = area;
 		tempMap = mapNum;
 		tempCol = col;
 		tempRow = row;
 		
-		
-//		gp.currentMap = mapNum;
-//		gp.player.worldX = gp.tileSize*col;
-//		gp.player.worldY = gp.tileSize*row;
-//		previousEventX = gp.player.worldX;
-//		previousEventY = gp.player.worldY;
 		canTouchEvent = false;
 		//eventRect[mapNum][col][row].eventDone = true;
 		gp.playSE(13);
@@ -120,7 +117,7 @@ public class EventHandler {
 	public void damagePit(int gameState){
 		gp.gameState = gameState;
 		gp.playSE(6);
-		eventMaster.startDialogue(eventMaster, 0);
+		eventMaster.startDialogue(eventMaster, 0); 
 		gp.player.life -= 1;
 		canTouchEvent = false; 
 	}
