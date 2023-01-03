@@ -3,6 +3,7 @@ package data;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public class DataStorage implements Serializable{
 	//PLAYER STATES
 	int level;

@@ -192,6 +192,8 @@ public class Player extends Entity{
 			
 			// CHECK INTERACTIVE TILE COLLISION
 			int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
+			if(iTileIndex != 999)
+				System.out.println("Throwaway: "+iTileIndex);
 			
 			// CHECK EVENT
 			gp.eHandler.checkEvent();

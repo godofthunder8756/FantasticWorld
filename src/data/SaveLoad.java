@@ -5,21 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
-import entity.Entity;
 import main.GamePanel;
-import object.OBJ_Axe;
-import object.OBJ_Blue_Slimeball;
-import object.OBJ_Boots;
-import object.OBJ_Chest;
-import object.OBJ_Coin_Bronze;
-import object.OBJ_Door;
-import object.OBJ_Heart;
-import object.OBJ_Lantern;
-import object.OBJ_Potion_Red;
-import object.OBJ_Shield_Blue;
-import object.OBJ_Shield_Wood;
-import object.OBJ_Sword_Normal;
+
 
 public class SaveLoad {
 	GamePanel gp;

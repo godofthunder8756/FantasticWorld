@@ -20,8 +20,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Map;
 
+@SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable{
 	
 	// SCREEN SETTINGS
@@ -97,7 +97,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public int currentArea;
 	public int nextArea;
 	public final int outside = 50;
-	public final int indoor = 52;
+	public final int indoor = 51;
 	public final int dungeon = 52;
 
 	
@@ -166,7 +166,7 @@ public class GamePanel extends JPanel implements Runnable{
 		long lastTime = System.nanoTime();
 		long currentTime;
 		long timer = 0;
-		int drawCount = 0;
+//		int drawCount = 0;
  		
 		//Game Loop
 		while(gameThread != null) {
@@ -181,11 +181,11 @@ public class GamePanel extends JPanel implements Runnable{
 				drawToTempScreen();
 				drawToScreen();
 				delta--;
-				drawCount++;
+//				drawCount++;
 			}
 			if(timer >= 1000000000) {
 				//System.out.println("FPS: " + drawCount);
-				drawCount = 0;
+//				drawCount = 0;
 				timer = 0;
 			}
 					
@@ -253,10 +253,10 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	public void changeArea() {
 		if(nextArea != currentArea) {
-			stopMusic();
-			if(nextArea == outside) {playMusic(0);}
-			//if(nextArea == outside) {playMusic(0);}
-			//if(nextArea == outside) {playMusic(0);}
+//			stopMusic();
+//			if(nextArea == outside) {playMusic(0);} //SEE EventHandler for music changes
+//			if(nextArea == indoor) {playMusic(18);}
+//			if(nextArea == dungeon) {playMusic(19);}
 		}
 		currentArea = nextArea;
 		aSetter.setMonster();//RESPAWNS MONSTERS

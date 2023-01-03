@@ -5,7 +5,6 @@ import object.OBJ_Axe;
 import object.OBJ_Blue_Slimeball;
 import object.OBJ_Boots;
 import object.OBJ_Chest;
-import object.OBJ_Coin_Bronze;
 import object.OBJ_Door;
 import object.OBJ_Fireball;
 import object.OBJ_Heart;
