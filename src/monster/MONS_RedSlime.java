@@ -92,7 +92,5 @@ public class MONS_RedSlime extends Entity{
 		if(i >=50 && i < 75) {
 			// you get nuthin
 		}
-		
 	}
-
 }
