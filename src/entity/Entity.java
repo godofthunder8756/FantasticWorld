@@ -123,11 +123,11 @@ public class Entity {
 		this.gp = gp;
 	}
 	public int getXDistance(Entity target) {
-		int xDistance = Math.abs(worldX - target.worldX);
+		int xDistance = Math.abs(getCenterX() - target.getCenterX());
 		return xDistance;
 	}
 	public int getYDistance(Entity target) {
-		int yDistance = Math.abs(worldY - target.worldY);
+		int yDistance = Math.abs(getCenterY() - target.getCenterY());
 		return yDistance;
 	}
 	public int getTileDistance(Entity target) {
@@ -156,7 +156,14 @@ public class Entity {
 	public void setAction() {} //override
 	public void move(String direction) {} // overwritten in bigrock
 	public void damageReaction() {} //override
-	
+	public int getCenterX() {
+		int centerX = worldX + up1.getWidth()/2;
+		return centerX;
+	}
+	public int getCenterY() {
+		int centerY = worldY + left1.getHeight()/2;
+		return centerY;
+	}
 	public void speak() {} //override
 	public void facePlayer() {
 		switch(gp.player.direction) {
@@ -427,22 +434,22 @@ public class Entity {
 		int yDist = getYDistance(gp.player);
 		switch(direction) {
 		case "up":
-			if(gp.player.worldY < worldY && yDist < straight && xDist < horizontal) {
+			if(gp.player.getCenterY() < getCenterY() && yDist < straight && xDist < horizontal) {
 				targetInRange = true;
 			}
 			break;
 		case "down":
-			if(gp.player.worldY > worldY && yDist < straight && xDist < horizontal) {
+			if(gp.player.getCenterY() > getCenterY() && yDist < straight && xDist < horizontal) {
 				targetInRange = true;
 			}
 			break;
 		case "left":
-			if(gp.player.worldX < worldY && xDist < straight && yDist < horizontal) {
+			if(gp.player.getCenterX() < getCenterX() && xDist < straight && yDist < horizontal) {
 				targetInRange = true;
 			}
 			break;
 		case "right":
-			if(gp.player.worldX > worldY && xDist < straight && yDist < horizontal) {
+			if(gp.player.getCenterX() > getCenterX() && xDist < straight && yDist < horizontal) {
 				targetInRange = true;
 			}
 			break;
@@ -460,6 +467,18 @@ public class Entity {
 	public void getRandomDirection() {
 		actionLockCounter++;
 		if(actionLockCounter == 120) {
+			Random random = new Random();
+			int i = random.nextInt(100)+1; // pick a num form 1 to 100
+			if(i<=25) {direction = "up";}
+			if(i>25 && i <= 50) {direction = "down";}
+			if(i>50 && i <= 75) {direction = "left";}
+			if(i>75 && i <= 100) {direction = "right";}
+			actionLockCounter = 0;
+		}	
+	}
+	public void getRandomDirection(int interval) {
+		actionLockCounter++;
+		if(actionLockCounter == interval) {
 			Random random = new Random();
 			int i = random.nextInt(100)+1; // pick a num form 1 to 100
 			if(i<=25) {direction = "up";}
@@ -489,7 +508,7 @@ public class Entity {
 					if(spriteNum == 2) {image = up2;}
 				}
 				if(attacking == true) {
-					tempScreenY = screenY - gp.tileSize;
+					tempScreenY = screenY - up1.getHeight();
 					if(spriteNum == 1) {image = attackUp1;}
 					if(spriteNum == 2) {image = attackUp2;}
 				}
@@ -510,7 +529,7 @@ public class Entity {
 					if(spriteNum == 2) {image = left2;}
 				}
 				if(attacking == true) {
-					tempScreenX = screenX - gp.tileSize;
+					tempScreenX = screenX - left1.getWidth();
 					if(spriteNum == 1) {image = attackLeft1;}
 					if(spriteNum == 2) {image = attackLeft2;}				
 				}

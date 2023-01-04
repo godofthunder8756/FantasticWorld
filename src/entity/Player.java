@@ -50,15 +50,9 @@ public class Player extends Entity{
 		guardRight = setup("/player/boy_guard_right", gp.tileSize, gp.tileSize);
 	}
 	public void setDefaultValues() {
-//		worldX = gp.tileSize *23;  //FIRST TESTING
-//		worldY = gp.tileSize *21;
-//		worldX = gp.tileSize *12;
-//		worldY = gp.tileSize *13;
-		worldX = gp.tileSize *32;  
-		worldY = gp.tileSize *21;
+		setDefaultPositions();
 		defaultSpeed = 4;
 		speed = defaultSpeed;
-		direction = "down";
 		
 		// Player Status
 		level = 1;
@@ -82,6 +76,7 @@ public class Player extends Entity{
 		setDialogue();
 	}	
 	public void setDefaultPositions() {
+		gp.currentMap = 0;
 		worldX = gp.tileSize *32;
 		worldY = gp.tileSize *21;
 		direction = "down";
