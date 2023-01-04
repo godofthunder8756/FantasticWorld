@@ -64,6 +64,7 @@ public class Entity {
 	public boolean guarding = false;
 	public Entity loot; //Chest
 	public boolean opened = false; //Chest
+	public boolean inRage = false;
 	
 	// CHARACTER ATTRIBUTES
 	public String name;
@@ -466,7 +467,7 @@ public class Entity {
 	}
 	public void getRandomDirection() {
 		actionLockCounter++;
-		if(actionLockCounter == 120) {
+		if(actionLockCounter > 120) {
 			Random random = new Random();
 			int i = random.nextInt(100)+1; // pick a num form 1 to 100
 			if(i<=25) {direction = "up";}
@@ -478,7 +479,7 @@ public class Entity {
 	}
 	public void getRandomDirection(int interval) {
 		actionLockCounter++;
-		if(actionLockCounter == interval) {
+		if(actionLockCounter > interval) {
 			Random random = new Random();
 			int i = random.nextInt(100)+1; // pick a num form 1 to 100
 			if(i<=25) {direction = "up";}
@@ -493,9 +494,9 @@ public class Entity {
 		int screenX = worldX - gp.player.worldX + gp.player.screenX;
 		int screenY = worldY - gp.player.worldY + gp.player.screenY;
 		
-		if(worldX + gp.tileSize> gp.player.worldX - gp.player.screenX && 
+		if(worldX + gp.tileSize*5> gp.player.worldX - gp.player.screenX && 
 			worldX - gp.tileSize< gp.player.worldX + gp.player.screenX && 
-			worldY + gp.tileSize> gp.player.worldY - gp.player.screenY &&
+			worldY + gp.tileSize*5> gp.player.worldY - gp.player.screenY &&
 			worldY - gp.tileSize< gp.player.worldY + gp.player.screenY) {
 			
 			int tempScreenX = screenX;
@@ -572,7 +573,30 @@ public class Entity {
 			changeAlpha(g2, 1F);
 		}
 	}
-	
+	public void moveTowardPlayer(int intverval) {
+		actionLockCounter++;
+		if(actionLockCounter > intverval) {
+			if(getXDistance(gp.player) > getYDistance(gp.player)) {
+				if(gp.player.getCenterX() < getCenterX()) {
+					// player is to the left
+					direction = "left";
+				}
+				else {
+					direction = "right";
+				}
+			}
+			else if(getXDistance(gp.player) < getYDistance(gp.player)) {
+					if(gp.player.getCenterY() < getCenterY()) {
+						// player is above
+						direction = "up";
+					}
+					else {
+						direction = "down";
+					}
+			}
+			actionLockCounter = 0;
+		}
+	}
 	public void dyingAnimation(Graphics2D g2) {
 		dyingCounter++;
 		
