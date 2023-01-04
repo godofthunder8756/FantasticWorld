@@ -6,6 +6,7 @@ import object.OBJ_Blue_Slimeball;
 import object.OBJ_Boots;
 import object.OBJ_Chest;
 import object.OBJ_Door;
+import object.OBJ_Door_Iron;
 import object.OBJ_Fireball;
 import object.OBJ_Heart;
 import object.OBJ_Key;
@@ -32,6 +33,7 @@ public class EntityGenerator {
 		case OBJ_Blue_Slimeball.OBJNAME: obj = new OBJ_Blue_Slimeball(gp); break;
 		case OBJ_Boots.OBJNAME: obj = new OBJ_Boots(gp); break;
 		case OBJ_Chest.OBJNAME: obj = new OBJ_Chest(gp); break;
+		case OBJ_Door_Iron.OBJNAME: obj = new OBJ_Door_Iron(gp); break;
 		case OBJ_Door.OBJNAME: obj = new OBJ_Door(gp); break;
 		case OBJ_Fireball.OBJNAME: obj = new OBJ_Fireball(gp); break;
 		case OBJ_Heart.OBJNAME: obj = new OBJ_Heart(gp); break;

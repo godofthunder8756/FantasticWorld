@@ -39,7 +39,7 @@ public class NPC_Merchant extends Entity{
 		dialogues[1][0] = "Come Again!";
 		dialogues[2][0] = "PUT THAT DOWN! \nYou can't afford that!";
 		dialogues[3][0] = "Ha! \nYou don't have enough room for that!";	
-		dialogues[4][0] = "You can't sell and equiped item!";
+		dialogues[4][0] = "You can't sell an equiped item!";
 
 	}
 	public void setItems() {

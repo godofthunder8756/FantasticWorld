@@ -33,6 +33,7 @@ public class Entity {
 	public String dialogues[][] = new String[50][50];
 	public boolean collision = false;
 	public Entity attacker;
+	public Entity linkedEntity;
 	
 	//COUNTERS
 	public int spriteCounter = 0;
@@ -153,7 +154,7 @@ public class Entity {
 		offBalanceCounter = 0;
 	}
 	public void setAction() {} //override
-	
+	public void move(String direction) {} // overwritten in bigrock
 	public void damageReaction() {} //override
 	
 	public void speak() {} //override

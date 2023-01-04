@@ -648,7 +648,9 @@ public class UI {
 			
 			//Sell ITEM
 			if(gp.keyH.enterPressed == true) {
-				if(gp.player.inventory.get(itemIndex) == gp.player.currentWeapon || gp.player.inventory.get(itemIndex) == gp.player.currentSheild) {
+				if(gp.player.inventory.get(itemIndex) == gp.player.currentWeapon || 
+						gp.player.inventory.get(itemIndex) == gp.player.currentSheild || 
+						gp.player.inventory.get(itemIndex) == gp.player.currentLight) {
 					commandNum = 0;
 					subState = 0;
 					npc.startDialogue(npc, 4);

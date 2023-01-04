@@ -342,11 +342,12 @@ public class Player extends Entity{
 	
 	
 	public void interactNPC(int i) {
-		if(gp.keyH.enterPressed == true) {
-			if(i != 999) {
+		if(i != 999) {
+			if(gp.keyH.enterPressed == true) {
 				attackCancelled = true;
 				gp.npc[gp.currentMap][i].speak();
 			}
+			gp.npc[gp.currentMap][i].move(direction); //doesn't affect anything besides big rock
 		}
 	}
 	

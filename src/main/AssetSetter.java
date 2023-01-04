@@ -1,5 +1,6 @@
 package main;
 
+import entity.NPC_BigRock;
 import entity.NPC_Merchant;
 import entity.NPC_OldMan;
 import monster.MONS_BlackSlime;
@@ -12,6 +13,7 @@ import object.OBJ_Axe;
 import object.OBJ_Chest;
 import object.OBJ_Coin_Bronze;
 import object.OBJ_Door;
+import object.OBJ_Door_Iron;
 import object.OBJ_Heart;
 import object.OBJ_Lantern;
 import object.OBJ_Pickaxe;
@@ -19,6 +21,7 @@ import object.OBJ_Potion_Red;
 import object.OBJ_Shield_Blue;
 import tile_interactive.IT_DestructibleWall;
 import tile_interactive.IT_DryTree;
+import tile_interactive.IT_MetalPlate;
 
 public class AssetSetter {
 	
@@ -100,6 +103,10 @@ public class AssetSetter {
 		gp.obj[mapNum][i].worldX = gp.tileSize*27;
 		gp.obj[mapNum][i].worldY = gp.tileSize*15;
 		i++;
+		gp.obj[mapNum][i] = new OBJ_Door_Iron(gp);
+		gp.obj[mapNum][i].worldX = gp.tileSize*18;
+		gp.obj[mapNum][i].worldY = gp.tileSize*23;
+		i++;
 		
 		
 		
@@ -119,6 +126,22 @@ public class AssetSetter {
 		gp.npc[mapNum][i] = new NPC_Merchant(gp);
 		gp.npc[mapNum][i].worldX = gp.tileSize*12;
 		gp.npc[mapNum][i].worldY = gp.tileSize*7;
+		i++;
+		
+		// MAP 2
+		mapNum = 2;
+		i = 0;
+		gp.npc[mapNum][i] = new NPC_BigRock(gp);
+		gp.npc[mapNum][i].worldX = gp.tileSize*20;
+		gp.npc[mapNum][i].worldY = gp.tileSize*25;
+		i++;
+		gp.npc[mapNum][i] = new NPC_BigRock(gp);
+		gp.npc[mapNum][i].worldX = gp.tileSize*11;
+		gp.npc[mapNum][i].worldY = gp.tileSize*18;
+		i++;
+		gp.npc[mapNum][i] = new NPC_BigRock(gp);
+		gp.npc[mapNum][i].worldX = gp.tileSize*23;
+		gp.npc[mapNum][i].worldY = gp.tileSize*14;
 		i++;
 		
 	}
@@ -195,6 +218,10 @@ public void setInteractiveTile() {
 		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp, 22, 28);i++;
 		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp, 30, 28);i++;
 		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp, 32, 28);i++;
+		
+		gp.iTile[mapNum][i] = new IT_MetalPlate(gp, 20, 22);i++;
+		gp.iTile[mapNum][i] = new IT_MetalPlate(gp, 8, 17);i++;
+		gp.iTile[mapNum][i] = new IT_MetalPlate(gp, 39, 31);i++;
 }
 
 }

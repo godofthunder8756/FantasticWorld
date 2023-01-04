@@ -257,6 +257,7 @@ public class GamePanel extends JPanel implements Runnable{
 //			if(nextArea == outside) {playMusic(0);} //SEE EventHandler for music changes
 //			if(nextArea == indoor) {playMusic(18);}
 //			if(nextArea == dungeon) {playMusic(19);}
+			aSetter.setNPC(); // maybe seperate NPCs and Rocks?
 		}
 		currentArea = nextArea;
 		aSetter.setMonster();//RESPAWNS MONSTERS
