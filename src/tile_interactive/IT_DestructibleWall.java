@@ -65,7 +65,7 @@ public class IT_DestructibleWall extends InteractiveTile{
 			dropItem(new OBJ_Coin_Bronze(gp));
 		}
 		if(i >=50 && i < 75) {
-			dropItem(new OBJ_Heart(gp));
+			//dropItem(new OBJ_Heart(gp));
 		}
 		if(i >=50 && i < 75) {
 			// you get nuthin

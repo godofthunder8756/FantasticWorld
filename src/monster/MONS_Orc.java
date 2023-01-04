@@ -4,7 +4,6 @@ import java.util.Random;
 
 import entity.Entity;
 import main.GamePanel;
-import object.OBJ_Blue_Slimeball;
 import object.OBJ_Coin_Bronze;
 import object.OBJ_Heart;
 
@@ -32,7 +31,6 @@ public class MONS_Orc extends Entity{
 		solidArea.height = 44;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
-		projectile = new OBJ_Blue_Slimeball(gp);
 		attackArea.width = 48;
 		attackArea.height = 48;
 		motion1_duration = 40;
@@ -82,7 +80,7 @@ public class MONS_Orc extends Entity{
 		}
 		//Check if attacking
 		if(attacking == false) {
-			checkAttackOrNot(30, gp.tileSize*4, gp.tileSize);
+			checkAttackOrNot(70, gp.tileSize*4, gp.tileSize); // ORIGINALLY 30, not 70
 		}
 	}
 	
