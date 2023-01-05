@@ -112,7 +112,7 @@ public class AssetSetter {
 		i++;
 		
 		//MAP 3
-		mapNum = 2;
+		mapNum = 3;
 		i=0;
 		gp.obj[mapNum][i] = new OBJ_Door_Iron(gp);
 		gp.obj[mapNum][i].worldX = gp.tileSize*25;

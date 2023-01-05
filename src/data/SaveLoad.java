@@ -29,6 +29,14 @@ public class SaveLoad {
 			ds.exp = gp.player.exp;
 			ds.nextLevelExp = gp.player.nextLevelExp;
 			ds.coin = gp.player.coin;
+			
+			ds.currentMap = gp.currentMap;
+			ds.currentArea = gp.currentArea;
+			ds.worldX = gp.player.worldX;
+			ds.worldY = gp.player.worldY;
+			ds.direction = gp.player.direction;
+			ds.currentMusic = gp.currentMusic;
+			
 			//Player Inventory
 			for(int i = 0; i< gp.player.inventory.size(); i++) {
 				ds.itemNames.add(gp.player.inventory.get(i).name);
@@ -85,6 +93,15 @@ public class SaveLoad {
 			gp.player.nextLevelExp = ds.nextLevelExp;
 			gp.player.coin = ds.coin;
 			
+			gp.currentMap = ds.currentMap;
+			gp.currentArea = ds.currentArea;
+			gp.player.worldX = ds.worldX;
+			gp.player.worldY = ds.worldY;
+			gp.player.direction = ds.direction;
+			//gp.currentMusic = ds.currentMusic;
+			if(gp.currentArea == gp.outside) {gp.currentMusic = 0;}
+			if(gp.currentArea == gp.indoor) {gp.currentMusic = 18;}
+			if(gp.currentArea == gp.dungeon) {gp.currentMusic = 19;}
 			//Player Inventory
 			gp.player.inventory.clear();
 			for(int i = 0; i< ds.itemNames.size(); i++) {

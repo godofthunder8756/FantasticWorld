@@ -24,10 +24,10 @@ public class MONS_SkeletonLord extends Entity{
 		name = monName;
 		defaultSpeed = 1;
 		speed = defaultSpeed;
-		maxLife = 50;
+		maxLife = 1;
 		life = maxLife;
 		attack = 10;
-		defense = 2;
+		defense = 0;
 		exp = 50;
 		knockBackPower = 5;
 		sleep = true;

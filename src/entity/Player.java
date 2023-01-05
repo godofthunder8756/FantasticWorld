@@ -54,6 +54,7 @@ public class Player extends Entity{
 		
 		// BOSS
 		gp.currentMap = 3;
+		gp.currentArea = gp.dungeon;
 		worldX = gp.tileSize *25;
 		worldY = gp.tileSize *30;
 		
@@ -307,6 +308,14 @@ public class Player extends Entity{
 			}
 		}
 		return currentShieldSlot;
+	}
+	public boolean getCurrentLightStatus() {
+		if(currentLight != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public void damageProjectile(int i) {

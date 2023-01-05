@@ -3,6 +3,8 @@ package main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.tree.AbstractLayoutCache;
+
 public class KeyHandler implements KeyListener{
 	
 	GamePanel gp;
@@ -120,12 +122,12 @@ public class KeyHandler implements KeyListener{
 		if(code == KeyEvent.VK_ENTER || code == KeyEvent.VK_SPACE) {
 			if(gp.ui.commandNum == 0) {
 				gp.gameState = gp.playState;
-				gp.playMusic(0);
+				gp.playMusic(gp.currentMusic);
 			}
 			if(gp.ui.commandNum == 1) {
 				gp.saveLoad.load();
 				gp.gameState = gp.playState;
-				gp.playMusic(0);
+				gp.playMusic(gp.currentMusic);
 			}
 			if(gp.ui.commandNum == 2) {
 				System.exit(0);
@@ -175,6 +177,20 @@ public class KeyHandler implements KeyListener{
 		if(code == KeyEvent.VK_SPACE) { 
 			spacePressed = true;		
 		}
+		if(code == KeyEvent.VK_H) { 
+			//Save game
+			if(gp.currentMap != 3) {
+				System.out.println(""+gp.currentArea);
+				gp.saveLoad.save();
+			}
+			else {
+				System.out.println("You cannot save here");
+			}
+			
+		}
+		if(gp.currentArea == gp.outside) {gp.currentMusic = 0;}
+		if(gp.currentArea == gp.indoor) {gp.currentMusic = 18;}
+		if(gp.currentArea == gp.dungeon) {gp.currentMusic = 19;}
 	}
 	
 	public void pauseState(int code) {
@@ -378,7 +394,7 @@ public class KeyHandler implements KeyListener{
 			if(gp.ui.commandNum == 0) {
 				gp.gameState = gp.playState;
 				gp.resetGame(false);
-				gp.playMusic(0);
+				gp.playMusic(gp.currentMusic);
 			}
 			else if (gp.ui.commandNum == 1) {
 				gp.gameState = gp.titleState;

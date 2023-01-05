@@ -104,6 +104,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int outside = 50;
 	public final int indoor = 51;
 	public final int dungeon = 52;
+	public int currentMusic = 0;
 
 	
 	public GamePanel () {
@@ -118,6 +119,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void setupGame() {
 		currentMap = 3;
 		currentArea = dungeon;
+		currentMusic = 19;
 //		currentMap = 0;
 //		currentArea = outside;
 		aSetter.setObject();
@@ -201,6 +203,14 @@ public class GamePanel extends JPanel implements Runnable{
 		
 	}
 	public void update(){
+		
+		
+		if(currentArea == outside) {currentMusic = 0;}
+		if(currentArea == indoor) {currentMusic = 18;}
+		if(currentArea == dungeon) {currentMusic = 19;}
+			
+		
+		
 		if(gameState == playState) {
 			//Player
 			player.update();
@@ -269,6 +279,9 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 		currentArea = nextArea;
 		aSetter.setMonster();//RESPAWNS MONSTERS
+		if(currentArea == outside) {currentMusic = 0;}
+		if(currentArea == indoor) {currentMusic = 18;}
+		if(currentArea == dungeon) {currentMusic = 19;}
 	}
 	public void drawToTempScreen() {
 		// TITLE SCREEN
