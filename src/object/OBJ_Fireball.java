@@ -18,7 +18,7 @@ public class OBJ_Fireball extends Projectile {
 		speed = 10; 
 		maxLife= 40; // 60 frames it burns out
 		life = maxLife;
-		attack = 2;
+		attack = 1;
 		knockBackPower = 5; // unneccisary code
 		useCost = 1; // spend 1 mana to cast
 		alive = false;
@@ -34,8 +34,8 @@ public class OBJ_Fireball extends Projectile {
 		left2 = setup("/projectile/fireball_left_2", gp.tileSize, gp.tileSize);
 		right1 = setup("/projectile/fireball_right_1", gp.tileSize, gp.tileSize);
 		right2 = setup("/projectile/fireball_right_2", gp.tileSize, gp.tileSize);
-		
 	}
+	
 	public boolean haveResource(Entity user) {
 		boolean haveResource = false;
 		if(user.mana >= useCost) {
@@ -43,6 +43,8 @@ public class OBJ_Fireball extends Projectile {
 		}
 		return haveResource;
 	}
+	
+	public void subtractResource(Entity user) { user.mana -= useCost;}
 	
 	public Color getParticleColor() {
 		Color color = new Color(240,50,0);

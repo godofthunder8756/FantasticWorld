@@ -58,6 +58,8 @@ public class Player extends Entity{
 		level = 1;
 		maxLife = 6;
 		life = maxLife;
+		maxMana = 4;
+		mana = maxMana;
 		strength = 1;  // More strength = more damage given
 		dexterity = 1; // More dexterity = less damage recieved
 		exp = 0;
@@ -237,10 +239,12 @@ public class Player extends Entity{
 		}	
 		// OUTSIDE of key if statement
 		//Projectile Shooting
-		if(gp.keyH.shootKeyPressed == true && projectile.alive == false && shotAvailableCOunter == 30) { //ONLY SHOOT ONE AT A TIME
+		if(gp.keyH.shootKeyPressed == true && projectile.alive == false 
+				&& shotAvailableCOunter == 30 && projectile.haveResource(this)==true) { //ONLY SHOOT ONE AT A TIME
 			//Set Default data
 			projectile.set(worldX, worldY, direction, true, this);
-			
+			//Subtract resource
+			projectile.subtractResource(this);
 			//CHECK VACANCY
 			for(int i = 0; i < gp.projectile[1].length; i++) {
 				if(gp.projectile[gp.currentMap][i] == null) {

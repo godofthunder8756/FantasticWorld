@@ -74,6 +74,7 @@ public class Entity {
 	public int life;
 	public int maxMana;
 	public int mana;
+	public int ammo; //probably never used
 	public int level;
 	public int strength;
 	public int dexterity;
@@ -88,6 +89,7 @@ public class Entity {
 	public Entity currentSheild; //^
 	public Entity currentLight; //^
 	public Projectile projectile;//^ 
+	public boolean boss = false;
 	
 	// ITEM ATTRIBUTES
 	public ArrayList<Entity> inventory = new ArrayList<>();

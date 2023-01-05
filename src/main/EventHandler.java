@@ -128,6 +128,7 @@ public class EventHandler {
 			gp.playSE(2);
 			eventMaster.startDialogue(eventMaster, 1);
 			gp.player.life = gp.player.maxLife;
+			gp.player.mana = gp.player.maxMana;
 			//eventRect[col][row].eventDone = true;
 			gp.aSetter.setMonster();//RESPAWN MONSTERS
 			gp.saveLoad.save();

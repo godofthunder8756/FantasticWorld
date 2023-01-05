@@ -21,4 +21,4 @@ public class OBJ_Lantern extends Entity{
 		
 	}
 
-}
+} 

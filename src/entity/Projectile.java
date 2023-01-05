@@ -23,7 +23,7 @@ public class Projectile extends Entity{
 		if(user==gp.player) {
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 			if(monsterIndex != 999) {
-				gp.player.damageMonster(monsterIndex, this, attack, knockBackPower);
+				gp.player.damageMonster(monsterIndex, this, attack*(gp.player.level/2), knockBackPower);
 				generateParticle(user.projectile, gp.monster[gp.currentMap][monsterIndex]);
 				alive = false;
 				// ADD burning animation
@@ -62,5 +62,10 @@ public class Projectile extends Entity{
 			spriteCounter = 0;
 		}
 	}
+	public boolean haveResource(Entity user) { //always overwritten in suibsclass
+		boolean haveResource = false;
+		return haveResource;
+	}
+	public void subtractResource(Entity user) {}
 
 }
