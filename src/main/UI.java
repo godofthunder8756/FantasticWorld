@@ -224,6 +224,7 @@ public class UI {
 	public void drawMessage() {
 		int messageX = gp.tileSize;
 		int messageY = gp.tileSize*4;
+		g2.setFont(maruMonica);
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 32F));
 		
 		for(int i = 0; i < message.size(); i++) {
@@ -332,7 +333,7 @@ public class UI {
 			if(gp.keyH.enterPressed == true) {
 				charIndex = 0;
 				combinedText = "";
-				if(gp.gameState == gp.dialogueState) {
+				if(gp.gameState == gp.dialogueState || gp.gameState == gp.cutsceneState) {
 					npc.dialogueIndex++;
 					gp.keyH.enterPressed=false;
 				}
@@ -343,6 +344,9 @@ public class UI {
 			npc.dialogueIndex = 0;
 			if(gp.gameState == gp.dialogueState) {
 				gp.gameState = gp.playState;
+			}
+			if(gp.gameState == gp.cutsceneState) {
+				gp.csManager.scenePhase++;
 			}
 		}
 		

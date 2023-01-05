@@ -65,6 +65,7 @@ public class GamePanel extends JPanel implements Runnable{
 	tile.Map map = new tile.Map(this); //-----------------------------------------MAYBE A FIX????
 	SaveLoad saveLoad = new SaveLoad(this);
 	public EntityGenerator eGenerator = new EntityGenerator(this);
+	public CutsceneManager csManager = new CutsceneManager(this);
 	Thread gameThread;
 	
 	// ENTITY AND OBJECT
@@ -91,6 +92,10 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int tradeState = 8;
 	public final int sleepState = 9;
 	public final int mapState = 10;
+	public final int cutsceneState = 11;
+	
+	//Others
+	public boolean bossBattleOn = false;
 	
 	
 	// AREA
@@ -111,14 +116,16 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
 	public void setupGame() {
-		currentMap = 0;
+		currentMap = 3;
+		currentArea = dungeon;
+//		currentMap = 0;
+//		currentArea = outside;
 		aSetter.setObject();
 		aSetter.setNPC();
 		aSetter.setMonster();
 		aSetter.setInteractiveTile();
 		eManager.setup();
 		gameState = titleState;
-		currentArea = outside;
 		//FULLSCREEN
 		tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
 		g2 = (Graphics2D)tempScreen.getGraphics();
@@ -129,15 +136,15 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
 	public void resetGame(boolean restart) {
-		currentArea = outside;
-		player.setDefaultPositions();
+		player.setDefaultValues();
+		removeTempEntity();
+		bossBattleOn = false;
 		player.restoreStatus();
 		player.resetCounter();
 		aSetter.setNPC();
 		aSetter.setMonster();
 		if(restart == true) {
 			player.setDefaultValues();
-			player.setDefaultPositions();
 			aSetter.setObject();
 			aSetter.setInteractiveTile();
 			eManager.lighting.resetDay();
@@ -337,6 +344,9 @@ public class GamePanel extends JPanel implements Runnable{
 					//Mini Map
 					map.drawMiniMap(g2);
 					
+					// CUTSCENE
+					csManager.draw(g2);
+					
 					//UI
 					ui.draw(g2);
 				}
@@ -359,5 +369,14 @@ public class GamePanel extends JPanel implements Runnable{
 		se.setFile(i);
 		se.play();
 	}
-
+	public void removeTempEntity() {
+		for(int mapNum = 0; mapNum < maxMap; mapNum++) {
+			for(int i = 0; i<obj[1].length; i++) {
+				if(obj[mapNum][i] != null && obj[mapNum][i].temp == true) {
+					obj[mapNum][i] = null;
+				}
+			}
+		}
+		
+	}
 }

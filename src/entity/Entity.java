@@ -34,6 +34,7 @@ public class Entity {
 	public boolean collision = false;
 	public Entity attacker;
 	public Entity linkedEntity;
+	public boolean temp = false; // for cutscenes
 	
 	//COUNTERS
 	public int spriteCounter = 0;
@@ -65,6 +66,8 @@ public class Entity {
 	public Entity loot; //Chest
 	public boolean opened = false; //Chest
 	public boolean inRage = false;
+	public boolean sleep = false;
+	public boolean drawing = true;
 	
 	// CHARACTER ATTRIBUTES
 	public String name;
@@ -309,64 +312,68 @@ public class Entity {
 	}
 	public void update() {
 		
-		if(knockBack == true) {
-			checkCollision();
-			if(collisionOn == true) {
-				knockbackCounter = 0; //stop knockback if it collides with anything
-				knockBack = false;
-				speed = defaultSpeed;
-			}
-			else if(collisionOn == false) {
-				switch (knockBackDirection) { 
-				case "up": worldY -= speed; break;
-				case "down": worldY += speed; break;
-				case "left": worldX -= speed; break;
-				case "right": worldX += speed; break;
-				}
-			}
-			knockbackCounter++;
-			if(knockbackCounter == 10) {
-				knockbackCounter = 0;
-				knockBack = false;
-				speed = defaultSpeed;
-			}
-		}
-		else if(attacking == true) {
-			attacking();
-		}
-		else {
-			setAction();
-			checkCollision();
+		if(sleep == false) {
 			
-			if(collisionOn == false) {
-				switch(direction) {
-				case "up": worldY -= speed; break;
-				case "down": worldY += speed; break;
-				case "left": worldX -= speed; break;
-				case "right": worldX += speed; break;
+			if(knockBack == true) {
+				checkCollision();
+				if(collisionOn == true) {
+					knockbackCounter = 0; //stop knockback if it collides with anything
+					knockBack = false;
+					speed = defaultSpeed;
+				}
+				else if(collisionOn == false) {
+					switch (knockBackDirection) { 
+					case "up": worldY -= speed; break;
+					case "down": worldY += speed; break;
+					case "left": worldX -= speed; break;
+					case "right": worldX += speed; break;
+					}
+				}
+				knockbackCounter++;
+				if(knockbackCounter == 10) {
+					knockbackCounter = 0;
+					knockBack = false;
+					speed = defaultSpeed;
 				}
 			}
-			spriteCounter++;
-			if(spriteCounter > 12) {
-				if(spriteNum == 1) {spriteNum = 2;}
-				else if(spriteNum ==2) {spriteNum = 1;}
-				spriteCounter = 0;
+			else if(attacking == true) {
+				attacking();
+			}
+			else {
+				setAction();
+				checkCollision();
+				
+				if(collisionOn == false) {
+					switch(direction) {
+					case "up": worldY -= speed; break;
+					case "down": worldY += speed; break;
+					case "left": worldX -= speed; break;
+					case "right": worldX += speed; break;
+					}
+				}
+				spriteCounter++;
+				if(spriteCounter > 12) {
+					if(spriteNum == 1) {spriteNum = 2;}
+					else if(spriteNum ==2) {spriteNum = 1;}
+					spriteCounter = 0;
+				}
+			}
+			
+			// Invincibility
+			if(invincible==true) {
+				invincibleCounter++;
+				if(invincibleCounter > 40) {
+					invincible = false;
+					invincibleCounter = 0;
+					
+				}
+			}
+			// Shoot cooldown timer
+			if(shotAvailableCOunter < 30) {
+				shotAvailableCOunter++;
 			}
 		}
 		
-		// Invincibility
-		if(invincible==true) {
-			invincibleCounter++;
-			if(invincibleCounter > 40) {
-				invincible = false;
-				invincibleCounter = 0;
-				
-			}
-		}
-		// Shoot cooldown timer
-		if(shotAvailableCOunter < 30) {
-			shotAvailableCOunter++;
-		}
 	}
 	
 	public void damagePlayer(int attack) {

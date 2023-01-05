@@ -2,9 +2,12 @@ package monster;
 
 import java.util.Random;
 
+import data.Progress;
 import entity.Entity;
+import entity.PlayerDummy;
 import main.GamePanel;
 import object.OBJ_Coin_Bronze;
+import object.OBJ_Door_Iron;
 import object.OBJ_Heart;
 
 public class MONS_SkeletonLord extends Entity{
@@ -27,6 +30,7 @@ public class MONS_SkeletonLord extends Entity{
 		defense = 2;
 		exp = 50;
 		knockBackPower = 5;
+		sleep = true;
 		
 		int size = gp.tileSize*5;
 		solidArea.x = 48;
@@ -43,6 +47,7 @@ public class MONS_SkeletonLord extends Entity{
 		
 		getImage();
 		getAttackImage();
+		setDialogue();
 	}
 	public void getImage() {
 		
@@ -95,9 +100,11 @@ public class MONS_SkeletonLord extends Entity{
 		}
 	}
 	
-//	public void update() {
-//		super.update();
-//	}
+	private void setDialogue() {
+		dialogues[0][0] = "I'm the Skeleton Lord!";
+		dialogues[0][1] = "I'm going to keeeeell you!";
+	}
+
 	public void setAction() {
 		
 		if(inRage == false && life < maxLife/2) {
@@ -128,6 +135,21 @@ public class MONS_SkeletonLord extends Entity{
 		
 	}
 	public void checkDrop() {
+		
+		gp.bossBattleOn = false;
+		Progress.skeletonLordDefeated = true;
+		//Restore the previous music
+		gp.stopMusic();
+		gp.playMusic(19);
+		
+		//Remove iron doors
+		for(int i = 0; i<gp.obj[1].length; i++) {
+			if(gp.obj[gp.currentMap][i] != null && gp.obj[gp.currentMap][i].name.equals(OBJ_Door_Iron.OBJNAME)) {
+				gp.playSE(21);
+				gp.obj[gp.currentMap][i] = null;
+			}
+		}
+		
 		// Roll dice
 		int i = new Random().nextInt(100)+1;
 		

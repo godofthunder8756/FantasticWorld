@@ -8,6 +8,7 @@ import main.GamePanel;
 import main.KeyHandler;
 import object.OBJ_Fireball;
 import object.OBJ_Key;
+import object.OBJ_Lantern;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
 
@@ -50,7 +51,18 @@ public class Player extends Entity{
 		guardRight = setup("/player/boy_guard_right", gp.tileSize, gp.tileSize);
 	}
 	public void setDefaultValues() {
-		setDefaultPositions();
+		
+		// BOSS
+		gp.currentMap = 3;
+		worldX = gp.tileSize *25;
+		worldY = gp.tileSize *30;
+		
+		//OVERWORLD
+//		gp.currentMap = 1;
+//		worldX = gp.tileSize *32;
+//		worldY = gp.tileSize *21;
+		
+		direction = "down";
 		defaultSpeed = 4;
 		speed = defaultSpeed;
 		
@@ -77,12 +89,7 @@ public class Player extends Entity{
 		setItems();
 		setDialogue();
 	}	
-	public void setDefaultPositions() {
-		gp.currentMap = 0;
-		worldX = gp.tileSize *32;
-		worldY = gp.tileSize *21;
-		direction = "down";
-	}
+	
 	public void restoreStatus() {
 		speed = defaultSpeed;
 		life = maxLife;
@@ -99,6 +106,7 @@ public class Player extends Entity{
 		inventory.add(currentSheild); //Default
 		inventory.add(new OBJ_Key(gp)); //Default
 		inventory.add(new OBJ_Key(gp)); //Default
+		inventory.add(new OBJ_Lantern(gp)); //Default
 	}
 	public int getAttack() {
 		attackArea = currentWeapon.attackArea;
@@ -579,7 +587,9 @@ public class Player extends Entity{
 		if(invincible==true) {
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
 		}
-		g2.drawImage(image, tempScreenX, tempScreenY, null);
+		if(drawing == true) {
+			g2.drawImage(image, tempScreenX, tempScreenY, null);
+		}
 		
 		//Reset Invincibility alpha
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
