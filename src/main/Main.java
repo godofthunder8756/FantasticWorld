@@ -16,8 +16,8 @@ public class Main {
 		window.setResizable(false);
 		window.setTitle("Fantastic World");
 		//window.setUndecorated(true); //removes topbar
-		ImageIcon icon = new ImageIcon("/player/character_03");
-		window.setIconImage(icon.getImage());
+		new Main().setIcon();
+		
 		window.setCursor(window.getToolkit().createCustomCursor(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB), new Point(), null));
 		
 		GamePanel gamePanel = new GamePanel();
@@ -36,6 +36,11 @@ public class Main {
 		gamePanel.setupGame();
 		
 		gamePanel.startGameThread();
+	}
+	
+	public void setIcon() {
+		ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("player/character_03.png"));
+		window.setIconImage(icon.getImage());
 	}
 
 }
