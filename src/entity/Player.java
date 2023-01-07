@@ -53,10 +53,10 @@ public class Player extends Entity{
 	public void setDefaultValues() {
 		
 		// BOSS
-		gp.currentMap = 3;
+		gp.currentMap = 0;
 		gp.currentArea = gp.dungeon;
-		worldX = gp.tileSize *25;
-		worldY = gp.tileSize *30;
+		worldX = gp.tileSize *6;
+		worldY = gp.tileSize *3; 
 		
 		//OVERWORLD
 //		gp.currentMap = 1;

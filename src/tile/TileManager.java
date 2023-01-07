@@ -26,7 +26,7 @@ public class TileManager {
 		this.gp = gp;
 		
 		// READ TILE DATA FILE
-		InputStream is = getClass().getResourceAsStream("/maps/tiledata.txt");
+		InputStream is = getClass().getResourceAsStream("/maps/DungeonTEST-1-6-23-TD.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		
 		//GETTING TILE NAMES AND COLLISION INFO FROM THE FILE
@@ -46,20 +46,22 @@ public class TileManager {
 		getTileImage();	
 		
 			//Get maxWorlCol and Row	
-			is = getClass().getResourceAsStream("/maps/worldmap.txt");
+			is = getClass().getResourceAsStream("/maps/DungeonTEST-1-6-23.txt");
 			br = new BufferedReader(new InputStreamReader(is));
 			try {
 				String line2 = br.readLine();
 				String maxTile[] = line2.split(" ");
 				gp.maxWorldCol = maxTile.length;
 				gp.maxWorldRow = maxTile.length;
+//				gp.maxWorldCol = 50;
+//				gp.maxWorldRow = 50;
 				mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];	
 				br.close();	
 			} catch (IOException e) { e.printStackTrace();}
-			loadMap("/maps/worldmap.txt", 0);
-			loadMap("/maps/indoor01.txt", 1);
-			loadMap("/maps/dungeon01.txt", 2);
-			loadMap("/maps/dungeon02.txt", 3);
+			loadMap("/maps/DungeonTEST-1-6-23.txt", 0);
+			//loadMap("/maps/indoor01.txt", 1);
+			//loadMap("/maps/dungeon01.txt", 2);
+			//loadMap("/maps/dungeon02.txt", 3);
 		
 //		loadMap("/maps/worldV3.txt", 0);
 //		loadMap("/maps/interior01.txt", 1);
@@ -72,6 +74,7 @@ public class TileManager {
 			boolean collision;
 			// Get filename
 			fileName = fileNames.get(i);
+			System.out.println(fileName);
 			// Get collision status
 			if(collisionStatus.get(i).equals("true")) {
 				collision = true;
@@ -88,7 +91,7 @@ public class TileManager {
 		UtilityTool uTool = new UtilityTool();
 		try {
 			tile[index] = new Tile();
-			tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + imagePath));
+			tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + imagePath ));
 			tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
 			tile[index].collision = collision;
 		} catch (IOException e) {
@@ -132,7 +135,7 @@ public class TileManager {
 		while(worldCol<gp.maxWorldCol && worldRow<gp.maxWorldRow) {
 			
 			int tileNum = mapTileNum[gp.currentMap][worldCol][worldRow];
-			
+			//System.out.println(" "+gp.maxWorldCol+" "+gp.maxWorldRow+" "+gp.currentMap);
 			int worldX = worldCol * gp.tileSize;
 			int worldY = worldRow * gp.tileSize;
 			int screenX = worldX - gp.player.worldX + gp.player.screenX;

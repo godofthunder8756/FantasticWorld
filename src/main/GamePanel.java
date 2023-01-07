@@ -117,7 +117,7 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
 	public void setupGame() {
-		currentMap = 3;
+		currentMap = 0;
 		currentArea = dungeon;
 		currentMusic = 19;
 //		currentMap = 0;
