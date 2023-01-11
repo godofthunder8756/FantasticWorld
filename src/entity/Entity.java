@@ -250,7 +250,7 @@ public class Entity {
 	public void attacking() {
 		
 		spriteCounter++;
-		
+
 		if(spriteCounter <= motion1_duration) { //5 frames
 			spriteNum = 1;
 		}
@@ -262,7 +262,8 @@ public class Entity {
 			int solidAreaWidth = solidArea.width;
 			int solidAreaHeight = solidArea.height;
 			
-			// Adjust worldx and world y of player
+			// Adjust worldx and world y 
+			
 			switch (direction) {
 			case "up": worldY -= attackArea.height; break;
 			case "down": worldY += attackArea.height; break;
@@ -286,11 +287,10 @@ public class Entity {
 				gp.player.damageInteractiveTile(iTileIndex);		
 				int projectileIndex = gp.cChecker.checkEntity(this, gp.projectile);
 				gp.player.damageProjectile(projectileIndex);
-			}
-			
-			
+			}		
 			
 			// After checking collision, restore world x and y
+			
 			worldX = currentWorldX;
 			worldY = currentWorldY;
 			solidArea.width = solidAreaWidth;
@@ -302,6 +302,7 @@ public class Entity {
 			spriteCounter= 0;
 			attacking = false;
 		}
+
 	}
 	public void setKnockBack(Entity target, Entity attacker, int knockBackPower) {
 		this.attacker = attacker;

@@ -119,28 +119,19 @@ public class Player extends Entity{
 		return defense = dexterity*currentSheild.defenseValue;	
 	}
 	public void getImage() {	
-//		up1 = setup("/player/man_up_1", gp.tileSize, gp.tileSize);
-//		up2 = setup("/player/man_up_2", gp.tileSize, gp.tileSize);
-//		down1 = setup("/player/man_down_1", gp.tileSize, gp.tileSize);
-//		down2 = setup("/player/man_down_2", gp.tileSize, gp.tileSize);
-//		left1 = setup("/player/man_left_1", gp.tileSize, gp.tileSize);
-//		left2 = setup("/player/man_left_2", gp.tileSize, gp.tileSize);
-//		right1 = setup("/player/man_right_1", gp.tileSize, gp.tileSize);
-//		right2 = setup("/player/man_right_2", gp.tileSize, gp.tileSize);
-//		downIdle = setup("/player/man_down_idle", gp.tileSize, gp.tileSize);
 		
-		up1 = setup("/player/character_08", gp.tileSize, gp.tileSize);
-		up2 = setup("/player/character_09", gp.tileSize, gp.tileSize);
-		down1 = setup("/player/character_00", gp.tileSize, gp.tileSize);
-		down2 = setup("/player/character_01", gp.tileSize, gp.tileSize);
-		left1 = setup("/player/character_05", gp.tileSize, gp.tileSize);
-		left2 = setup("/player/character_04", gp.tileSize, gp.tileSize);
-		right1 = setup("/player/character_07", gp.tileSize, gp.tileSize);
-		right2 = setup("/player/character_06", gp.tileSize, gp.tileSize);
-		upIdle = setup("/player/character_10", gp.tileSize, gp.tileSize);
-		downIdle = setup("/player/character_03", gp.tileSize, gp.tileSize);
-		leftIdle = setup("/player/character_04", gp.tileSize, gp.tileSize);
-		rightIdle = setup("/player/character_06", gp.tileSize, gp.tileSize);	
+		up1 = setup("/player/Lydia_10", gp.tileSize, gp.tileSize);
+		up2 = setup("/player/Lydia_11", gp.tileSize, gp.tileSize);
+		down1 = setup("/player/Lydia_8", gp.tileSize, gp.tileSize);
+		down2 = setup("/player/Lydia_7", gp.tileSize, gp.tileSize);
+		left1 = setup("/player/Lydia_5", gp.tileSize, gp.tileSize);
+		left2 = setup("/player/Lydia_4", gp.tileSize, gp.tileSize);
+		right1 = setup("/player/Lydia_2", gp.tileSize, gp.tileSize);
+		right2 = setup("/player/Lydia_1", gp.tileSize, gp.tileSize);
+		upIdle = setup("/player/Lydia_9", gp.tileSize, gp.tileSize);
+		downIdle = setup("/player/Lydia_6", gp.tileSize, gp.tileSize);
+		leftIdle = setup("/player/Lydia_3", gp.tileSize, gp.tileSize);
+		rightIdle = setup("/player/Lydia_0", gp.tileSize, gp.tileSize);	
 
 	}
 	public void getAttackImage() {
@@ -180,6 +171,8 @@ public class Player extends Entity{
 		
 		if(attacking == true) {
 			attacking();
+			//drawing = true;
+			
 		}
 		else if (keyH.spacePressed == true) {
 			guarding = true;
