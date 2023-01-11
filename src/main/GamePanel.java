@@ -71,6 +71,7 @@ public class GamePanel extends JPanel implements Runnable{
 	// ENTITY AND OBJECT
 	public Player player = new Player(this, keyH);
 	public Entity obj[][] = new Entity[maxMap][20]; //Display up to 20 objects at once in game (for performance. subject to change)
+	public Entity bldg[][] = new Entity[maxMap][20];
 	public Entity npc[][] = new Entity[maxMap][10]; 
 	public Entity monster[][] = new Entity[maxMap][20];
 	public InteractiveTile iTile[][] = new InteractiveTile[maxMap][50];
@@ -118,14 +119,13 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	public void setupGame() {
 		currentMap = 0;
-		currentArea = dungeon;
-		currentMusic = 19;
-//		currentMap = 0;
-//		currentArea = outside;
+		currentArea = outside;
+		currentMusic = 0;
 		aSetter.setObject();
 		aSetter.setNPC();
 		aSetter.setMonster();
 		aSetter.setInteractiveTile();
+		aSetter.setBuildings();
 		eManager.setup();
 		gameState = titleState;
 		//FULLSCREEN
@@ -314,6 +314,12 @@ public class GamePanel extends JPanel implements Runnable{
 					for(int i=0; i<obj[1].length; i++) {
 						if(obj[currentMap][i] != null) {
 							entityList.add(obj[currentMap][i]);
+						}
+					}
+					//Buildings
+					for(int i=0; i<bldg[1].length; i++) {
+						if(bldg[currentMap][i] != null) {
+							entityList.add(bldg[currentMap][i]);
 						}
 					}
 					//Monsters

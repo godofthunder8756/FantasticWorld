@@ -1,6 +1,7 @@
 package main;
 
 import entity.Entity;
+import object.BLDG_House;
 import object.OBJ_Axe;
 import object.OBJ_Blue_Slimeball;
 import object.OBJ_Boots;
@@ -46,7 +47,7 @@ public class EntityGenerator {
 		case OBJ_Shield_Blue.OBJNAME: obj = new OBJ_Shield_Blue(gp); break;
 		case OBJ_Shield_Wood.OBJNAME: obj = new OBJ_Shield_Wood(gp); break;
 		case OBJ_Sword_Normal.OBJNAME: obj = new OBJ_Sword_Normal(gp); break;
-		
+		case BLDG_House.OBJNAME: obj = new BLDG_House(gp); break;
 		
 		
 		

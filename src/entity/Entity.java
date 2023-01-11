@@ -123,6 +123,7 @@ public class Entity {
 	public final int type_light = 9;
 	public final int type_pickaxe = 10;
 	public final int type_boots = 11;
+	public final int type_building = 12;
 	
 	
 	public Entity(GamePanel gp) {

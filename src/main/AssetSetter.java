@@ -1,6 +1,7 @@
 package main;
 
 import data.Progress;
+import entity.Entity;
 import entity.NPC_BigRock;
 import entity.NPC_Merchant;
 import entity.NPC_OldMan;
@@ -12,6 +13,7 @@ import monster.MONS_PurpleSlime;
 import monster.MONS_RedSlime;
 import monster.MONS_SkeletonLord;
 import monster.MONS_Orc;
+import object.BLDG_House;
 import object.OBJ_Axe;
 import object.OBJ_Chest;
 import object.OBJ_Coin_Bronze;
@@ -33,14 +35,23 @@ public class AssetSetter {
 	public AssetSetter(GamePanel gp) {
 		this.gp = gp;
 	}
+	public void setBuildings() {
+		int mapNum = 0;
+		int i = 0;
+
+		gp.bldg[mapNum][i] = new BLDG_House(gp);
+		gp.bldg[mapNum][i].worldX = gp.tileSize*3;
+		gp.bldg[mapNum][i].worldY = gp.tileSize*4;
+		i++;
+	}
 	public void setObject() {
-//		int mapNum = 0;
-//		int i = 0;
-//		
-//		gp.obj[mapNum][i] = new OBJ_Coin_Bronze(gp);
-//		gp.obj[mapNum][i].worldX = gp.tileSize*25;
-//		gp.obj[mapNum][i].worldY = gp.tileSize*23;
-//		i++;
+		int mapNum = 0;
+		int i = 0;
+
+		gp.obj[mapNum][i] = new OBJ_Potion_Red(gp);
+		gp.obj[mapNum][i].worldX = gp.tileSize*23;
+		gp.obj[mapNum][i].worldY = gp.tileSize*13;
+		i++;
 //		gp.obj[mapNum][i] = new OBJ_Coin_Bronze(gp);
 //		gp.obj[mapNum][i].worldX = gp.tileSize*21;
 //		gp.obj[mapNum][i].worldY = gp.tileSize*19;

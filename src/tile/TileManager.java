@@ -26,7 +26,7 @@ public class TileManager {
 		this.gp = gp;
 		
 		// READ TILE DATA FILE
-		InputStream is = getClass().getResourceAsStream("/maps/DungeonTEST-1-6-23-TD.txt");
+		InputStream is = getClass().getResourceAsStream("/maps/MASTERTILEDATA.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		
 		//GETTING TILE NAMES AND COLLISION INFO FROM THE FILE
@@ -46,7 +46,7 @@ public class TileManager {
 		getTileImage();	
 		
 			//Get maxWorlCol and Row	
-			is = getClass().getResourceAsStream("/maps/DungeonTEST-1-6-23.txt");
+			is = getClass().getResourceAsStream("/maps/Overworld.txt");
 			br = new BufferedReader(new InputStreamReader(is));
 			try {
 				String line2 = br.readLine();
@@ -58,7 +58,7 @@ public class TileManager {
 				mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];	
 				br.close();	
 			} catch (IOException e) { e.printStackTrace();}
-			loadMap("/maps/DungeonTEST-1-6-23.txt", 0);
+			loadMap("/maps/Overworld.txt", 0);
 			//loadMap("/maps/indoor01.txt", 1);
 			//loadMap("/maps/dungeon01.txt", 2);
 			//loadMap("/maps/dungeon02.txt", 3);

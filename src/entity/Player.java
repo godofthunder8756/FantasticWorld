@@ -54,14 +54,10 @@ public class Player extends Entity{
 		
 		// BOSS
 		gp.currentMap = 0;
-		gp.currentArea = gp.dungeon;
-		worldX = gp.tileSize *6;
-		worldY = gp.tileSize *3; 
+		gp.currentArea = gp.outside;
+		worldX = gp.tileSize *27;
+		worldY = gp.tileSize *16; 
 		
-		//OVERWORLD
-//		gp.currentMap = 1;
-//		worldX = gp.tileSize *32;
-//		worldY = gp.tileSize *21;
 		
 		direction = "down";
 		defaultSpeed = 4;
