@@ -133,7 +133,7 @@ false
 MTile_69.png
 false
 MTile_7.png
-false
+true
 MTile_70.png
 false
 MTile_71.png

@@ -160,7 +160,7 @@ public class UI {
 		while(i<gp.player.maxMana) {
 			g2.drawImage(crystal_blank, x, y, iconSize, iconSize, null);
 			i++;
-			x+=20;
+			x+=25;
 			if(i%10 == 0) {
 				x = manaStartX;
 				y += iconSize;
@@ -173,7 +173,7 @@ public class UI {
 		while(i<gp.player.mana) {
 			g2.drawImage(crystal_full, x, y, iconSize, iconSize, null);
 			i++;
-			x+=20;
+			x+=25;
 			if(i%10 == 0) {
 				x = manaStartX;
 				y += iconSize;

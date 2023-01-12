@@ -14,20 +14,15 @@ public class BLDG_House extends Entity{
 		type = type_consumable;
 		name = OBJNAME;
 		down1 = setup("/buildings/House1", gp.tileSize*5, gp.tileSize*6);
-		value = 5;
-		description = "["+ name +"]\nTastes like red Kool-Aid!\nHeals you by "+value+"HP!";
-		price = 75;
-		stackable = true;
-		setDialogue();
+		//value = 5;
+		//description = "["+ name +"]\nTastes like red Kool-Aid!\nHeals you by "+value+"HP!";
+		//price = 75;
+		//stackable = true;
+		solidArea.x = 0;
+		solidArea.y = 16;
+		solidArea.width = 48;
+		solidArea.height = 32;
+		solidAreaDefaultX = solidArea.x;
+		solidAreaDefaultY = solidArea.y;
 	}
-	public void setDialogue() {
-		dialogues[0][0] = "You drink the "+name+"!\n +"+value+"HP";
-	}
-	public boolean use(Entity entity) {
-		startDialogue(this, 0);
-		entity.life += value;
-		gp.playSE(2);
-		return true;
-	}
-
 }

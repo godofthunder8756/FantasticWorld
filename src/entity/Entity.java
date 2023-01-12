@@ -241,6 +241,7 @@ public class Entity {
 		gp.cChecker.checkEntity(this, gp.npc);
 		gp.cChecker.checkEntity(this, gp.monster);
 		gp.cChecker.checkEntity(this, gp.iTile);
+		gp.cChecker.checkEntity(this, gp.bldg);
 		boolean contactPlayer = gp.cChecker.checkPlayer(this);
 		
 		//When Monster touches Player
