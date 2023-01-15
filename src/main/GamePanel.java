@@ -97,7 +97,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	//Others
 	public boolean bossBattleOn = false;
-	
+	public boolean musicPlaying = false;
 	
 	// AREA
 	public int currentArea;
@@ -285,6 +285,12 @@ public class GamePanel extends JPanel implements Runnable{
 	public void drawToTempScreen() {
 		// TITLE SCREEN
 				if(gameState == titleState) {
+					
+					if(musicPlaying == false) {
+						// Start Title Music
+						musicPlaying = true;
+						playMusic(22);
+					}
 					ui.draw(g2);
 					
 				}

@@ -248,6 +248,7 @@ public class UI {
 		
 	}
 	public void drawTitleScreen(){
+		
 		// Background Color
 		g2.setColor(new Color(50,50,50));
 		g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);

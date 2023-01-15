@@ -24,6 +24,7 @@ public class KeyHandler implements KeyListener{
 		int code = e.getKeyCode();
 		// TITLE STATE
 		if(gp.gameState == gp.titleState) {
+			
 			titleState(code);
 		}
 		
@@ -121,6 +122,7 @@ public class KeyHandler implements KeyListener{
 		}
 		if(code == KeyEvent.VK_ENTER || code == KeyEvent.VK_SPACE) {
 			if(gp.ui.commandNum == 0) {
+				gp.stopMusic();
 				gp.gameState = gp.playState;
 				gp.playMusic(gp.currentMusic);
 			}

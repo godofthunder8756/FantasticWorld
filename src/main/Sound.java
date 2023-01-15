@@ -37,6 +37,7 @@ public class Sound {
 		soundURL[20] = getClass().getResource("/sound/chipwall.wav"); //custom
 		soundURL[21] = getClass().getResource("/sound/dooropen.wav"); //custom
 		soundURL[22] = getClass().getResource("/sound/FirstBoss.wav"); //custom
+		soundURL[22] = getClass().getResource("/sound/Title.wav"); //custom
 	}
 	public void setFile(int i) { 
 		try {

@@ -39,7 +39,7 @@ public class Main {
 	}
 	
 	public void setIcon() {
-		ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("player/character_03.png"));
+		ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("monster/redslime_down_1.png"));
 		window.setIconImage(icon.getImage());
 	}
 
