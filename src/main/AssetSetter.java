@@ -39,10 +39,10 @@ public class AssetSetter {
 		int mapNum = 0;
 		int i = 0;
 
-		gp.bldg[mapNum][i] = new BLDG_House(gp);
-		gp.bldg[mapNum][i].worldX = gp.tileSize*3;
-		gp.bldg[mapNum][i].worldY = gp.tileSize*4;
-		i++;
+//		gp.bldg[mapNum][i] = new BLDG_House(gp);
+//		gp.bldg[mapNum][i].worldX = gp.tileSize*3;
+//		gp.bldg[mapNum][i].worldY = gp.tileSize*4;
+//		i++;
 	}
 	public void setObject() {
 		int mapNum = 0;
@@ -52,6 +52,12 @@ public class AssetSetter {
 		gp.obj[mapNum][i].worldX = gp.tileSize*23;
 		gp.obj[mapNum][i].worldY = gp.tileSize*13;
 		i++;
+		
+		gp.obj[mapNum][i] = new BLDG_House(gp);
+		gp.obj[mapNum][i].worldX = gp.tileSize*3;
+		gp.obj[mapNum][i].worldY = gp.tileSize*4;
+		i++;
+		
 //		gp.obj[mapNum][i] = new OBJ_Coin_Bronze(gp);
 //		gp.obj[mapNum][i].worldX = gp.tileSize*21;
 //		gp.obj[mapNum][i].worldY = gp.tileSize*19;
