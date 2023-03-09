@@ -52,11 +52,11 @@ public class Player extends Entity{
 	}
 	public void setDefaultValues() {
 		
-		// BOSS
+		
 		gp.currentMap = 0;
 		gp.currentArea = gp.outside;
 		worldX = gp.tileSize *27;
-		worldY = gp.tileSize *16; 
+		worldY = gp.tileSize *28; 
 		
 		
 		direction = "down";

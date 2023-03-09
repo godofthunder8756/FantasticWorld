@@ -60,15 +60,18 @@ public class EventHandler {
 		}
 		if(canTouchEvent == true) {
 			if(hit(0, 22, 18, "any") == true) { damagePit(gp.dialogueState);} //Invisible pit
-			else if(hit(0, 23, 12, "up") == true) { healingPool(gp.dialogueState);}	//Secret Pond Save	
-			else if(hit(0, 10, 39, "any") == true) {teleport(1, 12, 13, gp.indoor);gp.stopMusic(); gp.playMusic(18);} // Enter hut
-			else if(hit(1, 12, 13, "any") == true) {teleport(0, 10, 39, gp.outside); gp.stopMusic(); gp.playMusic(0);} // Leave hut
-			else if (hit(1, 12, 9, "up") == true) {speak(gp.npc[1][0]);} //Merchant Speak
-			else if(hit(0, 12, 9, "any") == true) {teleport(2, 9, 41, gp.dungeon);gp.stopMusic(); gp.playMusic(19);} // Enter Dungeon
-			else if(hit(2, 9, 41, "any") == true) {teleport(0, 12, 9, gp.outside);gp.stopMusic(); gp.playMusic(0);} // Exit Dungeon
-			else if(hit(2, 8, 7, "any") == true) {teleport(3, 26, 41, gp.dungeon);} // Enter B2
-			else if(hit(3, 26, 41, "any") == true) {teleport(2, 8, 7, gp.dungeon);} // Enter B1
-			else if(hit(3, 25, 27, "any") == true) {skeletonLord();} // Skeleton Lord Cutscene
+//			else if(hit(0, 23, 12, "up") == true) { healingPool(gp.dialogueState);}	//Secret Pond Save	
+//			else if(hit(0, 10, 39, "any") == true) {teleport(1, 12, 13, gp.indoor);gp.stopMusic(); gp.playMusic(18);} // Enter hut
+//			else if(hit(1, 12, 13, "any") == true) {teleport(0, 10, 39, gp.outside); gp.stopMusic(); gp.playMusic(0);} // Leave hut
+//			else if (hit(1, 12, 9, "up") == true) {speak(gp.npc[1][0]);} //Merchant Speak
+//			else if(hit(0, 12, 9, "any") == true) {teleport(2, 9, 41, gp.dungeon);gp.stopMusic(); gp.playMusic(19);} // Enter Dungeon
+//			else if(hit(2, 9, 41, "any") == true) {teleport(0, 12, 9, gp.outside);gp.stopMusic(); gp.playMusic(0);} // Exit Dungeon
+//			else if(hit(2, 8, 7, "any") == true) {teleport(3, 26, 41, gp.dungeon);} // Enter B2
+//			else if(hit(3, 26, 41, "any") == true) {teleport(2, 8, 7, gp.dungeon);} // Enter B1
+//			else if(hit(3, 25, 27, "any") == true) {skeletonLord();} // Skeleton Lord Cutscene
+			else if(hit(0, 27, 27, "up") == true) {teleport(1, 7, 8, gp.indoor); gp.stopMusic(); gp.playMusic(18);} // Enter house1
+			else if(hit(1, 7, 9, "any") == true) {teleport(0, 27, 27, gp.outside);gp.stopMusic(); gp.playMusic(0);} // Leave house1
+			else if(hit(1, 7, 10, "any") == true) {teleport(0, 27, 27, gp.outside);gp.stopMusic(); gp.playMusic(0);} // Leave house1
 		}
 	}
 	

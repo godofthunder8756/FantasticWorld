@@ -37,7 +37,7 @@ public class GamePanel extends JPanel implements Runnable{
 	// WORLD SETTING
 	public int maxWorldCol;
 	public int maxWorldRow;
-	public final int maxMap = 10; //MAXIMUM Number of maps
+	public final int maxMap = 5; //MAXIMUM Number of maps
 	public int currentMap = 0;
 	
 	// FOR FULLSCREEN
@@ -277,7 +277,7 @@ public class GamePanel extends JPanel implements Runnable{
 			if(currentArea == dungeon) {currentMusic = 19;}
 			aSetter.setNPC(); // maybe seperate NPCs and Rocks?
 		}
-		playMusic(currentMusic);
+		//playMusic(currentMusic);
 		currentArea = nextArea;
 		aSetter.setMonster();//RESPAWNS MONSTERS
 		

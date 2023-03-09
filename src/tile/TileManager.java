@@ -45,23 +45,24 @@ public class TileManager {
 		tile = new Tile[fileNames.size()];
 		getTileImage();	
 		
-			//Get maxWorlCol and Row	
-			is = getClass().getResourceAsStream("/maps/Overworld.txt");
-			br = new BufferedReader(new InputStreamReader(is));
-			try {
-				String line2 = br.readLine();
-				String maxTile[] = line2.split(" ");
-				gp.maxWorldCol = maxTile.length;
-				gp.maxWorldRow = maxTile.length;
+		//Get maxWorlCol and Row	
+		is = getClass().getResourceAsStream("/maps/50x50_test.txt");
+		//System.out.println(is.toString()); //DEBUG
+		br = new BufferedReader(new InputStreamReader(is));
+		try {
+			String line2 = br.readLine();
+			String maxTile[] = line2.split(" ");
+			gp.maxWorldCol = maxTile.length;
+			gp.maxWorldRow = maxTile.length;
 //				gp.maxWorldCol = 50;
 //				gp.maxWorldRow = 50;
-				mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];	
-				br.close();	
-			} catch (IOException e) { e.printStackTrace();}
-			loadMap("/maps/Overworld.txt", 0);
-			//loadMap("/maps/indoor01.txt", 1);
-			//loadMap("/maps/dungeon01.txt", 2);
-			//loadMap("/maps/dungeon02.txt", 3);
+			mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];	
+			br.close();	
+		} catch (IOException e) { e.printStackTrace();}
+		loadMap("/maps/50x50_test.txt", 0);
+		loadMap("/maps/house1interior.txt", 1);
+		//loadMap("/maps/dungeon01.txt", 2);
+		//loadMap("/maps/dungeon02.txt", 3);
 		
 //		loadMap("/maps/worldV3.txt", 0);
 //		loadMap("/maps/interior01.txt", 1);
@@ -105,12 +106,14 @@ public class TileManager {
 			
 			int col = 0;
 			int row = 0;
+			int num = 0;
 			
 			while(col < gp.maxWorldCol && row < gp.maxWorldRow) {
 				String line = br.readLine();
 				while (col < gp.maxWorldCol) {
 					String numbers[] = line.split(" ");
-					int num = Integer.parseInt(numbers[col]);
+					num = Integer.parseInt(numbers[col]);
+					//System.out.println(num);
 					
 					mapTileNum[map][col][row] = num;
 					col++;
@@ -119,7 +122,7 @@ public class TileManager {
 					col = 0;
 					row++;
 				}
-				}
+			}
 			br.close();
 			
 		} catch (IOException e) {

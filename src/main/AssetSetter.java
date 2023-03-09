@@ -49,13 +49,13 @@ public class AssetSetter {
 		int i = 0;
 
 		gp.obj[mapNum][i] = new OBJ_Potion_Red(gp);
-		gp.obj[mapNum][i].worldX = gp.tileSize*23;
-		gp.obj[mapNum][i].worldY = gp.tileSize*13;
+		gp.obj[mapNum][i].worldX = gp.tileSize*34;
+		gp.obj[mapNum][i].worldY = gp.tileSize*38;
 		i++;
 		
 		gp.obj[mapNum][i] = new BLDG_House(gp);
-		gp.obj[mapNum][i].worldX = gp.tileSize*3;
-		gp.obj[mapNum][i].worldY = gp.tileSize*4;
+		gp.obj[mapNum][i].worldX = gp.tileSize*25;
+		gp.obj[mapNum][i].worldY = gp.tileSize*22;
 		i++;
 		
 //		gp.obj[mapNum][i] = new OBJ_Coin_Bronze(gp);
@@ -177,8 +177,8 @@ public class AssetSetter {
 		int i = 0;
 		
 		gp.monster[mapNum][i] = new MONS_RedSlime(gp);
-		gp.monster[mapNum][i].worldX = gp.tileSize*23;
-		gp.monster[mapNum][i].worldY = gp.tileSize*12;
+		gp.monster[mapNum][i].worldX = gp.tileSize*38;
+		gp.monster[mapNum][i].worldY = gp.tileSize*27;
 		i++;
 //		gp.monster[mapNum][i] = new MONS_RedSlime(gp);
 //		gp.monster[mapNum][i].worldX = gp.tileSize*23;
